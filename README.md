@@ -1,4 +1,4 @@
-# Crowded
+# Crowdy
 Web App to locate nearby theaters to mitigate crowded venues
 
 Blog:
