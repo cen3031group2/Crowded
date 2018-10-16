@@ -25,7 +25,7 @@ app.use(express.static('client'));
 //app.use('/api/listings', listingsRouter);
 
 app.get('/*', function (req, res) {
-  res.redirect('../../index.html');
+  res.redirect('../../client/crowdy.html');
 });
 
 return app;
