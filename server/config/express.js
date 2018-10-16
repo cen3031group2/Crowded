@@ -8,7 +8,7 @@ var path = require('path'),
 
 module.exports.init = function() {
 //connect to database
-var db = mongoose.connect(config.db.uri);
+//var db = mongoose.connect(config.db.uri);
 
 //initialize app
 var app = express();
@@ -19,13 +19,13 @@ app.use(morgan('dev'));
 //body parsing middleware
 app.use(bodyParser.json());
 
-app.use(express.static('client'));
+app.use("/", express.static('client'));
 
 //TODO
 //app.use('/api/listings', listingsRouter);
 
-app.get('/*', function (req, res) {
-  res.redirect('../../client/crowdy.html');
+app.get('/*', function (req, res, next) {
+  res.redirect('./crowdy.html');
 });
 
 return app;
