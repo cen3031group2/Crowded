@@ -25,7 +25,7 @@ app.use("/", express.static('client'));
 //app.use('/api/listings', listingsRouter);
 
 app.get('/*', function (req, res, next) {
-  res.redirect('crowdy-group2.herokuapp.com');
+  res.redirect('https://crowdy-group2.herokuapp.com/crowdy.html');
 });
 
 return app;
