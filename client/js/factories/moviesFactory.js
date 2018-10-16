@@ -5,13 +5,13 @@ angular.module('crowdy').factory('Movies', function() {
         "id" : 0,
         "name" : 'Jaws',
         "genre" : 'Horror',
-        "ratings" : '1'
+        "ratings" : 1
       }
       {
         "id" : 1,
         "name" : 'Crazy Rich Asians',
         "genre" : 'Comedy',
-        "ratings" : '5'
+        "ratings" : 5
       }
     ]
     return movies.entries;
