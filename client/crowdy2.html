@@ -7,7 +7,17 @@
   <link rel="stylesheet" href="styles/main.css">
 </head>
   <body>
-    <h1 align="center">List of movies<br></h1>
+    <h1 align="center">
+      <!-- search bar *cole*  -->
+      <form class="example" action="action_page.php"></form>
+        <div class="container-1">
+          <span class="icon"><i class="fa fa-search"></i></span>
+          <input type="search" id="search" placeholder="search" />
+        </div>
+      </form>
+      <!--  -->
+    </h1>>
+    <h2 align="center">List of movies<br></h2>
     <div class="movies">
       <img src="/images/jaws.jpg">
       <h3>
@@ -24,8 +34,16 @@
       <label class="col-md-4 control-label" for="singlebutton"></label>
       <div class="col-md-4 text-center">
         <!--<button id="singlebutton" name="singlebutton" layout-align="center" ng-href="./crowdy2.html">Show Movies</button>-->
+        <!--previous tab buttons
         <a href="./crowdy.html">Cinemas</a>
-        <a href="./crowdy2.html">Movies</a>
+        <a href="./crowdy2.html">Movies</a> -->
+
+        <!-- cinema & movie tabs  *cole* -->
+        <ul>
+          <li><a href="./crowdy.html">Show Cinemas</a></li>
+          <li><a class="active" href="./crowdy2.html">Show Movies</a></li>
+        </ul>
+        
       </div>
     </div>
   </body>

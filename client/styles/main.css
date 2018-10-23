@@ -1,6 +1,55 @@
-// Crowdy's CSS file for styling our amazing webpage
-// 10/11/18
+/* // Crowdy's CSS file for styling our amazing webpage */
+/* // 10/11/18 */
 
 .movies {
   display: inline-block;
+}
+
+/* search bar */
+.container-1 input#search{
+  width: 400px;
+  height: 35px;
+  margin-top: 5px;
+  background: #2b303b;
+  border: none;
+  font-size: 10pt;
+  color: #63717f;
+  padding-left: 25px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 200px;  
+  background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: 95% center;
+}
+
+/* tabs */
+ul {
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: rgb(95, 168, 170);
 }
