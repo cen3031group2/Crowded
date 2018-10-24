@@ -2,7 +2,7 @@
 .DS_Store
 
 *.idea
-
+package-lock.json
 # configuration files
 #server/config/config.js
 
