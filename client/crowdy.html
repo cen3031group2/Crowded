@@ -5,7 +5,6 @@
 <style>
   #map {
     height: 100%;
-    width: 100%;
   }
 
   html,
@@ -15,6 +14,7 @@
     padding: 0;
   }
 </style>
+
 <!--Original HTML Below-->
 <html>
 
@@ -38,54 +38,56 @@
   </form>
 </h1>
 
-<!-- map element -->
-<div id="map"></div>
+  <!-- map element -->
+  <div id="map"></div>
   <script>
     var map;
     var infowindow;
 
     function initMap() {
-      var defaultLoc = {lat:29.6436, lng:-82.3549}
+      var gainesville = {
+        lat: 29.6436,
+        lng: -82.3549
+      };
 
       map = new google.maps.Map(document.getElementById('map'), {
-        center: defaultLoc,
+        center: gainesville,
         zoom: 14
       });
 
       infowindow = new google.maps.InfoWindow();
       var service = new google.maps.places.PlacesService(map);
       service.nearbySearch({
-        location: defaultLoc,
-        radius: 250,
-        type: ['store']
+        location: gainesville,
+        radius: 1000,
+        type: ['movie_theater']
       }, callback);
     }
 
     function callback(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
-          }
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          createMarker(results[i]);
         }
       }
+    }
 
-      function createMarker(place) {
-        var placeLoc = place.geometry.location;
-        var marker = new google.maps.Marker({
-          map: map,
-          position: place.geometry.location
-        });
+    function createMarker(place) {
+      var placeLoc = place.geometry.location;
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+      });
 
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
-          infowindow.open(map, this);
-        });
-      }
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(place.name);
+        infowindow.open(map, this);
+      });
+    }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap"
-    async defer></script>
-</div>
-<!-- end map element -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
+  </div>
+  <!-- end map element -->
 
   <div class="form-group">
     <label class="col-md-4 control-label" for="singlebutton"></label>
