@@ -5,6 +5,12 @@
   display: inline-block;
 }
 
+#login-button {
+  display: inline;
+  float: right;
+  margin-right: 30px;
+}
+
 /* search bar */
 .container-1 input#search{
   width: 400px;
@@ -17,7 +23,7 @@
   padding-left: 25px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  border-radius: 200px;  
+  border-radius: 200px;
   background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
   background-repeat: no-repeat;
   background-size: 18px 18px;
@@ -56,11 +62,11 @@ li a:hover:not(.active) {
 
 /*-------------------login form------------------*/
 
-body#LoginForm{ 
-  background-image:url("https://hdwallsource.com/img/2014/10/motion-blur-wallpapers-37066-37909-hd-wallpapers.jpg"); 
-  background-repeat:no-repeat; 
-  background-position:center; 
-  background-size:cover; 
+body#LoginForm{
+  background-image:url("https://hdwallsource.com/img/2014/10/motion-blur-wallpapers-37066-37909-hd-wallpapers.jpg");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
   padding:10px;
 }
 
