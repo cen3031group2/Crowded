@@ -1,8 +1,7 @@
-angular.module('crowdy').controller('TheaterController', ['$scope', 'Theaters',
+angular.module('theaters').controller('TheaterController', ['$scope', 'Theaters',
   function($scope, Theaters) {
 
     $scope.theaterListings = Theaters;
-    $scope.movieName = undefined;
 
     /* Get all the listings, then bind it to the scope */
     /*Movies.getAll().then(function(response) {

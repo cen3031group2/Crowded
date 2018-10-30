@@ -19,7 +19,18 @@
 
 </head>
   <body ng-app="directoryApp">
-    <div class="row" ng-controller="MovieController" ng-controller="TheaterController">
+    <!--<div class="row" ng-controller="TheaterController">
+      <!--<h2 align="center">List of movies<br></h2>
+      <div align="center" class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" id="selectCinema" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Select Cinema to View Crowdiness
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" ng-repeat="x in theaterListings">{{x}}</a><br>
+          </div>
+      </div>-->
+    <!--</div>-->
+    <div class="row" ng-controller="MovieController">
       <h1 align="center">
         <!-- search bar *cole*  -->
         <form class="example" action="action_page.php"></form>
@@ -28,15 +39,6 @@
             <input type="search" id="search" placeholder="search"/>
           </div>
       </h1>
-      <h2 align="center">List of movies<br></h2>
-      <div align="center" class="dropdown"> <!-- Select Cinema -->
-        <button class="btn btn-secondary dropdown-toggle" id="selectCinema" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Select Cinema to View Crowdiness
-        </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" ng-repeat="x in theaterListings">{{x}}</a><br> <!-- TODO -> Attach Theather Factory -->
-          </div>
-      </div>
         <div class="col-md-6">
           <div class="tableWrapper">
             <table class="table table-striped table-hover">

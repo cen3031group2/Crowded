@@ -2,10 +2,12 @@
 // 10/11/18
 
 /* register the modules the application depends upon here*/
-angular.module('movies', []);
+angular.module('crowdy', []);
 
 /* register the application and inject all the necessary dependencies */
-var app = angular.module('directoryApp', ['movies']);
+var app = angular.module('directoryApp', ['MovieController']);
+
+
 
 $scope.redirect = function(){
   window.location = "crowdy2.html";
