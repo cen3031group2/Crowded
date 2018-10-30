@@ -1,7 +1,10 @@
-angular.module('crowdy').controller('MovieController', ['$scope', 'Movies',
-  function($scope, Listings) {
+angular.module('theaters').controller('TheaterController', ['$scope', 'Theaters',
+  function($scope, Theaters) {
+
+    $scope.theaterListings = Theaters;
+
     /* Get all the listings, then bind it to the scope */
-    Movies.getAll().then(function(response) {
+    /*Movies.getAll().then(function(response) {
       $scope.movies = response.data;
     }, function(error) {
       console.log('Unable to retrieve listings:', error);
@@ -43,6 +46,6 @@ angular.module('crowdy').controller('MovieController', ['$scope', 'Movies',
 
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.listings[index];
-    };
+    };*/
   }
 ]);
