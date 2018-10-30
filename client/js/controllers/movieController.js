@@ -44,4 +44,5 @@ angular.module('movies').controller('MovieController', ['$scope', 'Movies',
       $scope.detailedInfo = $scope.listings[index];
     };
     */
+  }
 ]);
