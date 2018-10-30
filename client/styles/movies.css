@@ -11,6 +11,14 @@
   margin-right: 30px;
 }
 
+#shows {
+  margin-left:3em;
+}
+
+#selectCinema {
+  margin-bottom: 3em;
+}
+
 /* search bar */
 .container-1 input#search{
   width: 400px;
