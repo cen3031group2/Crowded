@@ -1,4 +1,4 @@
-angular.module('crowdy').factory('Theaters', function() {
+angular.module('theaters').factory('Theaters', function() {
   var theaters = {
     entries : [
       {
@@ -8,9 +8,11 @@ angular.module('crowdy').factory('Theaters', function() {
         "company" : "Regal Cinemas" ,
         "crowdy_lvl_public" : 75,
         "crowdy_lvl_employee" : 85,
-        "movies" : []
+        "movies" : {
+          "0" : "Jaws"
+        }
       }
     ]
-    return theaters.entries;
   };
-};
+  return theaters.entries;
+});

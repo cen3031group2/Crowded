@@ -3,116 +3,108 @@
 
 <!-- styling for map provided by google -->
 <style>
-  #map {
-    height: 100%;
-  }
-
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-</style>
-<!--Original HTML Below-->
-<html>
-
-<head>
-  <title>Crowdy</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles/main.css">
-</head>
-
-<body>
-  <!-- Header -->
-  <h1 align="center">
-    Welcome to Crowdy!<br>
-
-  <!-- search bar   *cole*  -->
-  <form class="example" action="action_page.php"></form>
-    <div class="container-1">
-      <span class="icon"><i class="fa fa-search"></i></span>
-      <input type="search" id="search" placeholder="search" />
-    </div>
-  </form>
-</h1>
-
-<!-- map element -->
-<div id="map"></div>
-  <script>
-    var map;
-    var infowindow;
-
-    function initMap() {
-      var defaultLoc = {lat:29.6436, lng:-82.3549}
-
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: defaultLoc,
-        zoom: 14
-      });
-
-      infowindow = new google.maps.InfoWindow();
-      var service = new google.maps.places.PlacesService(map);
-      service.nearbySearch({
-        location: defaultLoc,
-        radius: 250,
-        type: ['store']
-      }, callback);
+    #map {
+      height: 100%;
     }
-
-    function callback(results, status) {
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  
+  <!--Original HTML Below-->
+  <html>
+  
+  <head>
+    <title>Crowdy</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  
+  <body>
+    <!-- Header -->
+    <h1 align="center">
+      Welcome to Crowdy!<br>
+  
+    <!-- search bar -->
+      <form class="example" action="action_page.php"></form>
+        <div class="container-1">
+          <span class="icon"><i class="fa fa-search"></i></span>
+          <input type="search" id="search" placeholder="search" />
+        </div>
+      </form>
+    </h1>
+  
+    <!-- map element -->
+    <div id="map"></div>
+    <script>
+      var map;
+      var infowindow;
+      function initMap() {
+        var gainesville = {
+          lat: 29.6436,
+          lng: -82.3549
+        };
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: gainesville,
+          zoom: 14
+        });
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: gainesville,
+          radius: 1000,
+          type: ['movie_theater']
+        }, callback);
+      }
+      function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);
           }
         }
       }
-
       function createMarker(place) {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location
         });
-
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.setContent(place.name);
           infowindow.open(map, this);
         });
       }
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap"
-    async defer></script>
-</div>
-<!-- end map element -->
-
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="singlebutton"></label>
-    <div class="col-md-4 text-center">
-      <!--<button id="singlebutton" name="singlebutton" layout-align="center" ng-href="./crowdy2.html">Show Movies</button>-->
-      <!-- previous tab buttons
-        <a href="./crowdy.html">Cinemas</a>
-        <a href="./crowdy2.html">Movies</a> -->
-
-      <!-- cinema and movies tabs  *cole* -->
-      <ul>
-        <li><a class="active" href="./crowdy.html">Show Cinemas</a></li>
-        <li><a href="./crowdy2.html">Show Movies</a></li>
-      </ul>
-
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
     </div>
-  </div>
-</body>
-
-</html>
-
-<!--<script type="text/javascript" src="./js/app.js"></script>-->
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- end map element -->
+  
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="singlebutton"></label>
+      <div class="col-md-4 text-center">>
+  
+        <!-- cinema and movies tabs -->
+        <ul>
+          <li><a class="active" href="./crowdy.html">Show Cinemas</a></li>
+          <li><a href="./crowdy2.html">Show Movies</a></li>
+        </ul>
+  
+      </div>
+    </div>
+  </body>
+  
+  </html>
+  
+  <!--<script type="text/javascript" src="./js/app.js"></script>-->
+  
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
