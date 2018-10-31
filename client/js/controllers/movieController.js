@@ -3,13 +3,15 @@ angular.module('movies').controller('MovieController', ['$scope', 'Movies',
 
     /* Get all the listings, then bind it to the scope */
     $scope.movieListings = Movies;
-    $scope.movieName = undefined;
+    $scope.codec = undefined;
 
-    //Check if the input and name of the movie matches
-    /*$scope.valid = function (json) {
-           if ($scope.name == undefined) return true;
-           return (json.name.toLowerCase().startsWith($scope.movieName.toLowerCase()));
-    }*/
+    //Check if the input and code or name of the building matches
+    $scope.valid = function (json) {
+           if ($scope.codec == undefined) return true;
+           return (json.name.toLowerCase().startsWith($scope.codec.toLowerCase()) ||
+                   json.genre.toLowerCase().startsWith($scope.codec.toLowerCase()));
+    };
+
     /*
     $scope.addMovies = function() {
       try {
