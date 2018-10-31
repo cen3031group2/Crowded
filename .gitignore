@@ -1,6 +1,9 @@
 # osx
 .DS_Store
 
+*.idea
+.idea
+package-lock.json
 # configuration files
 #server/config/config.js
 

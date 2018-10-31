@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 var movieSchema = new Schema({
   id : {
     type: Number,
-    required: true
+    required: true,
     unique: true
   },
   name: {
