@@ -3,8 +3,9 @@
 <html>
 <head>
   <title>Crowdy</title>
-  
-  <link rel="stylesheet" href="styles/movies.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="styles/main.css">
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -14,6 +15,12 @@
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="app.js"></script>
+  <script src="movieController.js"></script>
+  <script src="moviesFactory.js"></script>
+  <script src="theaterController.js"></script>
+  <script src="theaterFactory.js"></script>
 
 </head>
   <body ng-app="directoryApp">
@@ -50,42 +57,19 @@
                 </td>
               </tr>
           </table>
-        </div>
-      </form>
-    </h1>>
-    <h2 align="center">List of movies<br></h2>
-    <div class="movies">
-      <img src="/images/jaws.jpg">
-      <h3>
-        <b>Jaws</b><br>
-        Horror<br>
-        People swim away from a big shark.<br>
-        5/5<br>
-        Showtimes: 5 pm, 6 pm<br>
-        Theater Data: 20% Full<br>
-        User Data: Satisfied<br>
-      </h3>
-    </div>
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="singlebutton"></label>
-      <div class="col-md-4 text-center">
-        <ul>
-          <li><a href="./crowdy.html">Show Cinemas</a></li>
-          <li><a class="active" href="./crowdy2.html">Show Movies</a></li>
-        </ul>
-        
-      </div>
-    </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 text-center">
+
+              <!-- cinema and movies tabs -->
+              <ul>
+                <li><a class="active" href="./crowdy.html">Show Cinemas</a></li>
+                <li><a href="./crowdy2.html">Show Movies</a></li>
+              </ul>
+
+            </div>
+          </div>
+
   </body>
 </html>
-
-<!--<script type="text/javascript" src="./js/app.js"></script>-->
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
