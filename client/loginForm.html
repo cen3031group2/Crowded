@@ -5,38 +5,42 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+  <script src="js/controllers/userController.js"></script>
 
   <body id="LoginForm">
     <div class="container">
-        <h1 class="form-heading"> 
-            <font face = "Times New Roman">Crowdy</font><br />
+        <h1 class="form-heading">
+            <font face = "Times New Roman">Crowdy</font><br/>
         </h1>
-    <div class="login-form">
+    <div class="login-form" ng-app="" ng-controller="UserController">
         <div class="main-div">
             <div class="panel">
                 <h2>Login</h2>
                 <p>Please enter your email and password </p>
             </div>
             <form id="Login">
-    
+
                 <div class="form-group">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email Address">
+                    <input type="email" class="form-control" placeholder="Email Address" ng-model="inputEmail">
                 </div>
-    
+
                 <div class="form-group">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <input type="password" class="form-control" placeholder="Password" ng-model="inputPassword">
                 </div>
 
                 <div class="forgot">
                     <a href="reset.html">Forgot password?</a>
                 </div>
-                    
-                <button type="submit" class="btn btn-primary" ><a href="./crowdy.html">Login</a></button>
-    
+
+                <button type="submit" class="btn btn-primary"><a href="./crowdy.html">Login</a></button>
+                <!--p>{{verify}}</p-->
             </form>
         </div>
-   
-    </div></div></div>    
-    
+
+    </div></div></div>
+
     </body>
     </html>
