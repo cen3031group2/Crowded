@@ -7,5 +7,6 @@ module.exports = {
     internationalshowtimes:{
         key: ""
     },
-    port: 8080
+    port: 8080,
+    companies : ["regmovies", "thehipp"]
   };
