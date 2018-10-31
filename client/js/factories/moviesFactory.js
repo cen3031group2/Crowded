@@ -1,19 +1,13 @@
-angular.module('crowdy').factory('Movies', function() {
-  var movies = {
-    entries : [
-      {
-        "id" : 0,
-        "name" : 'Jaws',
-        "genre" : 'Horror',
-        "ratings" : 1
+angular.module('crowdy').factory('Movies', function($http) {
+  var methods = {
+      getAllMoviesFromTheater: function(theater_id){
+          const config = {
+             params:{
+                 theater_id: "2"
+             }
+          };
+         return $http.get('./api/movies', config);
       }
-      {
-        "id" : 1,
-        "name" : 'Crazy Rich Asians',
-        "genre" : 'Comedy',
-        "ratings" : 5
-      }
-    ]
-    return movies.entries;
   };
-};
+  return methods
+});

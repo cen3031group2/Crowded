@@ -7,6 +7,10 @@ angular.module('crowdy').controller('MovieController', ['$scope', 'Movies',
       console.log('Unable to retrieve listings:', error);
     });
 
+    $scope.getMoviesFromTheater = function (theater_id){
+        $scope.movies = Movies.getAllMoviesFromTheater(theater_id)
+    };
+
     $scope.detailedInfo = function (index) {
       var movie = $scope.listings[index];
       //TODO
