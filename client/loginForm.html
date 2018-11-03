@@ -5,18 +5,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-  <script src="js/controllers/userController.js"></script>
+  <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+  <script src="./js/app.js"></script>
+  <script src="./js/controllers/movieController.js"></script>
+  <script src="./js/factories/moviesFactory.js"></script>
+  <script src="./js/controllers/theaterController.js"></script>
+  <script src="./js/factories/theaterFactory.js"></script>
+  <script src="./js/controllers/userController.js"></script>
+  <!--script src="./js/controllers/userFactory.js"></script-->
 
-  <body id="LoginForm">
+  <body id="LoginForm" ng-app="directoryApp">
     <div class="container">
         <h1 class="form-heading">
             <font face = "Times New Roman">Crowdy</font><br/>
         </h1>
-    <div class="login-form" ng-app="" ng-controller="UserController">
-        <div class="main-div">
+    <div class="login-form" >
+        <div class="main-div" ng-controller="UserController">
             <div class="panel">
                 <h2>Login</h2>
                 <p>Please enter your email and password </p>
@@ -28,7 +35,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" ng-model="inputPassword">
+                    <input type="password" class="form-control" placeholder="Password" ng-model="verify">
                 </div>
 
                 <div class="forgot">
@@ -36,7 +43,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary"><a href="./crowdy.html">Login</a></button>
-                <!--p>{{verify}}</p-->
+                <span ng-bind="verify"></span>
             </form>
         </div>
 

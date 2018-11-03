@@ -4,6 +4,7 @@ angular.module('movies').controller('MovieController', ['$scope', 'Movies',
     /* Get all the listings, then bind it to the scope */
     $scope.movieListings = Movies;
     $scope.codec = undefined;
+    $scope.verify = "hello";
 
     //Check if the input and code or name of the building matches
     $scope.valid = function (json) {
