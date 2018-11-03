@@ -4,7 +4,8 @@ var path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     config = require('./config'),
-    listingsRouter = require('../routes/crowdy.server.routes');
+    userRouter = require('../routes/userRouter'),
+    crowdyRouter = require('../routes/crowdyRouter');
 
 module.exports.init = function() {
 //connect to database
@@ -22,7 +23,8 @@ app.use(bodyParser.json());
 app.use("/", express.static('client'));
 
 //TODO
-//app.use('/api/listings', listingsRouter);
+app.use('/api/User', userRouter);
+app.use('/api/Crowdy', crowdyRouter);
 
 app.get('/*', function (req, res, next) {
   res.redirect('https://crowdy-group2.herokuapp.com/crowdy.html');
