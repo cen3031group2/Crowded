@@ -1,5 +1,5 @@
-var Public = require("../../models/crowdyPublicModel"),
-    Employee = require("../../models/crowdEmployeeModel");
+var Public = require("../models/crowdyPublicModel"),
+    Employee = require("../models/crowdEmployeeModel");
 
 exports.addPublicReport = function(req,res){
     var id = req.body.id;
@@ -51,5 +51,10 @@ exports.getEmployeeReport = function(req,res){
             res.json({value: crowdy.value});
         }
     });
+};
+
+exports.toId = function(req, res, next, id){
+    req.id = id;
+    next();
 };
 

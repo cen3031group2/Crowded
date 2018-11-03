@@ -1,7 +1,21 @@
-angular.module('movies').controller('MovieController', ['$scope', 'Movies',
-  function($scope, Movies) {
-
+angular.module('crowdy').controller('MovieController', ['$scope', 'Movies',
+  function($scope, Listings) {
     /* Get all the listings, then bind it to the scope */
+    Movies.getAll().then(function(response) {
+      $scope.movies = response.data;
+    }, function(error) {
+      console.log('Unable to retrieve listings:', error);
+    });
+
+    $scope.getMoviesFromTheater = function (theater_id){
+        $scope.movies = Movies.getAllMoviesFromTheater(theater_id)
+    };
+
+    $scope.detailedInfo = function (index) {
+      var movie = $scope.listings[index];
+      //TODO
+    };
+
     $scope.movieListings = Movies;
     $scope.codec = undefined;
     $scope.verify = "hello";
@@ -12,8 +26,7 @@ angular.module('movies').controller('MovieController', ['$scope', 'Movies',
            return (json.name.toLowerCase().startsWith($scope.codec.toLowerCase()) ||
                    json.genre.toLowerCase().startsWith($scope.codec.toLowerCase()));
     };
-
-    /*
+   
     $scope.addMovies = function() {
       try {
         var newMovie =
@@ -46,6 +59,5 @@ angular.module('movies').controller('MovieController', ['$scope', 'Movies',
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.listings[index];
     };
-    */
   }
 ]);
