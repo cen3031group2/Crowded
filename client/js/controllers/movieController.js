@@ -16,6 +16,16 @@ angular.module('crowdy').controller('MovieController', ['$scope', 'Movies',
       //TODO
     };
 
+    $scope.movieListings = Movies;
+    $scope.codec = undefined;
+
+    //Check if the input and code or name of the building matches
+    $scope.valid = function (json) {
+           if ($scope.codec == undefined) return true;
+           return (json.name.toLowerCase().startsWith($scope.codec.toLowerCase()) ||
+                   json.genre.toLowerCase().startsWith($scope.codec.toLowerCase()));
+    };
+   
     $scope.addMovies = function() {
       try {
         var newMovie =

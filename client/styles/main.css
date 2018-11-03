@@ -1,8 +1,10 @@
 /* // Crowdy's CSS file for styling our amazing webpage */
 /* // 10/11/18 */
 
-.movies {
-  display: inline-block;
+#login-button {
+  display: inline;
+  float: right;
+  margin-right: 30px;
 }
 
 /* search bar */
