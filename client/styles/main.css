@@ -28,6 +28,10 @@
   background-position: 95% center;
 }
 
+.text-center {
+  text-align:center
+}
+
 /* tabs */
 ul {
   display: inline-block;

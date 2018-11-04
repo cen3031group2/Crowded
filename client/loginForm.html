@@ -28,7 +28,7 @@
                 <h2>Login</h2>
                 <p>Please enter your email and password </p>
             </div>
-            <form id="Login">
+            <form id="Login" action="./crowdy.html">
 
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="Email Address" ng-model="inputEmail">
@@ -42,7 +42,7 @@
                     <a href="reset.html">Forgot password?</a>
                 </div>
 
-                <button type="submit" class="btn btn-primary"><a href="./crowdy.html">Login</a></button>
+                <a href="./crowdy.html"><button type="submit" class="btn btn-primary">Login</button></a>
                 <span ng-bind="verify"></span>
             </form>
         </div>
