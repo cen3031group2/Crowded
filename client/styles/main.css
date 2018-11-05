@@ -8,6 +8,10 @@
   text-decoration: none;
 }
 
+#title {
+  margin-left: 90px;
+}
+
 /* search bar */
 .container-1 input#search {
   width: 400px;
