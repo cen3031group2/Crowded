@@ -18,6 +18,7 @@ angular.module('crowdy').controller('MovieController', ['$scope', 'Movies',
 
     $scope.movieListings = Movies;
     $scope.codec = undefined;
+    $scope.verify = "hello";
 
     //Check if the input and code or name of the building matches
     $scope.valid = function (json) {

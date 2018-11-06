@@ -1,35 +1,51 @@
-angular.module('crowdy').controller('UserController', ['$scope', 'User',
-  function($scope, User)});
-  $scope.addListing = function() {
-  /**TODO
-  *Save the article using the Listings factory. If the object is successfully
-  saved redirect back to the list page. Otherwise, display the error
-  */
-$scope.verify = undefined;
+angular.module('users').controller('UserController', ['$scope', 'Users',
+  function($scope, Users) {
 
-$scope.verifyLogin = function() {
-    var login = {
-      inputEmail: $scope.newLogin.inputEmail,
-      inputPassword: $scope.newLogin.inputPassword,
+    /* Get all the listings, then bind it to the scope */
+    $scope.verify = "hello";
+    $scope.inputEmail = "";
+    $scope.inputPassword = "";
+
+    //Check if the input and code or name of the building matches
+    $scope.valid = function () {
+      if($scope.inputEmail == "user@test.com") {
+        location.replace("./crowdy.hmtl");
+      }
     };
-    //$scope.crowdy.push($scope.newListing);
-    if($scope.newLogin.inputEmail == "test@test.com" && $scope.newLogin.inputPassword = "test") {
-      $scope.verify = "verified";
-    }
-    else {
-      $scope.verify = "not verified";
-    }
-    $scope.newLogin = {};
-    $scope.newLogin.inputEmail = '';
-    $scope.newLogin.inputPassword = '';
 
+    /*
+    $scope.addMovies = function() {
+      try {
+        var newMovie =
+          {
+          "id" : $scope.newMovie.id,
+          "name" : $scope.newMovie.name,
+          "genre" : $scope.newMovie.genre,
+          "ratings" : $scope.newMovie.ratings
+          };
+        $scope.movies.push(newMovie);
+        Listings.create(newMovie);
+      }
+      catch (err) {
+        console.log (err);
+      }
+    };
 
-/*    Listings.create(crowdy).then(function(response){
-      $scope.newListing.code='';
-      $scope.newListing.name ='';
-      $scope.newListing.address='';
-    },
-    function(error){
-      console.log('Unable to add listing:', error);
-};*/
+    $scope.deleteMovie = function(index) {
+       try {
+           var id = $scope.listings[index]._id;
+           $scope.listings.splice(index, 1);
+           Listings.delete(id);
+           $route.reload();
+       }
+       catch (err) {
+         console.log(err);
+       }
+    };
+
+    $scope.showDetails = function(index) {
+      $scope.detailedInfo = $scope.listings[index];
+    };
+    */
+  }
 ]);
