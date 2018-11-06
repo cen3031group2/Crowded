@@ -142,6 +142,7 @@ exports.clearHistory = function(req, res){
 };
 
 exports.create = function(req, res){
+    console.log(req.body);
     var user = new User();
     user.username = req.body.username;
     user.password = req.body.password;

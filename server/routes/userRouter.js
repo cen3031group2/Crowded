@@ -1,5 +1,5 @@
 /* Dependencies */
-var user = require('../controllers/UserController'),
+var user = require('../controllers/userController'),
     express = require('express'),
     router = express.Router();
 
@@ -27,7 +27,7 @@ router.route('/get')
 router.route('/create')
     .post(user.create);
 
-router.route('company/get')
+router.route('/company/get')
     .post(user.getCompany);
 
 module.exports = router;

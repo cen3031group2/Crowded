@@ -8,17 +8,16 @@ var crowdy = require('../controllers/crowdyController'),
   Take note that it is possible for different controller functions to handle requests to the same route.
  */
 router.route('/public/:id')
-    .get()
-    .post(listings.create);
+    .get(crowdy.getPublicReport)
+    .post(crowdy.addPublicReport);
 
 
 /*
   The ':' specifies a URL parameter.
  */
-router.route('/:listingId')
-    .get(listings.read)
-    .put(listings.update)
-    .delete(listings.delete);
+router.route('/employee/:id')
+    .get(crowdy.getEmployeeReport)
+    .put(crowdy.setEmployeeReport);
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle

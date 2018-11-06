@@ -7,41 +7,57 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /* Create your schema */
-var movieSchema = new Schema({
+var theaterSchema = new Schema({
   id : {
     type: Number,
-    required: true
+    required: true,
     unique: true
+  },
+  slug:{
+    type: String
   },
   name: {
     type: String,
     required: true
   },
-  address: {
-    type: String,
-    required: true,
-    unique: true
+  chain_id:{
+    type: String
   },
+  telephone:{
+    type: String
+  },
+  website:{
+    type: String
+  },
+  location:{
+    lat: Number,
+    lon: Number,
+    address:{
+      display_text: String,
+      street: String,
+      house: String,
+      zipcode: String,
+      city: String,
+      state: String,
+      state_abbr: String,
+      country: String,
+      country_code: String
+    }
+  },
+  booking_type: String,
   company: {
     type: String,
     required: true
   },
-  crowdy_lvl_public: {
+  crowdy: {
     type: Number
   },
-  crowdy_lvl_employee: {
-    type: Number,
-    required: true
-  },
-  movies: {
-    type: Array
-  }
   created_at: Date,
   updated_at: Date
 });
 
 /* create a 'pre' function that adds the updated_at (and created_at if not already there) property */
-movieSchema.pre('save', function(next) {
+theaterSchema.pre('save', function(next) {
   var currentTime = new Date;
   this.updated_at = currentTime;
   if(!this.created_at)
@@ -52,7 +68,7 @@ movieSchema.pre('save', function(next) {
 });
 
 /* Use your schema to instantiate a Mongoose model */
-var Theaters = mongoose.model('Theaters', listingSchema);
+var Theater = mongoose.model('Theaters', theaterSchema);
 
 /* Export the model to make it avaiable to other parts of your Node application */
-module.exports = Theaters;
+module.exports = Theater;
