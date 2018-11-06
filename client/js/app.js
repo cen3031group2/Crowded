@@ -80,6 +80,10 @@ app.controller('TheaterController', function ($scope, Scopes) {
     Scopes.store('TheaterController', $scope);
     $scope.currentTheaterId = 42490;
 
+    $scope.changeListingsView = function(index) {
+      $scope.currentTheaterId = index;
+    };
+
 });
 
 app.controller('UserController', function ($scope, Scopes) {
