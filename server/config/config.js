@@ -18,3 +18,7 @@ module.exports = {
     port: 8080,
     companies : ["regmovies"]
   };
+    },
+    port: 8080,
+    companies : ["regmovies", "thehipp"]
+  };
