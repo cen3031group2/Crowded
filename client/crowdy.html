@@ -1,42 +1,24 @@
 <!-- this is crowdy's html file. woohoo. -->
 <!-- 10/11/18-->
 
-<!-- styling for map provided by google -->
-<style>
-    #map {
-      height: 100%;
-    }
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
-  
   <!--Original HTML Below-->
   <html>
-  
+
   <head>
     <title>Crowdy</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  
+
   <body>
+    <img src="images\Crowdy_Concept.png" alt="Crowdy">
+    <div align="right">
+      <a href="loginForm.html"><button type="button" class="btn btn-info" id="login-button">Login</button></a>
+    </div>
     <!-- Header -->
-    <h1 align="center">
-      Welcome to Crowdy!<br>
-  
-    <!-- search bar -->
-      <form class="example" action="action_page.php"></form>
-        <div class="container-1">
-          <span class="icon"><i class="fa fa-search"></i></span>
-          <input type="search" id="search" placeholder="search" />
-        </div>
-      </form>
+    <h1 align="center" margin-left=''>
+      <div id="title">Welcome to Crowdy!<br></div>
     </h1>
-  
     <!-- map element -->
     <div id="map"></div>
     <script>
@@ -44,67 +26,130 @@
       var infowindow;
       function initMap() {
         var gainesville = {
-          lat: 29.6436,
-          lng: -82.3549
+          lat: 29.6456,
+          lng: -82.3800
         };
+        var image = "images/video-camera.png";
+        var contentString1 = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Regal Butler Town Center 14</h1>'+
+            '<div id="bodyContent" align="center">'+
+            '<p>(844) 462-7342 ext 185<br>' +
+            '3101 SW 35th Blvd, Gainesville, FL 32608, United States<br>'+
+            '<a href="http://www.regmovies.com/theaters/regal-butler-town-center-14/1833">'+
+            'http://www.regmovies.com/theaters/regal-butler-town-center-14/1833</a>'+
+            '</p>'+
+            '</div>'+
+            '</div>';
+        var contentString2 = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Regal Royal Park Stadium 16</h1>'+
+            '<div id="bodyContent" align="center">'+
+            '<p>(844) 462-7342 ext 1308<br>' +
+            '3702 W Newberry Rd, Gainesville, FL 32607, United States<br>'+
+            '<a href="http://www.regmovies.com/theaters/regal-royal-park-stadium-16/6955">'+
+            'http://www.regmovies.com/theaters/regal-royal-park-stadium-16/6955</a>'+
+            '</p>'+
+            '</div>'+
+            '</div>';
+          var contentString3 = '<div id="content">'+
+              '<div id="siteNotice">'+
+              '</div>'+
+              '<h1 id="firstHeading" class="firstHeading">Regal Butler Town Center 14</h1>'+
+              '<div id="bodyContent" align="center">'+
+              '<p>(352) 373-2880<br>' +
+              '4901 Southwest 31st Place Gainesville, FL 32608, United States<br>'+
+              '<a href="http://www.regmovies.com/theaters/regal-celebration-pointe-10-rpx/47521">'+
+              'http://www.regmovies.com/theaters/regal-celebration-pointe-10-rpx/47521</a>'+
+              '</p>'+
+              '</div>'+
+              '</div>';
         map = new google.maps.Map(document.getElementById('map'), {
           center: gainesville,
-          zoom: 14
+          zoom: 13.5
         });
-        infowindow = new google.maps.InfoWindow();
-        var service = new google.maps.places.PlacesService(map);
-        service.nearbySearch({
-          location: gainesville,
-          radius: 1000,
-          type: ['movie_theater']
-        }, callback);
-      }
-      function callback(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
-          }
-        }
-      }
-      function createMarker(place) {
-        var placeLoc = place.geometry.location;
-        var marker = new google.maps.Marker({
+        var infowindow1 = new google.maps.InfoWindow({
+          content: contentString1
+        });
+        var infowindow2 = new google.maps.InfoWindow({
+          content: contentString2
+        });
+        var infowindow3 = new google.maps.InfoWindow({
+          content: contentString3
+        });
+        var regal14 = {lat: 29.627376, lng: -82.377151};
+        var marker1 = new google.maps.Marker({
+          position: regal14,
           map: map,
-          position: place.geometry.location
+          title: 'Regal Butler Town Center 14',
+          icon: image,
+          animation: google.maps.Animation.DROP
         });
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
-          infowindow.open(map, this);
+        var regal16 = {lat: 29.653878, lng: -82.380191};
+        var marker2 = new google.maps.Marker({
+          position: regal16,
+          map: map,
+          title: 'Regal Royal Park Stadium 16',
+          icon: image,
+          animation: google.maps.Animation.DROP
         });
-      }
+        var regal10 = {lat: 29.6236, lng: -82.3951};
+        var marker3 = new google.maps.Marker({
+          position: regal10,
+          map: map,
+          title: 'Regal Celebration Pointe 10',
+          icon: image,
+          animation: google.maps.Animation.DROP
+        });
+        marker1.addListener('click', function() {
+           map.setZoom(16);
+           map.setCenter(marker1.getPosition());
+           infowindow1.open(map, marker1);
+        });
+        marker2.addListener('click', function() {
+           map.setZoom(16);
+           map.setCenter(marker2.getPosition());
+           infowindow2.open(map, marker2);
+        });
+        marker3.addListener('click', function() {
+           map.setZoom(16);
+           map.setCenter(marker3.getPosition());
+           infowindow3.open(map, marker3);
+        });
+    }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
-    </div>
     <!-- end map element -->
-  
+
     <div class="form-group">
       <label class="col-md-4 control-label" for="singlebutton"></label>
-      <div class="col-md-4 text-center">>
-  
+      <div class="col-md-4 text-center">
+        <div class="bottomTabs">
+
         <!-- cinema and movies tabs -->
-        <ul>
+        <ul id="bottomButtons">
           <li><a class="active" href="./crowdy.html">Show Cinemas</a></li>
-          <li><a href="./crowdy2.html">Show Movies</a></li>
+          <li ng-controller="MovieController" ng-click="getMoviesFromTheater()"><a href="./crowdy2.html">Show Movies</a></li>
         </ul>
-  
+      </div>
       </div>
     </div>
+
   </body>
-  
+
   </html>
-  
+
   <!--<script type="text/javascript" src="./js/app.js"></script>-->
-  
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
+
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
+
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
