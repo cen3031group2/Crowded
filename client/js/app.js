@@ -10,6 +10,10 @@ app.run(function ($rootScope) {
 
 app.controller('MovieController', function ($scope, Scopes) {
 
+    $scope.movies = undefined;
+    $scope.codec = undefined;
+    $scope.verify = "hello";
+
     Scopes.store('MovieController', $scope);
     /* Get all the listings, then bind it to the scope */
     Movies.getAll().then(function(response) {
@@ -19,6 +23,9 @@ app.controller('MovieController', function ($scope, Scopes) {
     });
 
     $scope.getMoviesFromTheater = function (theater_id){
+        if (theater_id == null) {
+          theater_id = Scopes.get('TheaterController').currentTheaterId;
+        }
         $scope.movies = Movies.getAllMoviesFromTheater(theater_id)
     };
 
@@ -27,14 +34,8 @@ app.controller('MovieController', function ($scope, Scopes) {
       //TODO
     };
 
-    $scope.movieListings = Movies;
-    $scope.codec = undefined;
-    $scope.verify = "hello";
-    $scope.theaterId = Scopes.get('TheaterController').currentTheaterId;
-
     //Check if the input and code or name of the building matches
     $scope.valid = function (json) {
-           $scope.theaterId = Scopes.get('TheaterController').currentTheaterId;
            if ($scope.codec == undefined) return true;
            return (json.name.toLowerCase().startsWith($scope.codec.toLowerCase()) ||
                    json.genre.toLowerCase().startsWith($scope.codec.toLowerCase()));

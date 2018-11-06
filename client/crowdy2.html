@@ -35,7 +35,7 @@
         <div class="col-md-6">
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
-              <tr ng-repeat="x in movieListings | filter:valid">
+              <tr ng-repeat="x in movies | filter:valid">
                   <td> </td> <!-- Picture goes here -->
                   <td>{{x.name}}<br>
                   {{x.genre}}<br>
@@ -45,7 +45,6 @@
                 </td>
               </tr>
           </table>
-          <p>{{theaterId}}<p>
         </div>
       </div>
     </div>
@@ -55,7 +54,7 @@
               <!-- cinema and movies tabs -->
               <ul id="buttomBarul">
                 <li><a class="active" href="./crowdy.html">Show Cinemas</a></li>
-                <li><a href="./crowdy2.html">Show Movies</a></li>
+                <li ng-controller="MovieController" ng-click="getMoviesFromTheater()"><a href="./crowdy2.html">Show Movies</a></li>
               </ul>
             </div>
           </div>
