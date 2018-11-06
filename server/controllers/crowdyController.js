@@ -1,5 +1,6 @@
-var Public = require("../models/crowdyPublicModel"),
-    Employee = require("../models/crowdEmployeeModel");
+var crowdy = require("../models/crowdyModel");
+const Public = crowdy.Public,
+    Employee = crowdy.Employee;
 
 exports.addPublicReport = function(req,res){
     var id = req.body.id;

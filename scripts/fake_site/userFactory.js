@@ -16,20 +16,23 @@ angular.module('user', []).factory('User', function($http) {
                 username: user.username,
                 history: history
             };
-            return $http.post('../api/history/set', body);
+            return $http.post('../api/user/history/set', body);
         },
         getHistory: function(user, history){
-            return $http.post('../api/history/get', user);
+            return $http.post('../api/user/history/get', user);
         },
 
         checkPassword: function(user){
-            return $http.post('../api/password/check', user);
+            return $http.post('http://localhost:8080/api/user/password/check', user);
         },
         setPassword: function(user){
-            return $http.post('../api/password/set', user);
+            return $http.post('http://localhost:8080/api/user/password/set', user);
         },
         getCompany: function(user){
-            
+            return $http.post('../api/user/company/get')
+        },
+        createUser: function(user){
+            return $http.post('http://localhost:8080/api/user/create', user);
         }
     };
   
