@@ -1,7 +1,15 @@
-angular.module('theaters').controller('TheaterController', ['$scope', 'Theaters',
-  function($scope, Theaters) {
+angular.module('theaters').controller('TheaterController', ['$scope', 'Theaters', 'Scopes'
+  function($scope, Theaters, Scopes) {
 
-    $scope.theaterListings = Theaters;
+    //$scope.theaterListings = Theaters;
+    $scope.currentTheaterId = 42490;
+
+    /*$scope.changeListingsView(id) {
+      //Get the current theater id
+      $scope.currentTheaterId = id;
+    };*/
+
+    //Scopes.store('TheaterController', $scope);
 
     /* Get all the listings, then bind it to the scope */
     /*Movies.getAll().then(function(response) {
