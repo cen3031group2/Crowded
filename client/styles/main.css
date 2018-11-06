@@ -17,20 +17,21 @@
 }
 
 /* tabs */
-ul {
+.form-group ul {
   display: inline-block;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: #333;
+  /* z-index: 1; */
 }
 
-li {
+.form-group li {
   float: left;
 }
 
-li a {
+.form-group li a {
   display: block;
   color: white;
   text-align: center;
@@ -38,7 +39,7 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
+.form-group li a:hover:not(.active) {
   background-color: #111;
 }
 
@@ -73,6 +74,7 @@ img {
   z-index: 1;
 }
 
-#bottomButtons {
+/* #bottomTabs {
   z-index: 1;
-}
+} */
+
