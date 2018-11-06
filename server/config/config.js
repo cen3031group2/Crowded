@@ -5,7 +5,7 @@ module.exports = {
       uri: "" //place the URI of your mongo database here.
     },
     internationalshowtimes:{
-        key: ""
+        key: "4UY4hz5C8xx8xq3MofvSyLT9rvMP2FqD"
     },
     port: 8080,
     companies : ["regmovies", "thehipp"]
