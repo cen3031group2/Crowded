@@ -1,6 +1,5 @@
 /* // Crowdy's CSS file for styling our amazing webpage */
 /* // 10/11/18 */
-
 #login-button {
   display: inline;
   float: right;
@@ -9,23 +8,8 @@
   text-decoration: none;
 }
 
-/* search bar */
-.container-1 input#search{
-  width: 400px;
-  height: 35px;
-  margin-top: 5px;
-  background: #2b303b;
-  border: none;
-  font-size: 10pt;
-  color: #63717f;
-  padding-left: 25px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 200px;
-  background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
-  background-repeat: no-repeat;
-  background-size: 18px 18px;
-  background-position: 95% center;
+#title {
+  margin-left: 90px;
 }
 
 .text-center {
@@ -40,19 +24,17 @@ ul {
   padding: 0;
   overflow: hidden;
   background-color: #333;
-
 }
 
 li {
-  float: center;
+  float: left;
 }
 
 li a {
-  display: inline-block;
+  display: block;
   color: white;
   text-align: center;
-  padding: 14px 60px;
-  width: 300px;
+  padding: 14px 16px;
   text-decoration: none;
 }
 
@@ -64,187 +46,11 @@ li a:hover:not(.active) {
   background-color: #33a8b8;
 }
 
-/*-------------------login form------------------*/
-
-body#LoginForm{
-  background-image:url("https://hdwallsource.com/img/2014/10/motion-blur-wallpapers-37066-37909-hd-wallpapers.jpg");
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:cover;
-  padding:10px;
-}
-
-.form-heading { color:#fff; font-size:60px;}
-.panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
-.panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
-.login-form .form-control {
-  background: #f7f7f7 none repeat scroll 0 0;
-  border: 1px solid #d4d4d4;
-  border-radius: 4px;
-  font-size: 14px;
-  height: 50px;
-  line-height: 50px;
-}
-.main-div {
-  background: #ffffff none repeat scroll 0 0;
-  border-radius: 2px;
-  margin: 10px auto 30px;
-  max-width: 38%;
-  padding: 50px 70px 70px 71px;
-}
-
-.login-form .form-group {
-  margin-bottom:10px;
-}
-.login-form{ text-align:center;}
-.forgot a {
-  color: #777777;
-  font-size: 14px;
-  text-decoration: underline;
-  width: auto;
-  height: auto;
-}
-.login-form  .btn.btn-primary {
-  background: #33a8b8 none repeat scroll 0 0;
-  border-color: #33a8b8;
-  color: #ffffff;
-  font-size: 14px;
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  padding: 0;
-}
-.forgot {
-  text-align: left;
-  margin-bottom:30px;
-}
-.login-form .btn.btn-primary {
-  background: #33a8b8 none repeat scroll 0 0;
-  color: white;
-}
-.back { text-align: left; margin-top:10px;}
-.back a {color: #44444; font-size: 13px;text-decoration: none;}
-
-
-
-/* --------------------user profile page-------------------- */
-
-.form-heading2 {
-color: white;
-font-size: 150px;
-text-align: center;
-margin-top: 0px;
-}
-.page-header {
-  background-image:url("https://cdn.vox-cdn.com/thumbor/N36HRUFAAKDL0LwLpwAc8uPCSv8=/0x1:640x428/1200x800/filters:focal(0x1:640x428)/cdn.vox-cdn.com/uploads/chorus_image/image/35294246/movie_theater_seats.0.jpg");
-  height: 500px;
-  background-size: cover;
-  font-family: "Times New Roman";
-  text-align: center;
-  margin: 0;
-}
-.profile {
-  text-align: center;
-  font-size: 50px;
- }
- .underimg{
-   margin-top: 30px;
- }
-.profile img {
-  max-width: 250px;
-  width: 100%;
-  margin: -150px;
-}
-.rounded-circle {
-  border-radius: 50%;
-}
-.up {
-  text-align: left;
-  margin: 50px;
-  font-family: "Times New Roman";
-  font-size: 50px;
-  color: black;
-}
-
-scroll-container {
-  display: block;
-  width: 100%;
-  direction: ltr;
-  height: 100%;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-}
-/* dropdown menu */
-
-.dropbtn {
-  background-color: #0395af;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  width: 350px;
-  align-content: right;
-}
-
-.dropdown {
-  /* position: relative; */
-  align-content: right;
-  /* display: inline-block; */
-  margin-top: 50px;
-  margin-bottom: 200px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  width: 350px;
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #005a69;}
-/* end dropdwon */
-
-
-/* change email & username & password */
-legend {
-  background-color: #000;
-  color: #fff;
-  padding: 3px 6px;
-}
-input[type='text'],
-input[type='password'],
-input[type='email'] {
-  width: 100%;
-  margin-left:5px;
-}
-label{
-  margin-left: 20px;
-}
-input {
-  margin: .4rem 0;
-}
-input[type='submit']{
-  margin-left: 20px;
-}
 /* end change password */
-
-
-
 /* -------------------map----------------- */
 #map {
   height: 100%;
+  width: auto;
 }
 
 html,
@@ -252,4 +58,21 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+/* Crowdy image */
+img {
+  display: flex;
+  width: 100px;
+  height: auto;
+  position: absolute;
+  margin-left: 0px;
+  margin-right: auto;
+  margin-top: -35px;
+  margin-bottom: 10px;
+  z-index: 1;
+}
+
+#bottomButtons {
+  z-index: 1;
 }

@@ -1,0 +1,125 @@
+/* --------------------user profile page-------------------- */
+.form-heading2 {
+  color: white;
+  font-size: 150px;
+  text-align: center;
+  margin-top: 0px;
+}
+
+.page-header {
+  background-image: url("https://cdn.vox-cdn.com/thumbor/N36HRUFAAKDL0LwLpwAc8uPCSv8=/0x1:640x428/1200x800/filters:focal(0x1:640x428)/cdn.vox-cdn.com/uploads/chorus_image/image/35294246/movie_theater_seats.0.jpg");
+  height: 500px;
+  background-size: cover;
+  font-family: "Times New Roman";
+  text-align: center;
+  margin: 0;
+}
+
+.profile {
+  text-align: center;
+  font-size: 50px;
+}
+
+.underimg {
+  margin-top: 30px;
+}
+
+.profile img {
+  max-width: 250px;
+  width: 100%;
+  margin: -150px;
+}
+
+.rounded-circle {
+  border-radius: 50%;
+}
+
+.up {
+  text-align: left;
+  margin: 50px;
+  font-family: "Times New Roman";
+  font-size: 50px;
+  color: black;
+}
+
+scroll-container {
+  display: block;
+  width: 100%;
+  direction: ltr;
+  height: 100%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+/* dropdown menu */
+.dropbtn {
+  background-color: #0395af;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  width: 350px;
+  align-content: right;
+}
+
+.dropdown {
+  /* position: relative; */
+  align-content: right;
+  /* display: inline-block; */
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 350px;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #005a69;
+}
+
+/* end dropdwon */
+/* change email & username & password */
+legend {
+  background-color: #000;
+  color: #fff;
+  padding: 3px 6px;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'] {
+  width: 100%;
+  margin-left: 5px;
+}
+
+label {
+  margin-left: 20px;
+}
+
+input {
+  margin: .4rem 0;
+}
+
+input[type='submit'] {
+  margin-left: 20px;
+}
