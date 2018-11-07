@@ -48,10 +48,10 @@ exports.getAllMoviesFromTheater = function(req,res){
     var theater_id = req.body.id;
     movieOptions.qs.cinema_id = theater_id;
     request(movieOptions, function(error, response, body){
-        var newMovies;
+        var newMovies = {};
         movies = body.movies;
         movies.array.forEach(movie => {
-            var newMovie;
+            var newMovie = {};
             newMovie.title = movie.title;
             newMovie.id = movie.id;
             newMovie.poster_image_thumbnail = movie.poster_image_thumbnail;

@@ -49,9 +49,7 @@ var theaterSchema = new Schema({
     type: String,
     required: true
   },
-  crowdy: {
-    type: Number
-  },
+  crowdy: String,
   created_at: Date,
   updated_at: Date
 });
