@@ -59,11 +59,14 @@ exports.setEmployeeReport = function(req,res){
         }
         if(crowdy){
             crowdy.value = value;
+            crowdy.save(err => {
+                if(err){
+                    console.log(err);
+                }
+            });
         } else{
-            var product = createPublicReport(id);
-            product.num_reports += 1;
-            product.sum += report;
-            product.last_update = new Date();
+            var product = createEmployeeReport(id);
+            product.value = value;
             product.save(err => {
                 if(err){
                     console.log(err);
