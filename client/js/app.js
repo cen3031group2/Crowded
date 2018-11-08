@@ -1,6 +1,6 @@
 // this is Crowdy's app.js file
 // 10/11/18
-var app = angular.module('directoryApp', []);
+var app = angular.module('crowdy', []);
 
 app.run(function ($rootScope) {
     $rootScope.$on('scope.stored', function (event, data) {
@@ -8,15 +8,21 @@ app.run(function ($rootScope) {
     });
 });
 
-app.controller('MovieController', function ($scope, Scopes) {
+app.controller('MovieController', ['$scope', 'Scopes', 'Movies', function($scope, Scopes, Movies) {
 
     $scope.movies = undefined;
     $scope.codec = undefined;
     $scope.verify = "hello";
+    $scope.currentTheaterId = 42490;
+
+    $scope.changeListingsView = function(index) {
+      $scope.currentTheaterId = index;
+      cinemaIDService.setID(index);
+    };
 
     Scopes.store('MovieController', $scope);
     /* Get all the listings, then bind it to the scope */
-    Movies.getAll().then(function(response) {
+    Movies.getAllMoviesFromTheater().then(function(response) {
       $scope.movies = response.data;
     }, function(error) {
       console.log('Unable to retrieve listings:', error);
@@ -73,20 +79,9 @@ app.controller('MovieController', function ($scope, Scopes) {
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.listings[index];
     };
-});
+}]);
 
-app.controller('TheaterController', function ($scope, Scopes) {
-
-    Scopes.store('TheaterController', $scope);
-    $scope.currentTheaterId = 42490;
-
-    $scope.changeListingsView = function(index) {
-      $scope.currentTheaterId = index;
-    };
-
-});
-
-app.controller('UserController', function ($scope, Scopes) {
+app.controller('UserController', ['$scope', 'Scopes', function($scope, Scopes) {
 
     Scopes.store('UserController', $scope);
     /* Get all the listings, then bind it to the scope */
@@ -101,9 +96,9 @@ app.controller('UserController', function ($scope, Scopes) {
       }
     };
 
-});
+}]);
 
-app.factory('Scopes', function ($rootScope) {
+app.factory('Scopes', ['$rootScope', function ($rootScope) {
     var mem = {};
 
     return {
@@ -115,9 +110,4 @@ app.factory('Scopes', function ($rootScope) {
             return mem[key];
         }
     };
-});
-
-
-$scope.redirect = function(){
-  window.location = "crowdy2.html";
-}
+}]);

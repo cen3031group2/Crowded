@@ -1,4 +1,4 @@
-angular.module('theaters').factory('Theaters', function() {
+angular.module('crowdy').factory('Theaters', function() {
   var theaters = {
     entries : [
       {
