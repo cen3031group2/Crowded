@@ -2,6 +2,7 @@
 // manipulates database using queries
 // 10/11/18
 const request = require('request');
+var rp = require('request-promise');
 const config = require('../config/config');
 
 const MovieFormat = {
@@ -39,45 +40,62 @@ var showtimeOptions = {
     qs: {
         movie_id:0,
         cinema_id:0,
-        fields: "id,start_at",
-        limit: 5
+        fields: "start_at",
+        limit:5
     }
 };
 
-exports.getAllMoviesFromTheater = function(req,res){
+exports.getAllMoviesFromTheater = async function(req,res){
     var theater_id = req.body.id;
     movieOptions.qs.cinema_id = theater_id;
     request(movieOptions, function(error, response, body){
-        var newMovies = {};
+        if(error){
+            console.log(error);
+        }
+        var newMovies = [];
         movies = body.movies;
-        movies.array.forEach(movie => {
+        movies.forEach(movie => {
+            
             var newMovie = {};
             newMovie.title = movie.title;
             newMovie.id = movie.id;
-            newMovie.poster_image_thumbnail = movie.poster_image_thumbnail;
+            if(movie.poster_image_thumbnail){
+                newMovie.poster_image_thumbnail = movie.poster_image_thumbnail;
+            }
+            
             newMovie.genres = [];
             movie.genres.forEach(genre =>{
                 newMovie.genres.push(genre.name);
             });
-
-            newMovie.showtimes = [];
-            showtimeOptions.qs.cinema_id = theater_id;
-            showtimeOptions.qs.movie_id = movie.id;
-            request(showtimeOptions, function(s_error, s_response, s_body){
-                s_body.showtimes.forEach(showtime => {
-                    var time = new Date(showtime.start_at);
-                    var newTime = {
-                        hour: time.getHours(),
-                        minute: time.getMinutes(),
-                    }
-
-                    newMovie.showtimes.push(newTime);
-                });
-            });
-
             newMovies.push(newMovie);
         });
         
-        res.json(newMovies);
+        addShowtimes(newMovies, theater_id, res);
     });
 };
+
+async function addShowtimes(movies, theater_id, res){
+    showtimeOptions.qs.cinema_id = theater_id;
+    movies.forEach(movie =>{
+        
+        movie.showtimes = [];
+        showtimeOptions.qs.movie_id = movie.id;
+        var done = false;
+        console.log(movie);
+        let response = rp(showtimeOptions);
+        response.then(response => {
+            var body = response.body;
+            response.body.showtimes.forEach(showtime =>{
+                var time = new Date(showtime.start_at);
+                var newTime = {
+                    hour: time.getHours(),
+                    minute: time.getMinutes(),
+                }
+                
+                movie.showtimes.push(newTime)
+            });
+        });
+    });
+    
+    res.json(movies);
+}

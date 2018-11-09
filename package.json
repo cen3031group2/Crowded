@@ -12,6 +12,7 @@
     "mongoose": "^4.2.9",
     "morgan": "^1.6.1",
     "request": "^2.67.0",
+    "request-promise": "^4.2.2",
     "superagent": ">=3.7.0"
   },
   "devDependencies": {
