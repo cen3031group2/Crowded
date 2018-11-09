@@ -13,7 +13,7 @@ describe('Movies', function(){
             };
             var res = {};
             res.json = function(movies){
-                console.log(movies);
+                console.log(movies[0].showtimes);
             };
             movie.getAllMoviesFromTheater(req,res);
         })
