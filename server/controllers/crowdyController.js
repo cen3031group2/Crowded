@@ -13,7 +13,6 @@ exports.addPublicReport = function(req,res){
         if(crowdy){
             crowdy.num_reports += 1;
             crowdy.sum += report;
-            crowdy.last_update = new Date();
             crowdy.save(err => {
                 if(err){
                     console.log(err);
@@ -23,7 +22,6 @@ exports.addPublicReport = function(req,res){
             var product = createPublicReport(id);
             product.num_reports += 1;
             product.sum += report;
-            product.last_update = new Date();
             product.save(err => {
                 if(err){
                     console.log(err);
@@ -33,6 +31,55 @@ exports.addPublicReport = function(req,res){
     });
 };
 
+exports.getMovieReport = function(movie_id, theater_id){
+    var id = 't' + theater_id + 'm' + movie_id;
+    var query = {
+        id: id
+    }
+    Public.findOne(query, function(err, report){
+        if(err){
+            console.log(err);
+        } else{
+            if(report){
+                return report;
+            } else{
+                return createPublicReport(id);
+            }
+        }
+    });
+}
+
+exports.getTheatherReport = function(crowdy_id){
+    var query = {
+        id: crowdy_id
+    }
+    Public.findOne(query, function(err, report){
+        var result = {};
+        result.id = crowdy_id;
+        if(err){
+            console.log(err);
+        } else{
+            if(report){
+                result.public = report.avg;  
+            }else{
+                result.public = createPublicReport(crowdy_id).avg;
+            }
+            Employee.findOne(query, function(error, res){
+                if(error){
+                    console.log(error);
+                } else{
+                    if(res){
+                        result.employee = res.value;
+                    } else{
+                        result.employee = createEmployeeReport(crowdy_id).value;
+                    }
+                }
+                return result;
+            })
+        }
+    })
+}
+
 exports.getPublicReport = function(req,res){
     var id = req.body.id;
     var query = {id: id};
@@ -41,8 +88,7 @@ exports.getPublicReport = function(req,res){
             console.log(err);
         }
         if(crowdy){
-            const avg = crowdy.sum / crowdy.num_reports;
-            res.json({value: avg});
+            res.json(crowdy);
         } else{
             res.json(createPublicReport(id));
         }
@@ -111,7 +157,9 @@ exports.getEmployeeReport = function(req,res){
             console.log(err);
         }
         if(crowdy){
-            res.json({value: crowdy.value});
+            res.json(crowdy);
+        } else {
+            createEmployeeReport(id);
         }
     });
 };

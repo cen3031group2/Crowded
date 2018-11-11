@@ -4,6 +4,7 @@
 const request = require('request');
 var rp = require('request-promise');
 const config = require('../config/config');
+const crowdy = require('./crowdyController');
 
 const MovieFormat = {
     id: 0,
@@ -14,7 +15,11 @@ const MovieFormat = {
         tmdb: 0
     },
     poster_image_thumbnail: '',
-    showtimes: [{hour: 0, minute:0}]
+    showtimes: [{hour: 0, minute:0}],
+    crowdy:{
+        id: '',
+        value: 0
+    }
 };
 
 var movieOptions ={
@@ -81,7 +86,6 @@ async function addShowtimes(movies, theater_id, res){
         movie.showtimes = [];
         showtimeOptions.qs.movie_id = movie.id;
         var done = false;
-        console.log(movie);
         let response = rp(showtimeOptions);
         response.then(response => {
             var body = response.body;
@@ -96,6 +100,13 @@ async function addShowtimes(movies, theater_id, res){
             });
         });
     });
-    
+    addCrowdy(movies, theater_id, res)
+}
+
+async function addCrowdy(movies, theater_id, res){
+    movies.forEach(movie =>{
+        movie.crowdy.id = 't' + theater_id + 'm' + movie.id;
+        movie.crowdy.value = crowdy.getPublicReport(movie.crowdy.id).avg;
+    });
     res.json(movies);
 }
