@@ -4,16 +4,22 @@ var User = require('../models/userModel'),
 exports.getGenres = async function(req, res){
     const query = {username: req.username};
     const user = await User.findOne(query).exec();
-    const result = {
-        genres: user.genres
+    if(user){
+        const result = {
+            genres: user.genres
+        }
+        res.json(result);
+    } else{
+        res.send(undefined);
     }
-    res.json(result);
 };
 
 exports.getUser = async function(req, res){
     const query = {username: req.username};
     var user = await User.findOne(query).exec();
-    user.password = '';
+    if(user){
+        user.password = '';
+    }
     res.json(user);
 };
 
@@ -68,6 +74,18 @@ exports.createUser = async function(req, res){
     }
 };
 
+exports.saveUser = function(req, res){
+    const query = {
+        username: req.body.username
+    }
+    User.findOneAndUpdate(query, req.body,).exec();
+    res.end();
+}
+
+
+
+
+
 exports.getHistory = function(req, res){
     var username = req.body.username;
     var query = {username: username};
@@ -81,11 +99,7 @@ exports.getHistory = function(req, res){
     });
 };
 
-exports.saveUser = function(req, res){
-    var user = new User(req.body.user);
-    user.save();
-    res.end();
-}
+
 
 exports.setPassword = function(req, res){
     var username = req.body.username;
