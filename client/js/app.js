@@ -1,5 +1,6 @@
 // this is Crowdy's app.js file
 // 10/11/18
+
 var app = angular.module('directoryApp', []);
 
 app.run(function ($rootScope) {
@@ -8,13 +9,12 @@ app.run(function ($rootScope) {
     });
 });
 
-app.controller('MovieController', function ($scope, Scopes) {
+app.controller('MovieController', function ($scope) {
 
     $scope.movies = undefined;
     $scope.codec = undefined;
-    $scope.verify = "hello";
-
-    Scopes.store('MovieController', $scope);
+    $scope.verify = "hello"
+  
     /* Get all the listings, then bind it to the scope */
     Movies.getAll().then(function(response) {
       $scope.movies = response.data;
@@ -82,9 +82,7 @@ app.controller('TheaterController', function ($scope, Scopes) {
 
 });
 
-app.controller('UserController', function ($scope, Scopes) {
-
-    Scopes.store('UserController', $scope);
+app.controller('UserController', function ($scope) {
     /* Get all the listings, then bind it to the scope */
     $scope.verify = "hello";
     $scope.inputEmail = "";
@@ -96,24 +94,4 @@ app.controller('UserController', function ($scope, Scopes) {
         location.replace("./crowdy.hmtl");
       }
     };
-
 });
-
-app.factory('Scopes', function ($rootScope) {
-    var mem = {};
-
-    return {
-        store: function (key, value) {
-            $rootScope.$emit('scope.stored', key);
-            mem[key] = value;
-        },
-        get: function (key) {
-            return mem[key];
-        }
-    };
-});
-
-
-$scope.redirect = function(){
-  window.location = "crowdy2.html";
-}

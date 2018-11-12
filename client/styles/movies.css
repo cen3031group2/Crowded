@@ -24,8 +24,9 @@
   background-position: 95% center;
 }
 
+
 /* tabs */
-ul {
+.form-group ul {
   display: inline-block;
   list-style-type: none;
   margin: 0;
@@ -34,11 +35,11 @@ ul {
   background-color: #333;
 }
 
-li {
+.form-group li {
   float: left;
 }
 
-li a {
+.form-group li a {
   display: block;
   color: white;
   text-align: center;
@@ -46,7 +47,7 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
+.form-group li a:hover:not(.active) {
   background-color: #111;
 }
 
