@@ -6,12 +6,14 @@ var path = require('path'),
     config = require('./config'),
     userRouter = require('../routes/userRouter'),
     crowdyRouter = require('../routes/crowdyRouter'),
+    theaterRouter = require('../routes/theaterRouter'),
+    movieRouter = require('../routes/movieRouter'),
     cors = require('cors');
 
 module.exports.init = function() {
 //connect to database
 var db = mongoose.connect(config.db.uri, { useMongoClient: true })
-
+mongoose.Promise = require('bluebird');
 
 //initialize app
 var app = express();
@@ -27,7 +29,8 @@ app.use("/", express.static('client'));
 
 //TODO
 app.use('/api/user', userRouter);
-
+app.use('/api/theater', theaterRouter);
+app.use('/api/movie', movieRouter);
 app.use('/api/crowdy', crowdyRouter);
 
 app.get('/', function (req, res, next) {

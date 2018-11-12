@@ -5,10 +5,9 @@ var userSchema = new Schema({
     userId:  Number,
     username: String,
     password: String,
-    genre: [{type: Schema.Types.ObjectId, ref: 'Genre'}],
+    genre: [],
     email: String,
-    isEmployee: Boolean,
-    employee_company: [{type: Schema.Types.ObjectId, ref: 'Company'}]
+    employee_company: String,
 });
 
 var User = mongoose.model("User", userSchema);

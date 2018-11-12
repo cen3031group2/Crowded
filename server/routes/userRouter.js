@@ -7,9 +7,15 @@ var user = require('../controllers/userController'),
   These method calls are responsible for routing requests to the correct request handler.
   Take note that it is possible for different controller functions to handle requests to the same route.
  */
-router.route('/genre/get')
-    .post(user.getGenres);
-router.route('/genre/set')
+router.route('/genre/:username').get(user.getGenres);
+router.route('/:username').get(user.getUser)
+router.route('/password/check').post(user.checkPassword);
+router.route('/company/:username').get(user.getCompany);
+router.route('/create').post(user.createUser);
+router.route('/save').post(user.saveUser);
+
+
+router.route('/genre/:id')
     .post(user.setGenres);
 
 router.route('/history/get')
@@ -17,17 +23,14 @@ router.route('/history/get')
 router.route('/history/add')
     .post(user.addHistory);
 
-router.route('/password/check')
-    .post(user.checkPassword);
+
+    
 router.route('/password/set')
     .post(user.setPassword);
 
-router.route('/get')
-    .post(user.getUser);
-router.route('/create')
-    .post(user.create);
 
-router.route('/company/get')
-    .post(user.getCompany);
 
+
+
+router.param('username', user.toUsername);
 module.exports = router;

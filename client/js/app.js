@@ -1,6 +1,7 @@
 // this is Crowdy's app.js file
 // 10/11/18
-var app = angular.module('crowdy', []);
+
+var app = angular.module('directoryApp', []);
 
 app.run(function ($rootScope) {
     $rootScope.$on('scope.stored', function (event, data) {
@@ -8,21 +9,14 @@ app.run(function ($rootScope) {
     });
 });
 
-app.controller('MovieController', ['$scope', 'Scopes', 'Movies', function($scope, Scopes, Movies) {
+app.controller('MovieController', function ($scope) {
 
     $scope.movies = undefined;
     $scope.codec = undefined;
-    $scope.verify = "hello";
-    $scope.currentTheaterId = 42490;
-
-    $scope.changeListingsView = function(index) {
-      $scope.currentTheaterId = index;
-      cinemaIDService.setID(index);
-    };
-
-    Scopes.store('MovieController', $scope);
+    $scope.verify = "hello"
+  
     /* Get all the listings, then bind it to the scope */
-    Movies.getAllMoviesFromTheater().then(function(response) {
+    Movies.getAll().then(function(response) {
       $scope.movies = response.data;
     }, function(error) {
       console.log('Unable to retrieve listings:', error);
@@ -79,11 +73,16 @@ app.controller('MovieController', ['$scope', 'Scopes', 'Movies', function($scope
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.listings[index];
     };
-}]);
+});
 
-app.controller('UserController', ['$scope', 'Scopes', function($scope, Scopes) {
+app.controller('TheaterController', function ($scope, Scopes) {
 
-    Scopes.store('UserController', $scope);
+    Scopes.store('TheaterController', $scope);
+    $scope.currentTheaterId = 42490;
+
+});
+
+app.controller('UserController', function ($scope) {
     /* Get all the listings, then bind it to the scope */
     $scope.verify = "hello";
     $scope.inputEmail = "";
@@ -95,19 +94,4 @@ app.controller('UserController', ['$scope', 'Scopes', function($scope, Scopes) {
         location.replace("./crowdy.hmtl");
       }
     };
-
-}]);
-
-app.factory('Scopes', ['$rootScope', function ($rootScope) {
-    var mem = {};
-
-    return {
-        store: function (key, value) {
-            $rootScope.$emit('scope.stored', key);
-            mem[key] = value;
-        },
-        get: function (key) {
-            return mem[key];
-        }
-    };
-}]);
+});

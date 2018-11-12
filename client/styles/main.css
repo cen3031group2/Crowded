@@ -24,14 +24,15 @@
   padding: 0;
   overflow: hidden;
   background-color: #333;
-  /* z-index: 1; */
+
 }
 
-.form-group li {
+li {
   float: left;
 }
 
-.form-group li a {
+li a {
+
   display: block;
   color: white;
   text-align: center;
@@ -74,7 +75,8 @@ img {
   z-index: 1;
 }
 
-/* #bottomTabs {
+
+#bottomButtons {
   z-index: 1;
-} */
+}
 

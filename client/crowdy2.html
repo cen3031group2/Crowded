@@ -13,14 +13,14 @@
     <div class="row" ng-controller="MovieController">
       <h2 align="center">List of movies<br></h2>
       <div align="center" class="dropdown">
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Cinema
-          <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#" ng-click="changeListingsView(42490)">Regal Butler Town Center 14</a></li>
-            <li><a href="#" ng-click="changeListingsView(42506)">Regal Royal Park Stadium 16</a></li>
-            <li><a href="#" ng-click="changeListingsView(64196)">Regal Celebration Pointe 10 & RPX Movie Theatre</a></li>
-          </ul>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Cinema
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" ng-model="theaterListings">
+          <li><a href="#" ng-click="changeListingsView(42490)">Regal Butler Town Center 14</a></li>
+          <li><a href="#" ng-click="changeListingsView(42506)">Regal Royal Park Stadium 16</a></li>
+          <li><a href="#" ng-click="changeListingsView(64196)">Regal Celebration Pointe 10 & RPX Movie Theatre</a></li>
+        </ul>
         </div>
       </div>
       <h1 align="center">
@@ -49,13 +49,11 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="singlebutton"></label>
             <div class="col-md-4 text-center">
-              <!-- <div class="bottomTabs"> -->
               <!-- cinema and movies tabs -->
-              <ul id="bottomTabs">
+              <ul id="buttomBarul">
                 <li><a class="active" href="./crowdy.html">Show Cinemas</a></li>
                 <li ng-controller="MovieController" ng-click="getMoviesFromTheater()"><a href="./crowdy2.html">Show Movies</a></li>
               </ul>
-            <!-- </div> -->
             </div>
           </div>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>

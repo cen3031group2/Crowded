@@ -1,5 +1,5 @@
 /* Dependencies */
-var crowdy = require('../controllers/crowdyController'),
+var theater = require('../controllers/theaterController'),
     express = require('express'),
     router = express.Router();
 
@@ -7,15 +7,15 @@ var crowdy = require('../controllers/crowdyController'),
   These method calls are responsible for routing requests to the correct request handler.
   Take note that it is possible for different controller functions to handle requests to the same route.
  */
-router.route('/public/')
-    .post(crowdy.addPublicReport);
+router.route('/getAllTheaters')
+    .get(theater.getAllTheaters)
 
 
 /*
   The ':' specifies a URL parameter.
  */
-router.route('/employee/')
-    .put(crowdy.setEmployeeReport);
+router.route('/getTheater/:id')
+    .get(theater.getTheater)
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle
@@ -30,5 +30,5 @@ router.route('/employee/')
   It will then pass control to the routing function specified above, where it will either
   get, update, or delete that specific listing (depending on the HTTP verb specified)
  */
-
+router.param('id', theater.toId);
 module.exports = router;
