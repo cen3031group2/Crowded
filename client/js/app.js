@@ -1,7 +1,7 @@
 // this is Crowdy's app.js file
 // 10/11/18
 
-var app = angular.module('directoryApp', []);
+var app = angular.module('crowdy', []);
 
 app.run(function ($rootScope) {
     $rootScope.$on('scope.stored', function (event, data) {
@@ -9,22 +9,33 @@ app.run(function ($rootScope) {
     });
 });
 
-app.controller('MovieController', function ($scope) {
+app.controller('MovieController', ['$scope', 'Movies',
+  function ($scope, Movies) {
 
     $scope.movies = undefined;
     $scope.codec = undefined;
-    $scope.verify = "hello"
-  
+    $scope.verify = "hello";
+    $scope.currentTheaterId = 42490;
+
+    $scope.changeListingsView = function(index) {
+      $scope.currentTheaterId = index;
+      $scope.getMoviesFromTheater(index);
+    };
+
+    //Not sure what this is for
+
     /* Get all the listings, then bind it to the scope */
-    Movies.getAll().then(function(response) {
-      $scope.movies = response.data;
-    }, function(error) {
-      console.log('Unable to retrieve listings:', error);
-    });
+    // Movies.getAll()
+    // .then(function(response) {
+    //   $scope.movies = response.data;
+    // })
+    // .catch(function (error) {
+    //   console.log('Unable to retrieve listings:', error);
+    // });
 
     $scope.getMoviesFromTheater = function (theater_id){
         if (theater_id == null) {
-          theater_id = Scopes.get('TheaterController').currentTheaterId;
+          theater_id = currentTheaterId;
         }
         $scope.movies = Movies.getAllMoviesFromTheater(theater_id)
     };
@@ -35,11 +46,11 @@ app.controller('MovieController', function ($scope) {
     };
 
     //Check if the input and code or name of the building matches
-    $scope.valid = function (json) {
-           if ($scope.codec == undefined) return true;
-           return (json.name.toLowerCase().startsWith($scope.codec.toLowerCase()) ||
-                   json.genre.toLowerCase().startsWith($scope.codec.toLowerCase()));
-    };
+    // $scope.valid = function (json) {
+    //        if ($scope.codec == undefined) return true;
+    //        return (json.name.toLowerCase().startsWith($scope.codec.toLowerCase()) ||
+    //                json.genre.toLowerCase().startsWith($scope.codec.toLowerCase()));
+    // };
 
     $scope.addMovies = function() {
       try {
@@ -73,16 +84,12 @@ app.controller('MovieController', function ($scope) {
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.listings[index];
     };
-});
 
-app.controller('TheaterController', function ($scope, Scopes) {
+}
+]);
 
-    Scopes.store('TheaterController', $scope);
-    $scope.currentTheaterId = 42490;
+angular.controller('UserController', ['$scope', 'User', function ($scope, User) {
 
-});
-
-app.controller('UserController', function ($scope) {
     /* Get all the listings, then bind it to the scope */
     $scope.verify = "hello";
     $scope.inputEmail = "";
@@ -94,4 +101,19 @@ app.controller('UserController', function ($scope) {
         location.replace("./crowdy.hmtl");
       }
     };
-});
+
+    $scope.user = undefined;
+    $scope.getGenres = function(user){
+        $scope.user.genres = User.getGenres(user);
+    };
+
+    $scope.checkPassword = function (user) {
+        return User.checkPassword(user);
+    };
+
+    $scope.createUser = function (user) {
+        return User.createUser(user);
+    };
+
+}
+]);

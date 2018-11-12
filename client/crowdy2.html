@@ -16,7 +16,7 @@
       <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Cinema
         <span class="caret"></span></button>
-        <ul class="dropdown-menu" ng-model="theaterListings">
+        <ul class="dropdown-menu">
           <li><a href="#" ng-click="changeListingsView(42490)">Regal Butler Town Center 14</a></li>
           <li><a href="#" ng-click="changeListingsView(42506)">Regal Royal Park Stadium 16</a></li>
           <li><a href="#" ng-click="changeListingsView(64196)">Regal Celebration Pointe 10 & RPX Movie Theatre</a></li>
@@ -33,7 +33,7 @@
         <div class="col-md-6">
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
-              <tr ng-repeat="x in movies | filter:valid">
+              <tr ng-repeat="x in movies">
                   <td> </td> <!-- Picture goes here -->
                   <td>{{x.name}}<br>
                   {{x.genre}}<br>
