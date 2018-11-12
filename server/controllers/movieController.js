@@ -16,10 +16,8 @@ const MovieFormat = {
     },
     poster_image_thumbnail: '',
     showtimes: [{hour: 0, minute:0}],
-    crowdy:{
-        id: '',
-        value: 0
-    }
+    crowdy: 0,
+    theater: ''
 };
 
 var movieOptions ={
@@ -51,62 +49,62 @@ var showtimeOptions = {
 };
 
 exports.getAllMoviesFromTheater = async function(req,res){
-    var theater_id = req.body.id;
+    var theater_id = req.id;
     movieOptions.qs.cinema_id = theater_id;
-    request(movieOptions, function(error, response, body){
-        if(error){
-            console.log(error);
+    
+
+    const result = await rp(movieOptions);
+    
+    const movies = result.movies
+    var newMovies = [];
+    movies.forEach(function(movie){
+        var newMovie = {};
+        newMovie.title = movie.title;
+        newMovie.id = movie.id;
+        newMovie.theater = theater_id;
+        if(movie.poster_image_thumbnail){
+            newMovie.poster_image_thumbnail = movie.poster_image_thumbnail;
         }
-        var newMovies = [];
-        movies = body.movies;
-        movies.forEach(movie => {
-            
-            var newMovie = {};
-            newMovie.title = movie.title;
-            newMovie.id = movie.id;
-            if(movie.poster_image_thumbnail){
-                newMovie.poster_image_thumbnail = movie.poster_image_thumbnail;
-            }
-            
-            newMovie.genres = [];
-            movie.genres.forEach(genre =>{
-                newMovie.genres.push(genre.name);
-            });
-            newMovies.push(newMovie);
-        });
-        
-        addShowtimes(newMovies, theater_id, res);
+        if(movie.rating){
+            newMovie.rating = movie.rating;
+        }
+        newMovie.genres = [];
+        movie.genres.forEach(genre =>{
+            newMovie.genres.push(genre.name);
+        });   
+        newMovies.push(newMovie);
     });
+    addShowtimes(newMovies, theater_id, res);  
 };
 
 async function addShowtimes(movies, theater_id, res){
     showtimeOptions.qs.cinema_id = theater_id;
-    movies.forEach(movie =>{
-        
-        movie.showtimes = [];
-        showtimeOptions.qs.movie_id = movie.id;
-        var done = false;
-        let response = rp(showtimeOptions);
-        response.then(response => {
-            var body = response.body;
-            response.body.showtimes.forEach(showtime =>{
-                var time = new Date(showtime.start_at);
-                var newTime = {
-                    hour: time.getHours(),
-                    minute: time.getMinutes(),
-                }
-                
-                movie.showtimes.push(newTime)
-            });
-        });
-    });
-    addCrowdy(movies, theater_id, res)
+    for(var i = 0; i < movies.length; i++){
+        movies[i].showtimes = [];
+        showtimeOptions.qs.movie_id = movies[i].id;
+        const result = await rp(showtimeOptions)
+        const showtimes = result.showtimes;
+        for(var j = 0; j < showtimes.length; j++){
+            var time = new Date(showtimes[j].start_at);
+            var newTime = {
+                hour: time.getHours(),
+                minute: time.getMinutes(),
+            }  
+            movies[i].showtimes.push(newTime)
+        }
+    }
+    addCrowdy(movies, res);
 }
 
-async function addCrowdy(movies, theater_id, res){
-    movies.forEach(movie =>{
-        movie.crowdy.id = 't' + theater_id + 'm' + movie.id;
-        movie.crowdy.value = crowdy.getPublicReport(movie.crowdy.id).avg;
-    });
+async function addCrowdy(movies, res){
+    for (var i = 0; i < movies.length; i++){
+        var result = await crowdy.getMovieReport(movies[i]);
+        movies[i].crowdy = result.avg;
+    }
     res.json(movies);
 }
+
+exports.toId = function(req, res, next, id){
+    req.id = id;
+    next();
+};

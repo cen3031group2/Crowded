@@ -1,17 +1,71 @@
 var User = require('../models/userModel'),
     config = require('../config/config');
 
-exports.getGenres = function(req, res){
-    var username = req.body.username;
-    var query = {username: username};
-    User.findOne(query, function (err, user){
-        if(err){
-            console.log(err);
+exports.getGenres = async function(req, res){
+    const query = {username: req.username};
+    const user = await User.findOne(query).exec();
+    const result = {
+        genres: user.genres
+    }
+    res.json(result);
+};
+
+exports.getUser = async function(req, res){
+    const query = {username: req.username};
+    var user = await User.findOne(query).exec();
+    user.password = '';
+    res.json(user);
+};
+
+var expectedPackage = {
+    username: '',
+    pasword: ''
+}
+exports.checkPassword = async function(req, res){
+    const query = {username: req.body.username};
+    const password = req.body.password;
+    var user = await User.findOne(query).exec();
+    if(password === user.password){
+        res.send('true');
+    } else{
+        res.send('false');
+    }
+};
+
+exports.getCompany = async function(req, res){
+    const query = {username: req.body.username};
+    const user = await User.findOne(query).exec();
+    if(user.employee_company){
+        res.send(user.employee_company);
+    } else {
+        res.send(undefined);
+    }
+};
+
+exports.createUser = async function(req, res){
+    const query = {username: req.body.username};
+    const result = await User.findOne(query);
+    if(result){
+        res.json({
+            created: false,
+            msg: 'Username already taken.'
+        });
+    } else {
+        var user = new User();
+        user.username = req.body.username;
+        user.password = req.body.password;
+        const website = user.username.split("@")[1];
+        const website_name = website.split(".")[0];
+        if (website_name in config.companies) {
+            user.employee_company = website_name;
+        } else {
+            user.employee_company = undefined;
         }
-        if(user){
-            res.json(user.genre);
-        }
-    });
+        user.save();
+        res.json({
+            created: true
+        });
+    }
 };
 
 exports.getHistory = function(req, res){
@@ -27,23 +81,11 @@ exports.getHistory = function(req, res){
     });
 };
 
-exports.checkPassword = function(req, res){
-    var username = req.body.username;
-    var query = {username: username};
-    var password = req.body.password;
-    User.findOne(query, function (err, user){
-        if(err){
-            console.log(err);
-        }
-        if(user){
-            if(user.password === password){
-                res.json({valid:'true'});
-            } else
-                res.json({valid:'false'});
-
-        }
-    });
-};
+exports.saveUser = function(req, res){
+    var user = new User(req.body.user);
+    user.save();
+    res.end();
+}
 
 exports.setPassword = function(req, res){
     var username = req.body.username;
@@ -78,18 +120,7 @@ exports.setGenres = function(req, res){
     });
 };
 
-exports.getCompany = function(req, res){
-    var username = req.body.username;
-    var query = {username: username};
-    User.findOne(query, function (err, user){
-        if(err){
-            console.log(err);
-        }
-        if(user){
-            res.json({company: user.employee_company});
-        }
-    });
-};
+
 
 exports.getUser = function(req, res){
     var username = req.body.username;
@@ -141,25 +172,9 @@ exports.clearHistory = function(req, res){
     });
 };
 
-exports.create = function(req, res){
-    console.log(req.body);
-    var user = new User();
-    user.username = req.body.username;
-    user.password = req.body.password;
-    const website = user.username.split("@")[1];
-    const website_name = website.split(".")[0];
-    if (website_name in config.companies) {
-        user.isEmployee = true;
-        user.employee_company = website_name;
-    } else {
-        user.isEmployee = false;
-    }
-    user.save(function(err){
-        if(err){
-            console.log(err);
-            res.status(404).send(err);
-        } else {
-            res.json(user);
-        }
-    });
+
+
+exports.toUsername = function(req, res, next, username){
+    req.username = username;
+    next();
 };

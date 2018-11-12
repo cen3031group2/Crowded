@@ -18,8 +18,13 @@ var publicSchema = new Schema({
 });
 
 publicSchema.pre('save', function(next){
-    this.avg = sum / num_reports;
+    if(this.num_reports == 0){
+        this.avg = 0;
+    } else {
+        this.avg = this.sum / this.num_reports;
+    }
     this.last_update = new Date();
+    next();
 });
 
 var Public = mongoose.model("CrowdyPublic", publicSchema);

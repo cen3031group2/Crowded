@@ -3,6 +3,7 @@ var user = require('../../controllers/userController');
 var mongoose = require('mongoose'), 
  config = require('../../config/config');
 
+mongoose.Promise = require('bluebird');
 var db = mongoose.connect(config.db.uri, { useMongoClient: true });
 
 describe('Users', function(){

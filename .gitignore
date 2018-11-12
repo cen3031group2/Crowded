@@ -3,7 +3,7 @@
 
 *.idea
 .idea
-.vs
+.vscode
 package-lock.json
 # configuration files
 #server/config/config.js
