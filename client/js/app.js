@@ -42,7 +42,7 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
         if (theater_id == null || !theater_id) {
           theater_id = $scope.theaterId;
         }
-        $http.get(website + '/api/movie/getAllMoviesFromTheater/' + theater_id).then(function(response){
+        $http.get('/api/movie/getAllMoviesFromTheater/' + theater_id).then(function(response){
           $scope.movies = response.data;
         });
         
@@ -70,19 +70,21 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
   //   telephone: '',
   //   location: {}
   // }
+
+  // Gets all the theaters in Gaineville and then adds it to scope.theaters, this function can be altered.
   $scope.getAllTheaters = function() {
-    $http.get(website + '/api/theater/getAllTheaters');
+    $scope.theaters = $http.get('/api/theater/getAllTheaters'); // 
   }
 
   $scope.getTheater = function(theater_id){
-    $scope.currentTheater = $http.get(website + '/api/theater/getTheaters/' + theater_id);
+    $scope.currentTheater = $http.get('/api/theater/getTheaters/' + theater_id);
   }
 }]);
 
 app.controller('UserController', ['$scope', '$http', function($scope, $http){
   // returns an array with user's listed genres
   $scope.getUserGenres = function(username){
-    $http.get(website + '/api/user/genre/' + username).then(function(response){
+    $http.get('/api/user/genre/' + username).then(function(response){
       $scope.genres = response.data;
     });
   }
@@ -96,27 +98,24 @@ app.controller('UserController', ['$scope', '$http', function($scope, $http){
   //   employee_company: ''
   // }
   $scope.getUser = function(username){
-    $http.get(website + '/api/user/' + username); // returns user object, or null if there is no user
+    $http.get('/api/user/' + username); // returns user object, or null if there is no user
   }
 
+  // Either pass in user to the function to check or alter this function
+  // expected format for user to check {username: '', password: ''};
   $scope.checkPassword = function(userToCheck){
-    // expected format for user to check
-    // {username: '', password: ''};
-
-    if($http.post(website + '/api/user/password/check', userToCheck)){
-      $scope.user = $http.get(websiter + '/api/user/' + userToCheck.username);
-    };// returns true if valid, false otherwise
-
+    if($http.post('/api/user/password/check', userToCheck)){
+      $scope.user = $http.get('/api/user/' + userToCheck.username);
+    };
   }
 
   $scope.createUser = function(userToCreate){
-    // expect user to have {username: '', password: ''}
-    var msg = $http.post(website + '/api/user/create', userToCreate); // returns msg object, which will have a msg if failed
+    var msg = $http.post('/api/user/create', userToCreate); // returns msg object, which will have a msg if failed
     // msg = {created: boolean, msg: ''}
   }
 
   $scope.saveUser = function(userToSave){
     // expect user to have {username: '', password: ''}
-    $http.post(website + '/api/user/save', userToSave); // saves updates to user.
+    $http.post('/api/user/save', userToSave); // saves updates to user.
   }
 }]);

@@ -1,7 +1,7 @@
 var assert = require('assert');
-var movie = require('../../controllers/movieController');
+var movie = require('../../../server/controllers/movieController');
 var mongoose = require('mongoose'), 
- config = require('../../config/config');
+ config = require('../../../server/config/config');
 
  var db = mongoose.connect(config.db.uri, { useMongoClient: true });
  mongoose.Promise = require('bluebird');
