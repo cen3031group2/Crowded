@@ -83,13 +83,13 @@ app.controller('UserController', ['$scope', '$http', function($scope, $http){
   }
 
   // returns user by that name or null if none, does not have password attached
-  const userFormat = {
-    username: '',
-    password: '',
-    genre: [''],
-    email: '',
-    employee_company: ''
-  }
+  // const userFormat = {
+  //   username: '',
+  //   password: '',
+  //   genre: [''],
+  //   email: '',
+  //   employee_company: ''
+  // }
   $scope.getUser = function(username){
     $http.get(website + '/api/user/' + username); // returns user object, or null if there is no user
   }
