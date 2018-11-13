@@ -1,6 +1,6 @@
 // this is Crowdy's app.js file
 // 10/11/18
-const website = 'http://localhost:8000';
+const website = 'http://localhost:8080';
 var app = angular.module('directoryApp', []);
 
 app.run(function ($rootScope) {
@@ -15,6 +15,7 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
     $scope.codec = undefined;
     $scope.verify = "hello"
     $scope.theaterId = 42490;
+    $scope.loading = undefined;
 
     // const movieFormat = {
     //   id: 0,
@@ -39,20 +40,22 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
     };
 
     $scope.getMoviesFromTheater = async function (theater_id){
+      $scope.loading = "Loading";
         if (theater_id == null || !theater_id) {
           theater_id = $scope.theaterId;
         }
         $http.get(website + '/api/movie/getAllMoviesFromTheater/' + theater_id).then(function(response){
           $scope.movies = response.data;
+          $scope.loading = null;
         });
-        
+        $scope.loading = null;
     };
 
     //Used to show only the movie names or genres corresponding to the search bar information
     $scope.valid = function (json) {
-           if ($scope.codec == undefined) return true;
-           return (json.name.toLowerCase().startsWith($scope.codec.toLowerCase()) ||
-                   json.genre.toLowerCase().startsWith($scope.codec.toLowerCase()));
+      if ($scope.codec == undefined) return true;
+       if ($scope.codec == json) return true;
+       else return false;
     };
 }]);
 

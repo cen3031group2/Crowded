@@ -12,6 +12,7 @@
   <body ng-app="directoryApp">
     <div class="row" ng-controller="MovieController">
       <h2 align="center">List of movies<br></h2>
+      {{getMoviesFromTheater(42490)}}
       <div align="center" class="dropdown">
       <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Cinema
@@ -30,6 +31,7 @@
             <input type="search" id="search" placeholder="search" ng-model="codec"/>
           </div>
       </h1>
+      <h1>{{loading}}</h1>
         <div class="col-md-6">
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
