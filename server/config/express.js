@@ -34,7 +34,7 @@ app.use('/api/movie', movieRouter);
 app.use('/api/crowdy', crowdyRouter);
 
 app.get('/', function (req, res, next) {
-  res.redirect('https://crowdy-group2.herokuapp.com/crowdy.html');
+  res.redirect('~/crowdy.html');
 });
 
 return app;
