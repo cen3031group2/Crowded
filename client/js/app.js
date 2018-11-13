@@ -1,6 +1,6 @@
 // this is Crowdy's app.js file
 // 10/11/18
-const website = 'http://localhost:8080';
+const website = 'http://localhost:8000';
 var app = angular.module('directoryApp', []);
 
 app.run(function ($rootScope) {
