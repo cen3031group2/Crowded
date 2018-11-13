@@ -14,32 +14,38 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
     $scope.movies = undefined;
     $scope.codec = undefined;
     $scope.verify = "hello"
+    $scope.theaterId = 42490;
 
-    const movieFormat = {
-      id: 0,
-      title: '',
-      theater: 0,
-      poster_image_thumbnail: '',
-      rating: {
-        imbd: 0,
-        tmbd: 0
-      },
-      genres = [''],
-      showtimes = [{
-        hour: 0,
-        minute: 0
-      }],
-      crowdy: 0,
-    }
+    // const movieFormat = {
+    //   id: 0,
+    //   title: '',
+    //   theater: 0,
+    //   poster_image_thumbnail: '',
+    //   rating: {
+    //     imbd: 0,
+    //     tmbd: 0
+    //   },
+    //   genres = [''],
+    //   showtimes = [{
+    //     hour: 0,
+    //     minute: 0
+    //   }],
+    //   crowdy: 0,
+    // };
+
+    //Change the movies depending on the theater selected
+    $scope.changeListingsView = function (index) {
+      $scope.theaterId = index;
+    };
+
     $scope.getMoviesFromTheater = function (theater_id){
         if (theater_id == null || !theater_id) {
-          theater_id = Scopes.get('TheaterController').currentTheaterId;
+          theater_id = $scope.theaterId;
         }
         $scope.movies = $http.get(website + '/api/movie/getAllMoviesFromTheater/' + theater_id);
     };
 
-    //Check if the input and code or name of the building matches
-    // Isaiah: I don't understand what this is used for?
+    //Used to show only the movie names or genres corresponding to the search bar information
     $scope.valid = function (json) {
            if ($scope.codec == undefined) return true;
            return (json.name.toLowerCase().startsWith($scope.codec.toLowerCase()) ||
@@ -49,18 +55,18 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
 
 app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($scope, $http, Scopes) {
   $scope.theaters = undefined;
-  const theaterFormat = {
-    id: 0,
-    crowdy: {
-      id: '',
-      public: 0,
-      employee: 0
-    },
-    name: '',
-    website: '',
-    telephone: '',
-    location: {}
-  }
+  // const theaterFormat = {
+  //   id: 0,
+  //   crowdy: {
+  //     id: '',
+  //     public: 0,
+  //     employee: 0
+  //   },
+  //   name: '',
+  //   website: '',
+  //   telephone: '',
+  //   location: {}
+  // }
   $scope.getAllTheaters = function() {
     $scope.theaters = $http.get(website + '/api/theater/getAllTheaters');
   }
@@ -68,11 +74,6 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
   $scope.getTheater = function(theater_id){
     $scope.currentTheater = $http.get(website + '/api/theater/getTheaters/' + theater_id);
   }
-
-  // Isaiah: ?
-    Scopes.store('TheaterController', $scope);
-    $scope.currentTheaterId = 42490;
-
 }]);
 
 app.controller('UserController', ['$scope', '$http', function($scope, $http){
@@ -96,7 +97,7 @@ app.controller('UserController', ['$scope', '$http', function($scope, $http){
   $scope.checkPassword = function(userToCheck){
     // expected format for user to check
     // {username: '', password: ''};
-    
+
     $http.post(website + '/api/user/password/check', userToCheck);// returns true if valid, false otherwise
   }
 
