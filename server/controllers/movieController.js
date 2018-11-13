@@ -86,9 +86,11 @@ async function addShowtimes(movies, theater_id, res){
         const showtimes = result.showtimes;
         for(var j = 0; j < showtimes.length; j++){
             var time = new Date(showtimes[j].start_at);
+            const hour = time.getHours();
+            const minute = time.getMinutes();
             var newTime = {
-                hour: time.getHours(),
-                minute: time.getMinutes(),
+                hour: (hour < 10 ? "0" + hour : "" + hour),
+                minute: (minute < 10 ? "0" + minute : "" + minute)
             }  
             movies[i].showtimes.push(newTime)
         }
