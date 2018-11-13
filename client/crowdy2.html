@@ -36,7 +36,7 @@
         <div class="col-md-6">
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
-              <tr ng-repeat="x in movies | filter:valid">
+              <tr ng-repeat="x in movies | filter:codec">
                   <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
                   <td>{{x.title}}<br>
                   {{x.genres[0]}}<br>

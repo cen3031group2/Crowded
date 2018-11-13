@@ -15,7 +15,7 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
     $scope.codec = undefined;
     $scope.verify = "hello"
     $scope.theaterId = 42490;
-    $scope.loading = undefined;
+    //$scope.loading = undefined;
 
     // const movieFormat = {
     //   id: 0,
@@ -40,22 +40,19 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
     };
 
     $scope.getMoviesFromTheater = async function (theater_id){
-      $scope.loading = "Loading";
         if (theater_id == null || !theater_id) {
           theater_id = $scope.theaterId;
         }
         $http.get(website + '/api/movie/getAllMoviesFromTheater/' + theater_id).then(function(response){
           $scope.movies = response.data;
-          $scope.loading = null;
         });
-        $scope.loading = null;
     };
 
     //Used to show only the movie names or genres corresponding to the search bar information
     $scope.valid = function (json) {
       if ($scope.codec == undefined) return true;
-       if ($scope.codec == json) return true;
-       else return false;
+      if ($scope.codec == json) return true;
+      else return false;
     };
 }]);
 
