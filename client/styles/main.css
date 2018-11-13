@@ -14,6 +14,7 @@
 
 .text-center {
   text-align: center;
+
 }
 
 /* tabs */
@@ -59,7 +60,7 @@ html,
 body {
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 20px;
 }
 
 /* Crowdy image */
@@ -77,6 +78,6 @@ img {
 
 
 #bottomButtons {
-  z-index: 1;
-}
+  margin: 20px;
 
+}
