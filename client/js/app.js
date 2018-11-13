@@ -104,7 +104,7 @@ app.controller('UserController', ['$scope', '$http', function($scope, $http){
     // {username: '', password: ''};
 
     if($http.post(website + '/api/user/password/check', userToCheck)){
-      $scope.user = $http.get(websiter + '/api/user/' + userToCheck.username);
+      $scope.user = $http.get(website + '/api/user/' + userToCheck.username);
     };// returns true if valid, false otherwise
 
   }
