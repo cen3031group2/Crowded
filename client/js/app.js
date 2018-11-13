@@ -1,6 +1,6 @@
 // this is Crowdy's app.js file
 // 10/11/18
-const website = 'http://localhost:8080';
+const website = 'http://localhost:8000';
 var app = angular.module('directoryApp', []);
 
 app.run(function ($rootScope) {
@@ -38,11 +38,14 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
       $scope.theaterId = index;
     };
 
-    $scope.getMoviesFromTheater = function (theater_id){
+    $scope.getMoviesFromTheater = async function (theater_id){
         if (theater_id == null || !theater_id) {
           theater_id = $scope.theaterId;
         }
-        $scope.movies = $http.get(website + '/api/movie/getAllMoviesFromTheater/' + theater_id);
+        $http.get(website + '/api/movie/getAllMoviesFromTheater/' + theater_id).then(function(response){
+          $scope.movies = response.data;
+        });
+        
     };
 
     //Used to show only the movie names or genres corresponding to the search bar information
@@ -68,7 +71,7 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
   //   location: {}
   // }
   $scope.getAllTheaters = function() {
-    $scope.theaters = $http.get(website + '/api/theater/getAllTheaters');
+    $http.get(website + '/api/theater/getAllTheaters');
   }
 
   $scope.getTheater = function(theater_id){
@@ -79,7 +82,9 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
 app.controller('UserController', ['$scope', '$http', function($scope, $http){
   // returns an array with user's listed genres
   $scope.getUserGenres = function(username){
-    $http.get(website + '/api/user/genre/' + username);
+    $http.get(website + '/api/user/genre/' + username).then(function(response){
+      $scope.genres = response.data;
+    });
   }
 
   // returns user by that name or null if none, does not have password attached
@@ -98,7 +103,10 @@ app.controller('UserController', ['$scope', '$http', function($scope, $http){
     // expected format for user to check
     // {username: '', password: ''};
 
-    $http.post(website + '/api/user/password/check', userToCheck);// returns true if valid, false otherwise
+    if($http.post(website + '/api/user/password/check', userToCheck)){
+      $scope.user = $http.get(websiter + '/api/user/' + userToCheck.username);
+    };// returns true if valid, false otherwise
+
   }
 
   $scope.createUser = function(userToCreate){
