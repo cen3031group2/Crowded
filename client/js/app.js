@@ -98,7 +98,10 @@ app.controller('UserController', ['$scope', '$http', function($scope, $http){
     // expected format for user to check
     // {username: '', password: ''};
 
-    $http.post(website + '/api/user/password/check', userToCheck);// returns true if valid, false otherwise
+    if($http.post(website + '/api/user/password/check', userToCheck)){
+      $scope.user = $http.get(websiter + '/api/user/' + userToCheck.username);
+    };// returns true if valid, false otherwise
+
   }
 
   $scope.createUser = function(userToCreate){
