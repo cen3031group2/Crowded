@@ -223,6 +223,7 @@
       var smallest = 0;
       var smallestCalculation;
       $.getJSON("/api/theater/getAllTheaters", function( data ) {
+        console.log(data);
         smallestCalculation = (data[0].crowdy.public + data[0].crowdy.employee) / 2;
         for (var i = 0; i < data.length; ++i) {
           var tempCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;

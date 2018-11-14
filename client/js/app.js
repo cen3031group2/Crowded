@@ -39,12 +39,22 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
       $scope.theaterId = index;
     };
 
+    $scope.addCrowdyMovieReport = function(value, movie_id, theater_id){
+      const data = {
+        value: value,
+        movie: movie_id,
+        theater: theater_id
+      }
+      $http.post('/api/crowdy/public/', data);
+    }
+
     $scope.getMoviesFromTheater = async function (theater_id){
         if (theater_id == null || !theater_id) {
           theater_id = $scope.theaterId;
         }
         $http.get('/api/movie/getAllMoviesFromTheater/' + theater_id).then(function(response){
           $scope.movies = response.data;
+          console.log($scope.movies);
         });
     };
 
@@ -100,13 +110,12 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
   // }
   $scope.getUser = function(username){
     console.log("starting user request");
-    $http.get('/api/user/get/' + username).then(response => {
+    $http.get('/api/user/'+username).then(response => {
       $scope.user = response.data;
-      console.log("hell");
     }); // returns user object, or null if there is no user
   }
   $scope.getUserFromCookie = function(){
-    $scope.getUser($cookies.get('user_username'));
+    $scope.getUser($cookies.getObject('user').username);
   }
   // Either pass in user to the function to check or alter this function
   // expected format for user to check {username: '', password: ''};
@@ -115,7 +124,9 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
       response =>{
         console.log(response.data);
         if(response.data == true) {
+          var user = {username: userToCheck.username, valid:true};
           window.location.href = './index.html';
+          $cookies.putObject('user', user);
           console.log("success");
         }
         else {

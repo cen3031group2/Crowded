@@ -93,6 +93,10 @@
   display: block;
 }
 
+.shows{
+  border-style: groove;
+}
+
 #poster {
 	align-content: flex-start;
 	margin-left: 25%;
@@ -102,3 +106,4 @@
 	font-size: 18;
 	font-style: oblique;
 }
+
