@@ -2,63 +2,84 @@
 <!-- this is crowdy's html file. woohoo. -->
 <!-- 10/11/18-->
 
-  <!--Original HTML Below-->
-  <html>
+<!--Original HTML Below-->
+<html>
+<head>
+<title>Crowdy</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/main.css">
+</head>
 
-  <head>
-    <title>Crowdy</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
-  </head>
-
-  <body>
-    <img src="images\Crowdy_Concept.png" alt="Crowdy">
-    <div align="right">
-      <a href="loginForm.html"><button type="button" class="btn btn-info" id="login-button">Login</button></a>
-    </div>
-    <!-- Header -->
-    <h1 align="center" margin-left="">
-      <div id="title">Welcome to Crowdy!<br></div>
-    </h1>
-    <!-- map element -->
-    <div id="map"></div>
-    <script>
+<body>
+<img src="images\Crowdy_Concept.png" alt="Crowdy">
+<div align="right"> <a href="loginForm.html">
+  <button type="button" class="btn btn-info" id="login-button">Login</button>
+  </a> </div>
+<!-- Header -->
+<h1 align="center" margin-left="">
+  <div id="title">Welcome to Crowdy!<br>
+  </div>
+</h1>
+<!-- map element -->
+<div id="map"></div>
+<script>
       var map;
       var infowindow;
+      var pos;
+
       function initMap() {
         var gainesville = {
           lat: 29.6456,
           lng: -82.3800
         };
+		
         var image = "images/video-camera.png";
-        var contentString1 = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Regal Butler Town Center 14</h1>'+
-            '<div id="bodyContent" align="center">'+
+		var veryCrowded = "images/CrowdedLogos_VeryCrowded.png";
+		var crowdedImage = "images/CrowdedLogos_Crowded.png";
+		var moderateImage = "images/CrowdedLogos_Moderate.png";
+		var notCrowdedImage = "images/CrowdedLogos_NotCrowded.png";
+		var emptyImage = "images/CrowdedLogos_Empty.png";
+		  
+        var contentString1 = 
+			'<div id="crowdyLevel"><img src="images/CrowdedLogos_Empty.png">' +
+			'</div>' +
+			'<div id="bodyContent" style="float:right">'+
+			'<p><b>Regal Royal Park Stadium 14</b></p>' +
             '<p>(844) 462-7342 ext 185<br>' +
             '3101 SW 35th Blvd, Gainesville, FL 32608, United States<br>'+
             '<a href="http://www.regmovies.com/theaters/regal-butler-town-center-14/1833">'+
             'http://www.regmovies.com/theaters/regal-butler-town-center-14/1833</a>'+
             '</p>'+
-            '</div>'+
             '</div>';
-        var contentString2 = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Regal Royal Park Stadium 16</h1>'+
-            '<div id="bodyContent" align="center">'+
-            '<p>(844) 462-7342 ext 1308<br>' +
+        var contentString2 = 
+			'<div id="crowdyLevel"><img src="images/CrowdedLogos_NotCrowded.png">' +
+			'</div>' +			
+			'<div id="bodyContent" style="float:right">'+
+			'<p><b>Regal Royal Park Stadium 16</b></p>' +
+            '<p style="float:right">(844) 462-7342 ext 1308<br>' +
             '3702 W Newberry Rd, Gainesville, FL 32607, United States<br>'+
             '<a href="http://www.regmovies.com/theaters/regal-royal-park-stadium-16/6955">'+
             'http://www.regmovies.com/theaters/regal-royal-park-stadium-16/6955</a>'+
             '</p>'+
-            '</div>'+
             '</div>';
+<<<<<<< HEAD
+        var contentString3 = 
+			'<div id="crowdyLevel"><img src="images/CrowdedLogos_VeryCrowded.png">' +
+			'</div>' +	
+			'<div id="bodyContent" style="float:right">'+
+			'<p><b>Regal Royal Park Stadium 10</b></p>' +
+            '<p>(352) 373-2880<br>' +
+            '4901 Southwest 31st Place Gainesville, FL 32608, United States<br>'+
+            '<a href="http://www.regmovies.com/theaters/regal-celebration-pointe-10-rpx/47521">'+
+            'http://www.regmovies.com/theaters/regal-celebration-pointe-10-rpx/47521</a>'+
+            '</p>'+
+            '</div>';
+		  
+=======
           var contentString3 = '<div id="content">'+
               '<div id="siteNotice">'+
               '</div>'+
-              '<h1 id="firstHeading" class="firstHeading">Regal Butler Town Center 14</h1>'+
+              '<h1 id="firstHeading" class="firstHeading">Regal Celebration Pointe 10</h1>'+
               '<div id="bodyContent" align="center">'+
               '<p>(352) 373-2880<br>' +
               '4901 Southwest 31st Place Gainesville, FL 32608, United States<br>'+
@@ -67,9 +88,25 @@
               '</p>'+
               '</div>'+
               '</div>';
+>>>>>>> cc0d86bb08078fd63f53e25a8a6b76dcd8f5fa0a
         map = new google.maps.Map(document.getElementById('map'), {
           center: gainesville,
-          zoom: 13.5
+          zoom: 13.5,
+		mapTypeControl: true,
+          mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              position: google.maps.ControlPosition.TOP_CENTER
+          },
+          zoomControl: true,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.LEFT_CENTER
+          },
+          scaleControl: true,
+          streetViewControl: true,
+          streetViewControlOptions: {
+              position: google.maps.ControlPosition.LEFT_TOP
+          },
+          fullscreenControl: true
         });
         var infowindow1 = new google.maps.InfoWindow({
           content: contentString1
@@ -119,36 +156,70 @@
            map.setCenter(marker3.getPosition());
            infowindow3.open(map, marker3);
         });
+
+        infoWindow = new google.maps.InfoWindow;
+
+        if (navigator.geolocation) {
+
+         navigator.geolocation.getCurrentPosition(function(position) {
+           var userPos = {
+             lat: position.coords.latitude,
+             lng: position.coords.longitude
+           };
+
+          infoWindow.setPosition(userPos);
+          var userMarker = new google.maps.Marker({
+            position: userPos,
+            map: map,
+            title: 'YOU ARE HERE',
+            animation: google.maps.Animation.DROP
+          });
+
+           }, function() {
+             handleGeoLocationError(true, infoWindow, map.getCenter());
+           });
+         } else {
+            handleGeoLocationError(false, infoWindow, map.getCenter());
+     }
+
+     function handleGeoLocationError(geoAvailable, infoWindow, pos) {
+       infoWindow.setPosition(pos);
+       infoWindow.setContent(geoAvailable ?
+                           'Error: Geolocation has failed' :
+                           'Error: No Geolocation available on your machine');
+       infoWindow.open(map);
+     }
+
+
     }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
-    <!-- end map element -->
+		
+    </script> 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script> 
+<!-- end map element -->
 
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="singlebutton"></label>
-      <div class="col-md-4 text-center">
-        <!-- <div class="bottomTabs"> -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4 text-center"> 
+    <!-- <div class="bottomTabs"> --> 
+    
+    <!-- cinema and movies tabs -->
+    <ul id="bottomButtons">
+      <li><a class="active" href="./index.html">Show Cinemas</a></li>
+      <li ng-controller="MovieController" ng-click="getMoviesFromTheater()"><a href="./crowdy2.html">Show Movies</a></li>
+    </ul>
+    <!-- </div> --> 
+  </div>
+</div>
+</body>
+</html>
 
-        <!-- cinema and movies tabs -->
-        <ul id="bottomButtons">
-          <li><a class="active" href="./index.html">Show Cinemas</a></li>
-          <li ng-controller="MovieController" ng-click="getMoviesFromTheater()"><a href="./crowdy2.html">Show Movies</a></li>
-        </ul>
-      <!-- </div> -->
-      </div>
-    </div>
+<!--<script type="text/javascript" src="./js/app.js"></script>-->
 
-  </body>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-  </html>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  <!--<script type="text/javascript" src="./js/app.js"></script>-->
-
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
