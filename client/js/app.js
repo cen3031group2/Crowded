@@ -106,7 +106,7 @@ app.controller('UserController', ['$scope', '$http', function($scope, $http){
     if($http.post(website + '/api/user/password/check', userToCheck)){
       $scope.user = $http.get(website + '/api/user/' + userToCheck.username);
       console.log("function successfully called");
-      if($scope.user == userToCheck.username) {
+      if($scope.user == true) {
         console.log("successful login");
         window.location.href = "./index.html";
       }
