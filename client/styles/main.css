@@ -10,8 +10,10 @@
 }
 
 #title {
-  margin-left: 90px;
+  margin-left: -5px;
 }
+
+
 
 .text-center {
   text-align: center;
@@ -83,7 +85,7 @@ img {
 	margin-right: 80px;
 	display: inline;
 	padding: 20px;
-	width: 50px;
+	width: 1px;
 	height: auto;
 }
 
