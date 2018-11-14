@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="styles/main.css">
 </head>
 
-<body>
+<body ng-app="directoryApp">
   <!-- top navigation bar -->
   <div class="topNavigation">
       <ul class>
@@ -18,47 +18,25 @@
           <li><a href="crowdy2.html">Movies</a></li>
           <li><a href="#index.html">Theaters</a></li>
           <li><a href="user_profile.html">User Profile</a></li>
-          <!-- <li><div class="dropdown1">
-            <button class="dropbtn">Filter Map 
-              <i class="glyphicon glyphicon-chevron-down white"></i>
-            </button>
-            <div class="dropdown1-content">
-              
-              <a href="closestCinema();">
-                <input onclick="closestCinema();" class="btn btn-info" type=button value="Show Closest Cinema">
-              </a>
-              <a href="nonCrowdyCinema();">
-                <input onclick="nonCrowdyCinema();" class="btn btn-info" type=button value="Show Least Crowdiest Cinema">
-              </a>
-              <a href="crowdyCinema();">
-                <input onclick="crowdyCinema();" class="btn btn-info" type=button value="Show Most Crowdiest Cinema">
-              </a>
-              <a href="resetMap();">
-                <input onclick="resetMap();" class="btn btn-info" type=button value="Reset Map">
-              </a>
-              
-            </div>
-          </div> </li> -->
           <li style="float:right"><a class="active" href="loginForm.html">Login</a></li>
         </ul>
   </div>
-<!-- <img src="images\Crowdy_Concept.png" alt="Crowdy"> -->
 
-
-<!-- Header -->
-<!-- <h1 id="title" align="center">
-  <div id="title">Welcome to Crowdy!<br></div>
-</h1> -->
-
-<div class="headerButtons" id="floating-panel" align="center">
-  <input onclick="closestCinema();" class="btn btn-info" type=button value="Show Closest Cinema">
-  <input onclick="nonCrowdyCinema();" class="btn btn-info" type=button value="Show Least Crowdiest Cinema">
-  <input onclick="crowdyCinema();" class="btn btn-info" type=button value="Show Most Crowdiest Cinema">
-  <input onclick="resetMap();" class="btn btn-info" type=button value="Reset Map">
-  <!-- <input onclick="crowdinessLevels();" class="btn btn-info" type=button value="Find Crowdiness Levels"> -->
-</div>
 <!-- map element -->
-<div id="map"></div>
+  <div id="map"></div>
+  <div class="leftNavigation" align="right" ng-controller="TheaterController">
+    <input onclick="closestCinema();" class="btn btn-info" type=button value="Show Closest Cinema"><br>
+    <input onclick="nonCrowdyCinema();" class="btn btn-info" type=button value="Show Least Crowdiest Cinema"><br>
+    <input onclick="crowdyCinema();" class="btn btn-info" type=button value="Show Most Crowdiest Cinema"><br>
+    <input onclick="getCrowdinessLevel();" class="btn btn-info" type=button value="Get Crowdy"><br>
+    <input onclick="resetMap();" class="btn btn-info" type=button value="Reset Map">
+    {{getAllTheaters}}
+    <tr ng-repeat="x in theaters">
+      <td>{{x.name}}</td>
+    </tr>
+    <!-- Add a scroll for theaters -->
+  </div>
+
 <script>
       var map;
       var infowindow;
@@ -241,46 +219,48 @@
           // markers[i].setIcon(image);
     }
 
-    function nonCrowdyCinema() {
-      var smallest = 0;
-      var smallestCalculation;
-      $.getJSON("/api/theater/getAllTheaters", function( data ) {
-        console.log(data);
-        smallestCalculation = (data[0].crowdy.public + data[0].crowdy.employee) / 2;
-        for (var i = 0; i < data.length; ++i) {
-          var tempCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
-          if (tempCalc < smallestCalculation) {
-            smallest = i;
-            smallestCalculation = tempCalc;
-          }
-        }
-      });
 
-      for (var i = 3; i < 6; ++i) {
-          if (i - 3 != smallest)
-          markers[i].setMap(null);
-        }
-    }
-
-    function crowdyCinema() {
-      var largest = 0;
-      var largestCalculation;
-      $.getJSON("/api/theater/getAllTheaters", function( data ) {
-        largestCalculation = (data[0].crowdy.public + data[0].crowdy.employee) / 2;
-        for (var i = 0; i < data.length; ++i) {
-          var tempCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
-          if (tempCalc > largestCalculation) {
-            largest = i;
-            largestCalculation = tempCalc;
-          }
-        }
-      });
-
-      for (var i = 3; i < 6; ++i) {
-          if (i - 3 != largest)
-          markers[i].setMap(null);
-      }
-    }
+    //TODO - CHange function format
+    // function nonCrowdyCinema() {
+    //   var smallest = 0;
+    //   var smallestCalculation;
+    //   $.getJSON("/api/theater/getAllTheaters", function( data ) {
+    //     console.log(data);
+    //     smallestCalculation = (data[0].crowdy.public + data[0].crowdy.employee) / 2;
+    //     for (var i = 0; i < data.length; ++i) {
+    //       var tempCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
+    //       if (tempCalc < smallestCalculation) {
+    //         smallest = i;
+    //         smallestCalculation = tempCalc;
+    //       }
+    //     }
+    //   });
+    //
+    //   for (var i = 3; i < 6; ++i) {
+    //       if (i - 3 != smallest)
+    //       markers[i].setMap(null);
+    //     }
+    // }
+    //
+    // function crowdyCinema() {
+    //   var largest = 0;
+    //   var largestCalculation;
+    //   $.getJSON("/api/theater/getAllTheaters", function( data ) {
+    //     largestCalculation = (data[0].crowdy.public + data[0].crowdy.employee) / 2;
+    //     for (var i = 0; i < data.length; ++i) {
+    //       var tempCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
+    //       if (tempCalc > largestCalculation) {
+    //         largest = i;
+    //         largestCalculation = tempCalc;
+    //       }
+    //     }
+    //   });
+    //
+    //   for (var i = 3; i < 6; ++i) {
+    //       if (i - 3 != largest)
+    //       markers[i].setMap(null);
+    //   }
+    // }
 
     var crowdyImages = [];
 
@@ -298,45 +278,48 @@
 
     console.log(crowdyImages);
 
-    function crowdinessLevels () {
+    async function getCrowdinessLevel () {
       var crowdyIndex = [];
-      $.getJSON("/api/theater/getAllTheaters", function( data ) {
-          for (var i = 0; i < data.length; ++i) {
-            var crowdyCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
-            if (crowdyCalc < 20)
-              crowdyIndex.push(0);
-            else if (crowdyCalc >= 20 && crowdyCalc < 40)
-              crowdyIndex.push(1);
-            else if (crowdyCalc >= 40 && crowdyCalc < 60)
-              crowdyIndex.push(2);
-            else if (crowdyCalc >= 60 && crowdyCalc < 80)
-              crowdyIndex.push(3);
-            else
-              crowdyIndex.push(4);
-          }
+      $.getJSON("/api/theater/getAllTheaters", function(data) {
+        for (var i = 0; i < data.length; ++i)
+        crowdyIndex.push((data[i].crowdy.public + data[i].crowdy.employee) / 2);
       });
+      console.log(crowdyIndex);
+          // for (var i = 0; i < data.length; ++i) {
+          //   var crowdyCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
+          //   if (crowdyCalc < 20)
+          //     crowdyIndex.push(0);
+          //   else if (crowdyCalc >= 20 && crowdyCalc < 40)
+          //     crowdyIndex.push(1);
+          //   else if (crowdyCalc >= 40 && crowdyCalc < 60)
+          //     crowdyIndex.push(2);
+          //   else if (crowdyCalc >= 60 && crowdyCalc < 80)
+          //     crowdyIndex.push(3);
+          //   else
+          //     crowdyIndex.push(4);
+          // }
 
-       for (var i = 3; i < 6; ++i) {
-      //         console.log(crowdyIndex[i - 3]);
-        markers[i].setIcon(crowdyImages[0]);
-      }
+      //  for (var i = 3; i < 6; ++i) {
+      // //         console.log(crowdyIndex[i - 3]);
+      //   markers[i].setIcon(crowdyImages[0]);
+      // }
     }
-    </script>
+
+
+  </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
   <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
   <!-- end map element -->
 
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/app.js"></script>
 
 </body>
 </html>
-
-<!--<script type="text/javascript" src="./js/app.js"></script>-->
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

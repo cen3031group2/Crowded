@@ -55,7 +55,7 @@ li a {
 /* -------------------map----------------- */
 #map {
   height: 100%;
-  width: 100%;
+  width: 80%;
   padding: 0;
 }
 
@@ -86,6 +86,28 @@ img {
 	width: 50px;
 	height: auto;
 }
+
+#rightBarCrowdy {
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+  overflow-x: hidden;
+}
+
+/* left navigation bar*/
+
+.leftNavigation {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 20%;
+  float: right;
+  position: relative;
+  margin-top: -575px;
+  /* margin-top: 5px; */
+}
+
 
 /* top navigation bar */
 
@@ -127,7 +149,7 @@ img {
 /* ------------------ */
 
 .dropdown1 .dropbtn {
-  font-size: 20px;    
+  font-size: 20px;
   border: none;
   outline: none;
   color: white;
