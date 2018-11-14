@@ -20,12 +20,22 @@
     <h1 align="center" margin-left="">
       <div id="title">Welcome to Crowdy!<br></div>
     </h1>
+
+    <div id="floating-panel">
+      <input onclick="closestCinema();" type=button value="Show Closest Cinema">
+      <input onclick="nonCrowdyCinema();" type=button value="Show Least Crowdiest Cinema">
+      <input onclick="crowdyCinema();" type=button value="Show Most Crowdiest Cinema">
+      <input onclick="resetMap();" type=button value="Reset Map">
+    </div>
+
     <!-- map element -->
     <div id="map"></div>
     <script>
       var map;
       var infowindow;
       var pos;
+      var markers = [];
+      var usrMarker;
 
       function initMap() {
         var gainesville = {
@@ -106,6 +116,11 @@
           icon: image,
           animation: google.maps.Animation.DROP
         });
+
+        markers.push(marker1);
+        markers.push(marker2);
+        markers.push(marker3);
+
         marker1.addListener('click', function() {
            map.setZoom(16);
            map.setCenter(marker1.getPosition());
@@ -133,7 +148,7 @@
            };
 
           infoWindow.setPosition(userPos);
-          var userMarker = new google.maps.Marker({
+          usrMarker = new google.maps.Marker({
             position: userPos,
             map: map,
             title: 'YOU ARE HERE',
@@ -154,11 +169,83 @@
                            'Error: No Geolocation available on your machine');
        infoWindow.open(map);
      }
-
-
     }
+
+    function closestCinema () {
+      var shortest = 0;
+      var shortestCalculation = google.maps.geometry.spherical.computeDistanceBetween(markers[0].getPosition(), usrMarker.getPosition());;
+
+      for (var i = 3; i < 6; ++i) {
+        var compute = google.maps.geometry.spherical.computeDistanceBetween(markers[i].getPosition(), usrMarker.getPosition());
+        if (compute < shortestCalculation) {
+          shortest = i;
+          shortestCalculation = compute;
+        }
+      }
+
+      console.log (shortest);
+
+      for (var i = 3; i < 6; ++i) {
+        if (i != shortest)
+          markers[i].setMap(null);
+      }
+    }
+
+    function resetMap () {
+      for (var i = 3; i < 6; ++i)
+          markers[i].setMap(map);
+    }
+
+    function nonCrowdyCinema() {
+      var smallest = 0;
+      var smallestCalculation;
+      $.getJSON("/api/theater/getAllTheaters", function( data ) {
+        console.log(data);
+        smallestCalculation = data[0].crowdy.public + data[0].crowdy.employee / 2;
+        for (var i = 0; i < data.length; ++i) {
+          var tempCalc = data[i].crowdy.public + data[i].crowdy.employee / 2;
+          if (tempCalc < smallestCalculation) {
+            smallest = i;
+            smallestCalculation = tempCalc;
+          }
+        }
+      });
+
+      console.log (smallest);
+
+      for (var i = 3; i < 6; ++i) {
+          if (i - 3 != smallest)
+          markers[i].setMap(null);
+        }
+    }
+
+    function crowdyCinema() {
+      var largest = 0;
+      var largestCalculation;
+      $.getJSON("/api/theater/getAllTheaters", function( data ) {
+        console.log(data);
+        largestCalculation = data[0].crowdy.public + data[0].crowdy.employee / 2;
+        for (var i = 0; i < data.length; ++i) {
+          var tempCalc = data[i].crowdy.public + data[i].crowdy.employee / 2;
+          if (tempCalc > largestCalculation) {
+            largest = i;
+            largestCalculation = tempCalc;
+          }
+        }
+      });
+
+      console.log (largest);
+
+      for (var i = 3; i < 6; ++i) {
+          if (i - 3 != largest)
+          markers[i].setMap(null);
+        }
+    }
+
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
     <!-- end map element -->
 
     <div class="form-group">
