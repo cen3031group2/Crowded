@@ -5,6 +5,7 @@ body {
 
 .container {
     background-color: white;
+    width: 800px;
 }
 
 img {
