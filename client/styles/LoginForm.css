@@ -27,7 +27,16 @@ img {
   align-items: center;
 }
 
-.panel h2 {
+.exit {
+  float: right;
+  margin-right: 30px;
+  font-size: 36px;
+}
+.white, .white a {
+  color: #fff;
+}
+
+.panel h3 {
   color: #444444;
   font-size: 36px;
   margin: 0 0 8px 0;
@@ -89,8 +98,9 @@ img {
 }
 
 .login-form .btn.btn-primary {
-  background: #33a8b8 none repeat scroll 0 0;
+  background: #FBA20C none repeat scroll 0 0;
   color: white;
+  border: none;
 }
 
 .back {
