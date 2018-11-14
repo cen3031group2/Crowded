@@ -23,7 +23,7 @@
   <input onclick="closestCinema();" type=button value="Show Closest Cinema">
   <input onclick="nonCrowdyCinema();" type=button value="Show Least Crowdiest Cinema">
   <input onclick="crowdyCinema();" type=button value="Show Most Crowdiest Cinema">
-  <input onclick="resetMap();" type=button value="Reset Map"> 
+  <input onclick="resetMap();" type=button value="Reset Map">
 </div>
 <!-- map element -->
 <div id="map"></div>
@@ -39,15 +39,15 @@
           lat: 29.6456,
           lng: -82.3800
         };
-		  
+
         var image = "images/video-camera.png";
 		var veryCrowded = "images/CrowdedLogos_VeryCrowded.png";
 		var crowdedImage = "images/CrowdedLogos_Crowded.png";
 		var moderateImage = "images/CrowdedLogos_Moderate.png";
 		var notCrowdedImage = "images/CrowdedLogos_NotCrowded.png";
 		var emptyImage = "images/CrowdedLogos_Empty.png";
-		  
-        var contentString1 = 
+
+        var contentString1 =
 			'<div id="crowdyLevel"><img src="images/CrowdedLogos_Empty.png">' +
 			'</div>' +
 			'<div id="bodyContent" style="float:right">'+
@@ -58,9 +58,9 @@
             'http://www.regmovies.com/theaters/regal-butler-town-center-14/1833</a>'+
             '</p>'+
             '</div>';
-        var contentString2 = 
+        var contentString2 =
 			'<div id="crowdyLevel"><img src="images/CrowdedLogos_NotCrowded.png">' +
-			'</div>' +			
+			'</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 16</b></p>' +
             '<p style="float:right">(844) 462-7342 ext 1308<br>' +
@@ -69,9 +69,9 @@
             'http://www.regmovies.com/theaters/regal-royal-park-stadium-16/6955</a>'+
             '</p>'+
             '</div>';
-        var contentString3 = 
+        var contentString3 =
 			'<div id="crowdyLevel"><img src="images/CrowdedLogos_VeryCrowded.png">' +
-			'</div>' +	
+			'</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 10</b></p>' +
             '<p>(352) 373-2880<br>' +
@@ -80,7 +80,7 @@
             'http://www.regmovies.com/theaters/regal-celebration-pointe-10-rpx/47521</a>'+
             '</p>'+
             '</div>';
-		  
+
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: gainesville,
@@ -259,25 +259,23 @@
           markers[i].setMap(null);
       }
     }
- 
-</script> 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script> 
-<!-- end map element --> 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script> 
-<!-- end map element -->
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
+  <!-- end map element -->
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="singlebutton"></label>
-  <div class="col-md-4 text-center"> 
-    <!-- <div class="bottomTabs"> --> 
-    
+  <div class="col-md-4 text-center">
+    <!-- <div class="bottomTabs"> -->
+
     <!-- cinema and movies tabs -->
     <ul id="bottomButtons">
       <li><a class="active" href="./index.html">Show Cinemas</a></li>
       <li ng-controller="MovieController" ng-click="getMoviesFromTheater()"><a href="./crowdy2.html">Show Movies</a></li>
     </ul>
-    <!-- </div> --> 
+    <!-- </div> -->
   </div>
 </div>
 </body>
