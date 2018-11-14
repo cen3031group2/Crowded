@@ -74,7 +74,7 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
 
   // Gets all the theaters in Gaineville and then adds it to scope.theaters, this function can be altered.
   $scope.getAllTheaters = function() {
-    $scope.theaters = $http.get('/api/theater/getAllTheaters'); // 
+    $scope.theaters = $http.get('/api/theater/getAllTheaters'); //
   }
 
   $scope.getTheater = function(theater_id){
@@ -109,11 +109,19 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
   // Either pass in user to the function to check or alter this function
   // expected format for user to check {username: '', password: ''};
   $scope.checkPassword = function(userToCheck){
+    $scope.userIsValid = false;
     $http.post('/api/user/password/check', userToCheck).then(
       response =>{
         $scope.userIsValid = response.data;
       }
     )
+    if($scope.userIsValid == true) {
+      //window.location.href = "./index.html";
+      console.log("success");
+    }
+    else {
+      console.log("failure");
+    }
   }
 
   $scope.createUser = function(userToCreate){
