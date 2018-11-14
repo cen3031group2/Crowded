@@ -99,8 +99,10 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
   //   employee_company: ''
   // }
   $scope.getUser = function(username){
-    $http.get('/api/user/' + username).then(response => {
+    console.log("starting user request");
+    $http.get('/api/user/get/' + username).then(response => {
       $scope.user = response.data;
+      console.log("hell");
     }); // returns user object, or null if there is no user
   }
   $scope.getUserFromCookie = function(){

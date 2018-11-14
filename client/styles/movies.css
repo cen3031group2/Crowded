@@ -54,3 +54,7 @@
 .active {
   background-color: #33a8b8;
 }
+
+.shows{
+  border-style: groove;
+}

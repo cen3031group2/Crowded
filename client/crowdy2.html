@@ -8,11 +8,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script>
-    $.getJSON("/api/theater/getAllTheaters", function( data ) {
-  console.log(data);
-});
-  </script>
 
 </head>
   <body ng-app="directoryApp">
@@ -46,7 +41,7 @@
                   {{x.genres[0]}}<br>
                   {{x.rating[0]}}<br>
                   Showtimes
-                  <span id="shows" ng-repeat="y in x.showtimes">{{y.hour}}:{{y.minute}} </span>
+                  <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span>
                 </td>
               </tr>
           </table>

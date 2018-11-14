@@ -16,6 +16,8 @@ exports.getGenres = async function(req, res){
 
 exports.getUser = async function(req, res){
     const query = {username: req.username};
+    console.log("hello");
+    console.log(req.username);
     var user = await User.findOne(query).exec();
     if(user){
         user.password = '';
@@ -32,9 +34,9 @@ exports.checkPassword = async function(req, res){
     const password = req.body.password;
     var user = await User.findOne(query).exec();
     if(password === user.password){
-        res.send('true');
+        res.send(true);
     } else{
-        res.send('false');
+        res.send(false);
     }
 };
 
