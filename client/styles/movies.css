@@ -5,12 +5,65 @@
   display: inline-block;
 }
 
+.form-heading2 {
+  color: black;
+  font-size: 50px;
+  text-align: center;
+  margin-top: -40px;
+}
+
+.page-header {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrToqQ1KopbfqH8kJ03gcb5Y_tH5-Wf_OAmTiBIUO3Zv-AHcHP");
+  background-position: center;
+  height: 100px;
+  background-size: cover;
+  font-family: "Times New Roman";
+  text-align: center;
+}
+
+/* top navigation bar */
+
+.topNavigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(0, 0, 0);
+  margin-top: -40px;
+}
+
+.topNavigation li {
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.topNavigation li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.topNavigation li a:hover:not(.active) {
+  background-color: #FBA20C;
+}
+
+.active {
+  background-color: rgb(0, 154, 201);
+  margin-right: -20px;
+  width: 120px;
+}
+
+/* end top navigation bar */
+
 /* search bar */
 .container-1 input#search{
   width: 400px;
   height: 35px;
   margin-top: 5px;
-  background: #2b303b;
+  background: #000000;
   border: none;
   font-size: 10pt;
   color: #63717f;
@@ -25,36 +78,18 @@
 }
 
 
-/* tabs */
-.form-group ul {
-  display: inline-block;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-.form-group li {
-  float: left;
-}
-
-.form-group li a {
+.dropdown-content{
   display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  background-color:	#184991;
+  padding: 16px; 
+  font-size: 16px; 
+  width: 350px;  
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px #184991;
+  
+}
+.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
-.form-group li a:hover:not(.active) {
-  background-color: #111;
-}
-
-.active {
-  background-color: #33a8b8;
-}
-
-.shows{
-  border-style: groove;
-}
