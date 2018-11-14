@@ -74,7 +74,7 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
 
   // Gets all the theaters in Gaineville and then adds it to scope.theaters, this function can be altered.
   $scope.getAllTheaters = function() {
-    $scope.theaters = $http.get('/api/theater/getAllTheaters'); //
+    $scope.theaters = $http.get('/api/theater/getAllTheaters').then(response); //
   }
 
   $scope.getTheater = function(theater_id){

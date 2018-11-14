@@ -93,9 +93,7 @@ exports.getTheatherReport = async function(crowdy_id){
     } else{
         result.employee = createEmployeeReport(crowdy_id).value;
     }
-    return new Promise((res, rej) =>{
-        res(result);
-    });
+    return result;
         
 }
 
