@@ -74,7 +74,7 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
 
   // Gets all the theaters in Gaineville and then adds it to scope.theaters, this function can be altered.
   $scope.getAllTheaters = function() {
-    $scope.theaters = $http.get('/api/theater/getAllTheaters'); //
+    $scope.theaters = $http.get('/api/theater/getAllTheaters').then(response); //
   }
 
   $scope.getTheater = function(theater_id){
@@ -99,8 +99,10 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
   //   employee_company: ''
   // }
   $scope.getUser = function(username){
-    $http.get('/api/user/' + username).then(response => {
+    console.log("starting user request");
+    $http.get('/api/user/'+username).then(response => {
       $scope.user = response.data;
+      console.log("hell");
     }); // returns user object, or null if there is no user
   }
   $scope.getUserFromCookie = function(){
@@ -109,19 +111,18 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
   // Either pass in user to the function to check or alter this function
   // expected format for user to check {username: '', password: ''};
   $scope.checkPassword = function(userToCheck){
-    $scope.userIsValid = false;
     $http.post('/api/user/password/check', userToCheck).then(
       response =>{
-        $scope.userIsValid = response.data;
+        console.log(response.data);
+        if(response.data == true) {
+          window.location.href = './index.html';
+          console.log("success");
+        }
+        else {
+          console.log("failure");
+        }
       }
     )
-    if($scope.userIsValid == true) {
-      //window.location.href = "./index.html";
-      console.log("success");
-    }
-    else {
-      console.log("failure");
-    }
   }
 
   $scope.createUser = function(userToCreate){

@@ -110,7 +110,9 @@ function addShowtime(movie){
             const minute = time.getMinutes();
             var newTime = {
                 hour: (hour < 10 ? "0" + hour : "" + hour),
-                minute: (minute < 10 ? "0" + minute : "" + minute)
+                minute: (minute < 10 ? "0" + minute : "" + minute),
+                day: time.getDay(),
+                month: time.getMonth()
             }
             movie.showtimes.push(newTime)
         }

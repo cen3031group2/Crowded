@@ -1,12 +1,16 @@
 <!--  user profile  -->
 <html>
-  <head>
+  
+<head>
     <title>Crowdy</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/userProfile.css">
-  </head>
+</head>
+  
+
   <body id="userProfile" ng-app="directoryApp">
     <scroll-container>
+        <!-- header bar -->
         <h2 class="form-heading2">
             <div class="page-header">Crowdy</div>
         </h2>
@@ -15,36 +19,39 @@
             <img src="http://profilepicturesdp.com/wp-content/uploads/2018/06/generic-female-profile-picture-8.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid"/>
         </div>
 
-        <!-------------------------------------------------->
 
-
+        <!-- top navigation bar -->
         <div class="topNavigation">
             <ul class>
-                <li><a href="#Movies">Movies</a></li>
-                <li><a href="#Theaters">Theaters</a></li>
-                <li><a href="#User Profile">User Profile</a></li>
-                <li style="float:right"><a class="active" href="#login">Login</a></li>
+                <li><a href="crowdy2.html">Movies</a></li>
+                <li><a href="index.html">Theaters</a></li>
+                <li><a href="user_profile.html">User Profile</a></li>
+                <li style="float:right"><a class="active" href="loginForm.html">Login</a></li>
               </ul>
         </div>
 
-
-        <div class="up">User Profile</div>
-
-        <div ng-controller="UserController" data-ng-init="getUserFromCookie()">
-            {{user}}
+        <!-- user profile section -->
+        <div class="up"><!--User Profile-->  </div>
+        <div ng-controller="UserController" data-ng-init="getUser('crowdy@github.com')">
+            <span>Username: {{user.username}}</span>
+            <span></span>Genres: {{user.genres}}
         </div>
 
-        <div class="dropdown">
+        <!-- dropdown -->
+        <div class="dropdown" align="center">
             <button class="dropbtn">Change Account Info</button>
             <div class="dropdown-content">
                 <a href="change_email.html">Change Email</a>
                 <a href="change_username.html">Change Username</a>
                 <a href="change_password.html">Change Password</a>
+                <a href="change_profile_photo.html">Change Profile Photo</a>
             </div>
         </div>
 
 
-        <!-------------------------------------------------->
+
+
+        
 
 
 

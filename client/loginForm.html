@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-cookies.js"></script>
 <script src="./js/app.js"></script>
 
 <body id="LoginForm" ng-app="directoryApp">
@@ -23,7 +24,7 @@
         <h3>Login</h3>
         <p>Please enter your email and password </p>
       </div>
-      <form id="Login" action="./index.html">
+      <form id="Login" onsubmit="return false">
 
         <div class="form-group">
           <input type="email" class="form-control" placeholder="Email Address" ng-model="userToCheck.username">
