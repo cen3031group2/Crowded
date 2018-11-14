@@ -19,6 +19,16 @@ img {
     margin-bottom: 10px;
   }
 
+  .exit {
+    float: right;
+    margin-right: 30px;
+    margin-top: 30px;
+    font-size: 36px;
+  }
+  .white, .white a {
+    color: #fff;
+  }
+
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;
@@ -42,7 +52,7 @@ hr {
 
 /* Set a style for the submit button */
 .registerbtn {
-    background-color: rgb(247, 148, 0);
+    background-color: #FBA20C;
     color: white;
     padding: 16px 20px;
     margin: 8px 0;
