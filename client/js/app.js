@@ -111,19 +111,18 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
   // Either pass in user to the function to check or alter this function
   // expected format for user to check {username: '', password: ''};
   $scope.checkPassword = function(userToCheck){
-    $scope.userIsValid = false;
     $http.post('/api/user/password/check', userToCheck).then(
       response =>{
-        $scope.userIsValid = response.data;
+        console.log(response.data);
+        if(response.data == "true") {
+          window.location.href = './index.html';
+          console.log("success");
+        }
+        else {
+          console.log("failure");
+        }
       }
     )
-    if($scope.userIsValid == true) {
-      //window.location.href = "./index.html";
-      console.log("success");
-    }
-    else {
-      console.log("failure");
-    }
   }
 
   $scope.createUser = function(userToCreate){
