@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!-- this is crowdy's html file. woohoo. -->
 <!-- 10/11/18-->
 
@@ -16,7 +17,7 @@
       <a href="loginForm.html"><button type="button" class="btn btn-info" id="login-button">Login</button></a>
     </div>
     <!-- Header -->
-    <h1 align="center" margin-left=''>
+    <h1 align="center" margin-left="">
       <div id="title">Welcome to Crowdy!<br></div>
     </h1>
     <!-- map element -->
@@ -24,6 +25,8 @@
     <script>
       var map;
       var infowindow;
+      var pos;
+
       function initMap() {
         var gainesville = {
           lat: 29.6456,
@@ -57,7 +60,7 @@
           var contentString3 = '<div id="content">'+
               '<div id="siteNotice">'+
               '</div>'+
-              '<h1 id="firstHeading" class="firstHeading">Regal Butler Town Center 14</h1>'+
+              '<h1 id="firstHeading" class="firstHeading">Regal Celebration Pointe 10</h1>'+
               '<div id="bodyContent" align="center">'+
               '<p>(352) 373-2880<br>' +
               '4901 Southwest 31st Place Gainesville, FL 32608, United States<br>'+
@@ -118,6 +121,41 @@
            map.setCenter(marker3.getPosition());
            infowindow3.open(map, marker3);
         });
+
+        infoWindow = new google.maps.InfoWindow;
+
+        if (navigator.geolocation) {
+
+         navigator.geolocation.getCurrentPosition(function(position) {
+           var userPos = {
+             lat: position.coords.latitude,
+             lng: position.coords.longitude
+           };
+
+          infoWindow.setPosition(userPos);
+          var userMarker = new google.maps.Marker({
+            position: userPos,
+            map: map,
+            title: 'YOU ARE HERE',
+            animation: google.maps.Animation.DROP
+          });
+
+           }, function() {
+             handleGeoLocationError(true, infoWindow, map.getCenter());
+           });
+         } else {
+            handleGeoLocationError(false, infoWindow, map.getCenter());
+     }
+
+     function handleGeoLocationError(geoAvailable, infoWindow, pos) {
+       infoWindow.setPosition(pos);
+       infoWindow.setContent(geoAvailable ?
+                           'Error: Geolocation has failed' :
+                           'Error: No Geolocation available on your machine');
+       infoWindow.open(map);
+     }
+
+
     }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
@@ -130,7 +168,7 @@
 
         <!-- cinema and movies tabs -->
         <ul id="bottomButtons">
-          <li><a class="active" href="./crowdy.html">Show Cinemas</a></li>
+          <li><a class="active" href="./index.html">Show Cinemas</a></li>
           <li ng-controller="MovieController" ng-click="getMoviesFromTheater()"><a href="./crowdy2.html">Show Movies</a></li>
         </ul>
       <!-- </div> -->
@@ -151,5 +189,3 @@
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!-- this is crowdy's html file. woohoo. -->
 <!-- 10/11/18-->
 <html>
@@ -12,6 +13,7 @@
   <body ng-app="directoryApp">
     <div class="row" ng-controller="MovieController">
       <h2 align="center">List of movies<br></h2>
+      {{getMoviesFromTheater(42490)}}
       <div align="center" class="dropdown">
       <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Cinema
@@ -30,10 +32,11 @@
             <input type="search" id="search" placeholder="search" ng-model="codec"/>
           </div>
       </h1>
+      <h1>{{loading}}</h1>
         <div class="col-md-6">
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
-              <tr ng-repeat="x in movies | filter:valid">
+              <tr ng-repeat="x in movies | filter:codec">
                   <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
                   <td>{{x.title}}<br>
                   {{x.genres[0]}}<br>
@@ -51,7 +54,7 @@
             <div class="col-md-4 text-center">
               <!-- cinema and movies tabs -->
               <ul id="buttomBarul">
-                <li><a class="active" href="./crowdy.html">Show Cinemas</a></li>
+                <li><a class="active" href="./index.html">Show Cinemas</a></li>
                 <li ng-controller="MovieController" ng-click="getMoviesFromTheater()"><a href="./crowdy2.html">Show Movies</a></li>
               </ul>
             </div>
