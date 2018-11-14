@@ -100,7 +100,7 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
   // }
   $scope.getUser = function(username){
     console.log("starting user request");
-    $http.get('/api/user/get/' + username).then(response => {
+    $http.get('/api/user/'+username).then(response => {
       $scope.user = response.data;
       console.log("hell");
     }); // returns user object, or null if there is no user

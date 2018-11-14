@@ -16,7 +16,7 @@ exports.getGenres = async function(req, res){
 
 exports.getUser = async function(req, res){
     const query = {username: req.username};
-    console.log("hello");
+    
     console.log(req.username);
     var user = await User.findOne(query).exec();
     if(user){
@@ -138,55 +138,55 @@ exports.setGenres = function(req, res){
 
 
 
-exports.getUser = function(req, res){
-    var username = req.body.username;
-    var query = {username: username};
-    User.findOne(query, function (err, user){
-        if(err){
-            console.log(err);
-        }
-        if(user){
-            user.password = "";
-            res.json(user);
-        }
-    });
-};
+// exports.getUser = function(req, res){
+//     var username = req.body.username;
+//     var query = {username: username};
+//     User.findOne(query, function (err, user){
+//         if(err){
+//             console.log(err);
+//         }
+//         if(user){
+//             user.password = "";
+//             res.json(user);
+//         }
+//     });
+// };
 
-exports.setCompany = function(req, res){
-    var username = req.body.username;
-    var query = {username: username};
-    var company = req.body.company;
-    User.findOneAndUpdate(query, {employee_company: company}, function (err){
-        if(err){
-            console.log(err);
-        }
-    });
-};
+// exports.setCompany = function(req, res){
+//     var username = req.body.username;
+//     var query = {username: username};
+//     var company = req.body.company;
+//     User.findOneAndUpdate(query, {employee_company: company}, function (err){
+//         if(err){
+//             console.log(err);
+//         }
+//     });
+// };
 
-exports.addHistory = function(req,res){
-    var newItem = req.body.newItem;
-    var username = req.body.username;
-    var query = {username: username};
-    User.findOneAndUpdate(query, function (err,user){
-        if(err){
-            console.log(err);
-        }
-        if(user){
-            user.history.push(newItem);
-            user.save();
-        }
-    });
-};
+// exports.addHistory = function(req,res){
+//     var newItem = req.body.newItem;
+//     var username = req.body.username;
+//     var query = {username: username};
+//     User.findOneAndUpdate(query, function (err,user){
+//         if(err){
+//             console.log(err);
+//         }
+//         if(user){
+//             user.history.push(newItem);
+//             user.save();
+//         }
+//     });
+// };
 
-exports.clearHistory = function(req, res){
-    var username = req.body.username;
-    var query = {username: username};
-    User.findOneAndUpdate(query, {history: []}, function (err){
-        if(err){
-            console.log(err);
-        }
-    });
-};
+// exports.clearHistory = function(req, res){
+//     var username = req.body.username;
+//     var query = {username: username};
+//     User.findOneAndUpdate(query, {history: []}, function (err){
+//         if(err){
+//             console.log(err);
+//         }
+//     });
+// };
 
 
 

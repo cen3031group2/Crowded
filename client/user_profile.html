@@ -33,7 +33,8 @@
         <!-- user profile section -->
         <div class="up"><!--User Profile-->  </div>
         <div ng-controller="UserController" data-ng-init="getUser('crowdy@github.com')">
-            <!-- {{user}} -->
+            <span>Username: {{user.username}}</span>
+            <span></span>Genres: {{user.genres}}
         </div>
 
         <!-- dropdown -->
