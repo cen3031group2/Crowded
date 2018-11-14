@@ -114,7 +114,7 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
     $http.post('/api/user/password/check', userToCheck).then(
       response =>{
         console.log(response.data);
-        if(response.data == "true") {
+        if(response.data == true) {
           window.location.href = './index.html';
           console.log("success");
         }
