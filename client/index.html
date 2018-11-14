@@ -24,30 +24,40 @@
 
 
 <!-- Header -->
-<h1 class="head" align="center">
+<h1 id="title" align="center">
   <div id="title">Welcome to Crowdy!<br></div>
 </h1>
+
+<div id="floating-panel" align="center">
+  <input onclick="closestCinema();" class="btn btn-info" type=button value="Show Closest Cinema">
+  <input onclick="nonCrowdyCinema();" class="btn btn-info" type=button value="Show Least Crowdiest Cinema">
+  <input onclick="crowdyCinema();" class="btn btn-info" type=button value="Show Most Crowdiest Cinema">
+  <input onclick="resetMap();" class="btn btn-info" type=button value="Reset Map">
+  <!-- <input onclick="crowdinessLevels();" class="btn btn-info" type=button value="Find Crowdiness Levels"> -->
+</div>
 <!-- map element -->
 <div id="map"></div>
 <script>
       var map;
       var infowindow;
       var pos;
+      var markers = [];
+      var usrMarker;
+
+      var image = "images/video-camera.png";
+  		var veryCrowded = "images/CrowdedLogos_VeryCrowded.png";
+  		var crowdedImage = "images/CrowdedLogos_Crowded.png";
+  		var moderateImage = "images/CrowdedLogos_Moderate.png";
+  		var notCrowdedImage = "images/CrowdedLogos_NotCrowded.png";
+  		var emptyImage = "images/CrowdedLogos_Empty.png";
 
       function initMap() {
         var gainesville = {
           lat: 29.6456,
           lng: -82.3800
         };
-		
-        var image = "images/video-camera.png";
-		var veryCrowded = "images/CrowdedLogos_VeryCrowded.png";
-		var crowdedImage = "images/CrowdedLogos_Crowded.png";
-		var moderateImage = "images/CrowdedLogos_Moderate.png";
-		var notCrowdedImage = "images/CrowdedLogos_NotCrowded.png";
-		var emptyImage = "images/CrowdedLogos_Empty.png";
-		  
-        var contentString1 = 
+
+        var contentString1 =
 			'<div id="crowdyLevel"><img src="images/CrowdedLogos_Empty.png">' +
 			'</div>' +
 			'<div id="bodyContent" style="float:right">'+
@@ -58,9 +68,9 @@
             'http://www.regmovies.com/theaters/regal-butler-town-center-14/1833</a>'+
             '</p>'+
             '</div>';
-        var contentString2 = 
+        var contentString2 =
 			'<div id="crowdyLevel"><img src="images/CrowdedLogos_NotCrowded.png">' +
-			'</div>' +			
+			'</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 16</b></p>' +
             '<p style="float:right">(844) 462-7342 ext 1308<br>' +
@@ -69,9 +79,9 @@
             'http://www.regmovies.com/theaters/regal-royal-park-stadium-16/6955</a>'+
             '</p>'+
             '</div>';
-        var contentString3 = 
+        var contentString3 =
 			'<div id="crowdyLevel"><img src="images/CrowdedLogos_VeryCrowded.png">' +
-			'</div>' +	
+			'</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 10</b></p>' +
             '<p>(352) 373-2880<br>' +
@@ -80,7 +90,7 @@
             'http://www.regmovies.com/theaters/regal-celebration-pointe-10-rpx/47521</a>'+
             '</p>'+
             '</div>';
-		  
+
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: gainesville,
@@ -134,6 +144,7 @@
           icon: image,
           animation: google.maps.Animation.DROP
         });
+        markers.push(marker1); markers.push(marker2); markers.push(marker3);
         marker1.addListener('click', function() {
            map.setZoom(16);
            map.setCenter(marker1.getPosition());
@@ -161,7 +172,7 @@
            };
 
           infoWindow.setPosition(userPos);
-          var userMarker = new google.maps.Marker({
+          usrMarker = new google.maps.Marker({
             position: userPos,
             map: map,
             title: 'YOU ARE HERE',
@@ -183,12 +194,114 @@
        infoWindow.open(map);
      }
     }
-    </script> 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script> 
-<!-- end map element --> 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script> 
-<!-- end map element -->
+    function closestCinema () {
+      var shortest = 0;
+      var shortestCalculation = google.maps.geometry.spherical.computeDistanceBetween(markers[0].getPosition(), usrMarker.getPosition());;
+
+      for (var i = 3; i < 6; ++i) {
+        var compute = google.maps.geometry.spherical.computeDistanceBetween(markers[i].getPosition(), usrMarker.getPosition());
+        if (compute < shortestCalculation) {
+          shortest = i;
+          shortestCalculation = compute;
+        }
+      }
+
+      for (var i = 3; i < 6; ++i) {
+        if (i != shortest)
+          markers[i].setMap(null);
+      }
+    }
+
+    function resetMap () {
+      for (var i = 3; i < 6; ++i)
+          markers[i].setMap(map);
+          // markers[i].setIcon(image);
+    }
+
+    function nonCrowdyCinema() {
+      var smallest = 0;
+      var smallestCalculation;
+      $.getJSON("/api/theater/getAllTheaters", function( data ) {
+        smallestCalculation = (data[0].crowdy.public + data[0].crowdy.employee) / 2;
+        for (var i = 0; i < data.length; ++i) {
+          var tempCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
+          if (tempCalc < smallestCalculation) {
+            smallest = i;
+            smallestCalculation = tempCalc;
+          }
+        }
+      });
+
+      for (var i = 3; i < 6; ++i) {
+          if (i - 3 != smallest)
+          markers[i].setMap(null);
+        }
+    }
+
+    function crowdyCinema() {
+      var largest = 0;
+      var largestCalculation;
+      $.getJSON("/api/theater/getAllTheaters", function( data ) {
+        largestCalculation = (data[0].crowdy.public + data[0].crowdy.employee) / 2;
+        for (var i = 0; i < data.length; ++i) {
+          var tempCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
+          if (tempCalc > largestCalculation) {
+            largest = i;
+            largestCalculation = tempCalc;
+          }
+        }
+      });
+
+      for (var i = 3; i < 6; ++i) {
+          if (i - 3 != largest)
+          markers[i].setMap(null);
+      }
+    }
+
+    var crowdyImages = [];
+
+    var veryCrowded = "images/CrowdedLogos_VeryCrowded.png";
+    var crowdedImage = "images/CrowdedLogos_Crowded.png";
+    var moderateImage = "images/CrowdedLogos_Moderate.png";
+    var notCrowdedImage = "images/CrowdedLogos_NotCrowded.png";
+    var emptyImage = "images/CrowdedLogos_Empty.png";
+
+    crowdyImages.push(emptyImage);
+    crowdyImages.push(notCrowdedImage);
+    crowdyImages.push(moderateImage);
+    crowdyImages.push(crowdedImage);
+    crowdyImages.push(veryCrowded);
+
+    console.log(crowdyImages);
+
+    function crowdinessLevels () {
+      var crowdyIndex = [];
+      $.getJSON("/api/theater/getAllTheaters", function( data ) {
+          for (var i = 0; i < data.length; ++i) {
+            var crowdyCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
+            if (crowdyCalc < 20)
+              crowdyIndex.push(0);
+            else if (crowdyCalc >= 20 && crowdyCalc < 40)
+              crowdyIndex.push(1);
+            else if (crowdyCalc >= 40 && crowdyCalc < 60)
+              crowdyIndex.push(2);
+            else if (crowdyCalc >= 60 && crowdyCalc < 80)
+              crowdyIndex.push(3);
+            else
+              crowdyIndex.push(4);
+          }
+      });
+
+       for (var i = 3; i < 6; ++i) {
+      //         console.log(crowdyIndex[i - 3]);
+        markers[i].setIcon(crowdyImages[0]);
+      }
+    }
+    </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyBJT8tEpxqhEBNdkmalgH3w4VNVnX8hOTA&callback=initMap" async defer></script>
+  <!-- end map element -->
 
 
 </body>

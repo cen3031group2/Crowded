@@ -3,18 +3,33 @@
   <head>
     <title>Crowdy</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/change.css">
   </head>
 
-  <body>
+  <body id="LoginForm" ng-app="directoryApp">
+    
+    <h1 class="form-heading">
+      <img src="images\Crowdy_Concept.png" alt="Crowdy">
+    </h1>
+      
+    <div class="exit">
+      <a href="index.html">
+        <i class="glyphicon glyphicon-remove white"></i>
+      </a>
+    </div>
+    
+    <div class="login-form">
+      <div class="main-div" ng-controller="UserController">
+        <div class="panel">
+          <legend>Change Username</legend>
+        <p>
+          <label for="username">New Username:</label>
+          <input type="text" class="form-control" id="username" name="username" required />
+        </p>
 
-        <legend>Change Username</legend>
-        <div>
-            <label for="username">New Username:</label>
-            <input type="text" id="username" name="username" required />
-        </div>
-
-        <input type="submit" value="Submit Change">
-
-
-  </body>
+        <button type="submit" class="btn btn-primary">Submit Change</button>
+        <span ng-bind="verify"></span>
+      </div>
+    </div>
+  </div>
+</body>
