@@ -10,10 +10,8 @@
 }
 
 #title {
-  margin-left: -5px;
+  margin-left: 90px;
 }
-
-
 
 .text-center {
   text-align: center;
@@ -70,10 +68,10 @@ body {
 /* Crowdy image */
 img {
   display: flex;
-  width: 100px;
-  height: auto;
+  width: 130px;
+  height: 120px;
   position: absolute;
-  margin-left: 0px;
+  margin-left: -15px;
   margin-right: auto;
   margin-top: -10px;
   margin-bottom: 10px;
@@ -85,7 +83,7 @@ img {
 	margin-right: 80px;
 	display: inline;
 	padding: 20px;
-	width: 1px;
+	width: 50px;
 	height: auto;
 }
 
@@ -108,17 +106,19 @@ img {
 .topNavigation li a {
   display: block;
   color: white;
+  font-size: 20px;
   text-align: center;
-  padding: 14px 16px;
+  padding: 30px 16px;
   text-decoration: none;
 }
 
 .topNavigation li a:hover:not(.active) {
-  background-color: #FBA20C;
+  background-color: rgb(0, 154, 201);
 }
 
 .active {
-  background-color: rgb(0, 154, 201);
+  background-color: #FBA20C;
   width: 120px;
+  margin-right: -20px;
 }
 /* end top navigation bar */

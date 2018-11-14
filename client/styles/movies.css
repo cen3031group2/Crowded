@@ -97,3 +97,13 @@
   border-style: groove;
 }
 
+#poster {
+	align-content: flex-start;
+	margin-left: 25%;
+}
+
+#movie-title {
+	font-size: 18;
+	font-style: oblique;
+}
+
