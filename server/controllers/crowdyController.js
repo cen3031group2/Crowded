@@ -22,7 +22,7 @@ exports.addPublicReport = async function(req,res){
         .then(function(crowdy){
             if(crowdy){
                 crowdy.num_reports += 1;
-                crowdy.sum += report;
+                crowdy.sum += value;
                 crowdy.save();
             } else{
                 crowdy = new Public();

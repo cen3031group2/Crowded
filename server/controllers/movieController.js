@@ -70,7 +70,6 @@ exports.getAllMoviesFromTheater = async function(req,res){
         if(movie.ratings){
             newMovie.ratings = movie.ratings;
         }
-        console.log(movie.ratings);
         promisesToFill.push(addShowtime(newMovie));
         promisesToFill.push(addCrowdy(newMovie));
         newMovie.genres = [];

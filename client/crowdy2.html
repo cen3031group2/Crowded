@@ -37,19 +37,16 @@
             <input type="search" id="search" placeholder="search" ng-model="codec"/>
           </div>
       </h1>
-
-
-      <!-- select cinema dropdown -->
-      <div class="dropdown" align="center">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" ng-click="getMoviesFromTheater(42490)" href="#">Regal Butler Town Center 14</a> <br>
-              <a class="dropdown-item" ng-click="getMoviesFromTheater(42506)" href="#">Regal Royal Park Stadium 16</a> <br>
-              <a class="dropdown-item" ng-click="getMoviesFromTheater(64196)" href="#">Regal Celebration Pointe 10 & RPX Movie Theatre</a>
-          </div>
+      <div class="dropdown container-fluid" align="center" role="menu">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Theaters
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu" align="center">
+            <li><a class="dropdown-item" ng-click="getMoviesFromTheater(42490)" href="#">Regal Butler Town Center 14</a></li>
+            <li><a class="dropdown-item" ng-click="getMoviesFromTheater(42506)" href="#">Regal Royal Park Stadium 16</a></li>
+            <li><a class="dropdown-item" ng-click="getMoviesFromTheater(64196)" href="#">Regal Celebration Pointe 10 & RPX Movie Theatre</a></li>
+          </ul>
       </div>
+      
 
       <!-- table list of movies -->
         <div class="col-md-6">
@@ -61,7 +58,11 @@
                   <em ng-repeat="genre in x.genres">{{genre}}, </em><br>
                   <b>imbd rating {{x.ratings.imdb.value}}</b><br>
                   Showtimes
-                  <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span>
+                  <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span> <br>
+                  Crowdy Public: {{x.crowdy}} <br>
+                  Rate crowdy: <button ng-click="addCrowdyMovieReport(0, x.id, x.theater)">0</button> <button ng-click="addCrowdyMovieReport(1, x.id, x.theater)">1</button>
+                  <button ng-click="addCrowdyMovieReport(2, x.id, x.theater)">2</button>
+                  <button ng-click="addCrowdyMovieReport(3, x.id, x.theater)">3</button>
                 </td>
               </tr>
           </table>
