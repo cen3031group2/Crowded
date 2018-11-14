@@ -56,12 +56,12 @@
 
       <!-- table list of movies -->
       <h1>{{loading}}</h1>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
               <tr ng-repeat="x in movies | filter:codec">
-                  <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
-                  <td><b>{{x.title}}</b><br>
+                  <td><img src={{x.poster_image_thumbnail}} id="poster"> </td> <!-- Picture goes here -->
+                  <td><h3>{{x.title}}</h3><br>
                   <em>{{x.genres[0]}}</em><br>
                   <b>{{x.rating[0]}}</b><br>
                   Showtimes
