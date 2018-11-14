@@ -1,7 +1,7 @@
 // this is Crowdy's app.js file
 // 10/11/18
 const website = 'http://localhost:8080';
-var app = angular.module('directoryApp', []);
+var app = angular.module('directoryApp', ['ngCookies']);
 
 app.run(function ($rootScope) {
     $rootScope.$on('scope.stored', function (event, data) {
@@ -58,6 +58,7 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
 
 app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($scope, $http, Scopes) {
   $scope.theaters = undefined;
+  $scope.userIsValid = undefined;
   // const theaterFormat = {
   //   id: 0,
   //   crowdy: {
@@ -81,7 +82,7 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
   }
 }]);
 
-app.controller('UserController', ['$scope', '$http', function($scope, $http){
+app.controller('UserController', ['$scope', '$http','$cookies', function($scope, $http, $cookies){
   // returns an array with user's listed genres
   $scope.getUserGenres = function(username){
     $http.get('/api/user/genre/' + username).then(function(response){
@@ -98,19 +99,27 @@ app.controller('UserController', ['$scope', '$http', function($scope, $http){
   //   employee_company: ''
   // }
   $scope.getUser = function(username){
-    $http.get('/api/user/' + username); // returns user object, or null if there is no user
+    $http.get('/api/user/' + username).then(response => {
+      $scope.user = response.data;
+    }); // returns user object, or null if there is no user
   }
-
+  $scope.getUserFromCookie = function(){
+    $scope.getUser($cookies.get('user_username'));
+  }
   // Either pass in user to the function to check or alter this function
   // expected format for user to check {username: '', password: ''};
   $scope.checkPassword = function(userToCheck){
-    if($http.post('/api/user/password/check', userToCheck)){
-      $scope.user = $http.get('/api/user/' + userToCheck.username);
-    };
+    $http.post('/api/user/password/check', userToCheck).then(
+      response =>{
+        $scope.userIsValid = response.data;
+      }
+    )
   }
 
   $scope.createUser = function(userToCreate){
-    var msg = $http.post('/api/user/create', userToCreate); // returns msg object, which will have a msg if failed
+    $http.post('/api/user/create', userToCreate).then(response => {
+      $scope.msg = response.data;
+    }); // returns msg object, which will have a msg if failed
     // msg = {created: boolean, msg: ''}
   }
 

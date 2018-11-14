@@ -71,7 +71,7 @@ exports.getAllMoviesFromTheater = async function(req,res){
             newMovie.rating = movie.rating;
         }
         promisesToFill.push(addShowtime(newMovie));
-        //promisesToFill.push(addCrowdy(newMovie));
+        promisesToFill.push(addCrowdy(newMovie));
         newMovie.genres = [];
         movie.genres.forEach(genre =>{
             newMovie.genres.push(genre.name);
@@ -79,7 +79,10 @@ exports.getAllMoviesFromTheater = async function(req,res){
         newMovies.push(newMovie);
     });
     //addShowtimes(newMovies, theater_id, res);
-    res.json(newMovies);
+    
+    Promise.all(promisesToFill).then(result => {
+        res.json(newMovies);
+    });
 };
 
 function addShowtime(movie){
@@ -98,19 +101,21 @@ function addShowtime(movie){
         }
     };
     
-     rp(showtimeOptions).then(response => {
+    return rp(showtimeOptions).then(response => {
         const showtimes = response.showtimes;
         movie.showtimes = [];
-        for(var i = 0; i < showtimes; i++){
-            var time = new Date(showtimes[j].start_at);
+        for(var i = 0; i < showtimes.length; i++){
+            var time = new Date(showtimes[i].start_at);
             const hour = time.getHours();
             const minute = time.getMinutes();
             var newTime = {
                 hour: (hour < 10 ? "0" + hour : "" + hour),
                 minute: (minute < 10 ? "0" + minute : "" + minute)
-            }  
+            }
             movie.showtimes.push(newTime)
         }
+        
+        return true;
     });
 }
 // async function addShowtimes(movies, theater_id, res){
@@ -134,13 +139,10 @@ function addShowtime(movie){
 //     addCrowdy(movies, res);
 // }
 
-// async function addCrowdy(movies, res){
-//     for (var i = 0; i < movies.length; i++){
-//         var result = await crowdy.getMovieReport(movies[i]);
-//         movies[i].crowdy = result.avg;
-//     }
-//     res.json(movies);
-// }
+async function addCrowdy(movie){
+    var result = await crowdy.getMovieReport(movie);
+    movie.crowdy = result.avg;
+}
 
 exports.toId = function(req, res, next, id){
     req.id = id;
