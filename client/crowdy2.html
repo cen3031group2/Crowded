@@ -41,31 +41,27 @@
 
       <!-- select cinema dropdown -->
       <div class="dropdown" align="center">
-      
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Cinema
-          <span class="caret"></span></button>
-          <div class="dropdown-content">
-        
-            <li><a href="#" ng-click="getMoviesFromTheater(42490)">Regal Butler Town Center 14</a></li>
-            <li><a href="#" ng-click="getMoviesFromTheater(42506)">Regal Royal Park Stadium 16</a></li>
-            <li><a href="#" ng-click="getMoviesFromTheater(64196)">Regal Celebration Pointe 10 & RPX Movie Theatre</a></li>
-          
-          
-        </div>
-        </div>
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" ng-click="getMoviesFromTheater(42490)" href="#">Regal Butler Town Center 14</a> <br>
+              <a class="dropdown-item" ng-click="getMoviesFromTheater(42506)" href="#">Regal Royal Park Stadium 16</a> <br>
+              <a class="dropdown-item" ng-click="getMoviesFromTheater(64196)" href="#">Regal Celebration Pointe 10 & RPX Movie Theatre</a>
+          </div>
+      </div>
 
       <!-- table list of movies -->
-      <h1>{{loading}}</h1>
         <div class="col-md-6">
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
               <tr ng-repeat="x in movies | filter:codec">
                   <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
                   <td><b>{{x.title}}</b><br>
-                  <em>{{x.genres[0]}}</em><br>
-                  <b>{{x.rating[0]}}</b><br>
+                  <em ng-repeat="genre in x.genres">{{genre}}, </em><br>
+                  <b>imbd rating {{x.ratings.imdb.value}}</b><br>
                   Showtimes
-                  <span id="shows" ng-repeat="y in x.showtimes">{{y.hour}}:{{y.minute}} </span>
+                  <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span>
                 </td>
               </tr>
           </table>
