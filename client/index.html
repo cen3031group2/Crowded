@@ -14,21 +14,43 @@
   <!-- top navigation bar -->
   <div class="topNavigation">
       <ul class>
+          <li><img src="images\WHITE.png" alt="Crowdy">....................</li>
           <li><a href="crowdy2.html">Movies</a></li>
           <li><a href="#index.html">Theaters</a></li>
           <li><a href="user_profile.html">User Profile</a></li>
+          <!-- <li><div class="dropdown1">
+            <button class="dropbtn">Filter Map 
+              <i class="glyphicon glyphicon-chevron-down white"></i>
+            </button>
+            <div class="dropdown1-content">
+              
+              <a href="closestCinema();">
+                <input onclick="closestCinema();" class="btn btn-info" type=button value="Show Closest Cinema">
+              </a>
+              <a href="nonCrowdyCinema();">
+                <input onclick="nonCrowdyCinema();" class="btn btn-info" type=button value="Show Least Crowdiest Cinema">
+              </a>
+              <a href="crowdyCinema();">
+                <input onclick="crowdyCinema();" class="btn btn-info" type=button value="Show Most Crowdiest Cinema">
+              </a>
+              <a href="resetMap();">
+                <input onclick="resetMap();" class="btn btn-info" type=button value="Reset Map">
+              </a>
+              
+            </div>
+          </div> </li> -->
           <li style="float:right"><a class="active" href="loginForm.html">Login</a></li>
         </ul>
   </div>
-<img src="images\Crowdy_Concept.png" alt="Crowdy">
+<!-- <img src="images\Crowdy_Concept.png" alt="Crowdy"> -->
 
 
 <!-- Header -->
-<h1 id="title" align="center">
+<!-- <h1 id="title" align="center">
   <div id="title">Welcome to Crowdy!<br></div>
-</h1>
+</h1> -->
 
-<div id="floating-panel" align="center">
+<div class="headerButtons" id="floating-panel" align="center">
   <input onclick="closestCinema();" class="btn btn-info" type=button value="Show Closest Cinema">
   <input onclick="nonCrowdyCinema();" class="btn btn-info" type=button value="Show Least Crowdiest Cinema">
   <input onclick="crowdyCinema();" class="btn btn-info" type=button value="Show Most Crowdiest Cinema">
