@@ -34,6 +34,10 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
     //   crowdy: 0,
     // };
 
+    $scope.setTheaterID = function (id) {
+      $scope.theaterID = id;
+    }
+
     //Change the movies depending on the theater selected
     $scope.changeListingsView = function (index) {
       $scope.theaterId = index;
@@ -66,7 +70,7 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
     };
 }]);
 
-app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($scope, $http, Scopes) {
+app.controller('TheaterController', ['$scope', '$http', function ($scope, $http) {
   $scope.theaters = undefined;
   $scope.userIsValid = undefined;
   // const theaterFormat = {
@@ -84,7 +88,9 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
 
   // Gets all the theaters in Gaineville and then adds it to scope.theaters, this function can be altered.
   $scope.getAllTheaters = function() {
-    $scope.theaters = $http.get('/api/theater/getAllTheaters').then(response); //
+    $http.get('/api/theater/getAllTheaters').then(function(response) {
+        $scope.theaters = response.data;
+    });
   }
 
   $scope.getTheater = function(theater_id){
