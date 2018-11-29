@@ -55,7 +55,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
+            // a get request to /api/user will return the current user if they are logged in.
+            // if noone is logged in, then it will return nothing.
             $.get('/api/user', function(data){
+                // data is what will be sent back once the request is done
+                // look up await and promises if you want the data to be accessed outside of this function.
                 if(data){
                     $("#loginButton").text('Logout');
                     $("#loginButton").attr("href", "/logout");
