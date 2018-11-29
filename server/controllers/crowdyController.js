@@ -82,19 +82,20 @@ exports.getTheatherReport = async function(crowdy_id){
 
     const public  = await Public.findOne(query).exec();
     if(public){
-        result.public = public.avg; 
+        result.public = public.avg;
     } else{
         result.public = createPublicReport(crowdy_id).avg;
     }
-    
+
     const employee  = await Employee.findOne(query).exec();
     if(employee){
         result.employee = employee.value;
     } else{
         result.employee = createEmployeeReport(crowdy_id).value;
     }
+
     return result;
-        
+
 }
 
 
@@ -123,13 +124,13 @@ async function addTheaterReport(theater_id, report){
     if(crowdy){
         crowdy.sum += report;
         crowdy.num_reports += 1;
-        crowdy.save(); 
+        crowdy.save();
     } else {
         crowdy = new Public();
         crowdy.id = 't' + theater_id;
         crowdy.num_reports = 1;
         crowdy.sum = report;
-        crowdy.save(); 
+        crowdy.save();
     }
 }
 
