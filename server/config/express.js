@@ -8,7 +8,11 @@ var path = require('path'),
     crowdyRouter = require('../routes/crowdyRouter'),
     theaterRouter = require('../routes/theaterRouter'),
     movieRouter = require('../routes/movieRouter'),
-    cors = require('cors');
+    cors = require('cors'),
+    passport = require('passport'),
+    User = require('../models/userModel'),
+    LocalStrategy = require('passport-local').Strategy,
+    session = require("express-session");
 
 module.exports.init = function() {
 //connect to database
@@ -25,18 +29,65 @@ app.use(cors());
 //body parsing middleware
 app.use(bodyParser.json());
 
+app.use(session({ secret: "cats" }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/", express.static('client'));
 
 //TODO
+app.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    console.log(user);
+    if (err) { return next(err); }
+    if (!user) { return res.send('/loginForm.html'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.send('/');
+    });
+  })(req, res, next);
+});
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 app.use('/api/user', userRouter);
 app.use('/api/theater', theaterRouter);
 app.use('/api/movie', movieRouter);
 app.use('/api/crowdy', crowdyRouter);
 
 app.get('/', function (req, res, next) {
-  res.redirect('~/crowdy.html');
+  res.redirect('/crowdy.html');
 });
 
 return app;
 
 };
+
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.password === password) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+passport.serializeUser(function(user, done){
+  done(null, user.username);
+});
+
+passport.deserializeUser(async function(username, done){
+  const query = {username: username}
+  User.findOne(query, function(err, user){
+    done(err, user);
+  });
+  
+})

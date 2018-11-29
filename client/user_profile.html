@@ -26,15 +26,16 @@
                 <li><a href="crowdy2.html">Movies</a></li>
                 <li><a href="index.html">Theaters</a></li>
                 <li><a href="user_profile.html">User Profile</a></li>
-                <li style="float:right"><a class="active" href="loginForm.html">Login</a></li>
+                <li style="float:right"><a id="loginButton" class="active" href="loginForm.html">Login</a></li>
               </ul>
         </div>
 
         <!-- user profile section -->
         <div class="up"><!--User Profile-->  </div>
-        <div ng-controller="UserController" data-ng-init="getUserFromCookie()">
-            <span>Username: {{user.username}}</span>
-            <span></span>Genres: {{user.genres}}
+        <div ng-controller="UserController">
+            <span id="username"></span>
+            <span id="genres"></span>
+            <span id="history"></span>
         </div>
 
         <!-- dropdown -->
@@ -48,16 +49,29 @@
             </div>
         </div>
 
-
-
-
-        
-
-
-
     </scroll-container>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
     <script src="./js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.get('/api/user', function(data){
+                if(data){
+                    $("#loginButton").text('Logout');
+                    $("#loginButton").attr("href", "/logout");
+                    if(data.username){
+                        $("#username").text('Username: ' + data.username);
+                    }
+                    if(data.genre){
+                        $("#genres").text('Genres: ' + data.genre);
+                    }
+                    if(data.history){
+                        $("#history").text('History: ' + data.history);
+                    }
+                };
+            });
+        });
+    </script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-cookies.js"></script>
 </body>
 </html>

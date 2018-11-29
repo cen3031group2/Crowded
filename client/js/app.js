@@ -92,48 +92,21 @@ app.controller('TheaterController', ['$scope', '$http', 'Scopes', function ($sco
   }
 }]);
 
-app.controller('UserController', ['$scope', '$http','$cookies', function($scope, $http, $cookies){
-  // returns an array with user's listed genres
-  $scope.getUserGenres = function(username){
-    $http.get('/api/user/genre/' + username).then(function(response){
-      $scope.genres = response.data;
-    });
-  }
 
-  // returns user by that name or null if none, does not have password attached
-  // const userFormat = {
-  //   username: '',
-  //   password: '',
-  //   genre: [''],
-  //   email: '',
-  //   employee_company: ''
-  // }
-  $scope.getUser = function(username){
+app.controller('UserController', ['$scope', '$http','$cookies', function($scope, $http, $cookies){
+  $scope.getUser = function(){
     console.log("starting user request");
-    $http.get('/api/user/'+username).then(response => {
+    $http.get('/api/user/').then(response => {
       $scope.user = response.data;
-    }); // returns user object, or null if there is no user
-  }
-  $scope.getUserFromCookie = function(){
-    $scope.getUser($cookies.getObject('user').username);
+    });
   }
   // Either pass in user to the function to check or alter this function
   // expected format for user to check {username: '', password: ''};
   $scope.checkPassword = function(userToCheck){
-    $http.post('/api/user/password/check', userToCheck).then(
-      response =>{
-        console.log(response.data);
-        if(response.data == true) {
-          var user = {username: userToCheck.username, valid:true};
-          window.location.href = './index.html';
-          $cookies.putObject('user', user);
-          console.log("success");
-        }
-        else {
-          console.log("failure");
-        }
-      }
-    )
+    
+    $http.post('/login', userToCheck).then(response => {
+      window.location.replace(response.data);
+    });
   }
 
   $scope.createUser = function(userToCreate){
