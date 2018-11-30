@@ -3,7 +3,6 @@ var User = require('../models/userModel'),
 
 
 exports.getUser = async function(req, res){
-    console.log(req.user);
     res.json(req.user);
     // const query = {username: req.user.username};
     // var user = await User.findOne(query).exec();
@@ -56,6 +55,10 @@ exports.saveUser = function(req, res){
     }
     User.findOneAndUpdate(query, req.body).exec();
     res.end();
+}
+
+exports.addHistory = function(user, movie, theater){
+    console.log("adding history");
 }
 
 exports.toUsername = function(req, res, next, username){
