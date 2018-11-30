@@ -49,8 +49,10 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
         movie: movie_id,
         theater: theater_id
       }
-      $http.post('/api/crowdy/public/', data);
+      $http.post('/api/crowdy/', data);
     }
+
+    
 
     $scope.getMoviesFromTheater = async function (theater_id){
         if (theater_id == null || !theater_id) {
@@ -58,7 +60,6 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
         }
         $http.get('/api/movie/getAllMoviesFromTheater/' + theater_id).then(function(response){
           $scope.movies = response.data;
-          console.log($scope.movies);
         });
     };
 
@@ -95,6 +96,13 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
 
   $scope.getTheater = function(theater_id){
     $scope.currentTheater = $http.get('/api/theater/getTheaters/' + theater_id);
+  }
+  $scope.setTheaterCrowdy = function(theater_id, value){
+    const data = {
+      value: value,
+      theater: theater_id
+    }
+    $http.post('/api/crowdy/theater');
   }
 }]);
 

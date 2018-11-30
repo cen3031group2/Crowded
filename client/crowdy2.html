@@ -13,7 +13,6 @@
   <body ng-app="directoryApp">
 
     <div class="row" ng-controller="MovieController">
-      {{getMoviesFromTheater(42490)}}
       <!-- header image & title -->
       <h2 class="form-heading2">
         <div class="page-header">Crowdy</div>
@@ -37,7 +36,7 @@
             <input type="search" id="search" placeholder="search" ng-model="codec"/>
           </div>
       </h1>
-      <div class="dropdown container-fluid" align="center" role="menu">
+      <!-- <div class="dropdown container-fluid" align="center" role="menu">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Theaters
           <span class="caret"></span></button>
           <ul class="dropdown-menu" align="center">
@@ -45,6 +44,12 @@
             <li><a class="dropdown-item" ng-click="getMoviesFromTheater(42506)" href="#">Regal Royal Park Stadium 16</a></li>
             <li><a class="dropdown-item" ng-click="getMoviesFromTheater(64196)" href="#">Regal Celebration Pointe 10 & RPX Movie Theatre</a></li>
           </ul>
+      </div> -->
+
+      <div align="center">
+        <button class="btn" type="button" ng-click="getMoviesFromTheater(42490)">Regal Butler Town Center 14</button>
+        <button class="btn" type="button" ng-click="getMoviesFromTheater(42506)">Regal Royal Park Stadium 16</button>
+        <button class="btn" type="button" ng-click="getMoviesFromTheater(42506)">Regal Celebration Pointe 10 & RPX Movie Theatre</button>
       </div>
 
         <div class="col-md-12">

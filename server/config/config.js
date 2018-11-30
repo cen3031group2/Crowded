@@ -5,7 +5,7 @@ module.exports = {
       uri: "mongodb://admin:whatis42@ds153093.mlab.com:53093/crowdy" //place the URI of your mongo database here.
     },
     internationalshowtimes:{
-        key: "4UY4hz5C8xx8xq3MofvSyLT9rvMP2FqD"
+        key: "YGKevY9psgmImaMhv4YZGoZoXYo8KKwF"
     },
     gainesville : {
       "id":"22777",

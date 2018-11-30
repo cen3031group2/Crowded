@@ -10,6 +10,7 @@ var crowdy = require('../controllers/crowdyController'),
 router.route('/public/')
     .post(crowdy.addPublicReport);
 
+router.route('/').post(crowdy.addReport);
 
 /*
   The ':' specifies a URL parameter.

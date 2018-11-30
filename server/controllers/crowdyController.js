@@ -1,4 +1,5 @@
 var Crowdy = require("../models/crowdyModel");
+var User = require("./userController");
 const Public = Crowdy.Public,
     Employee = Crowdy.Employee;
 
@@ -7,10 +8,26 @@ const expectedPackage = {
     theater: '',
     value: 0,
 }
+exports.addReport = async function(req, res){
+    user = req.user;
+    if(user){
+        if(user.employee_company){
+            //this.setEmployeeReport(req, res);
+        } else {
+            this.addPublicReport(req, res);
+        }
+        
+    } else{
+        //res.send("User is not logged in.");
+        res.end();
+        return;
+    }
+}
 
 exports.addPublicReport = async function(req,res){
     const movie_id = req.body.movie;
     const theater_id = req.body.theater;
+    User.addHistory(user, req.body.movie, req.body.theater);
     const value = req.body.value;
     const id = 't' + theater_id + 'm' + movie_id;
 
