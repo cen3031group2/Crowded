@@ -49,7 +49,6 @@
       <div align="center">
         <button class="btn" type="button" ng-click="getMoviesFromTheater(42490)">Regal Butler Town Center 14</button>
         <button class="btn" type="button" ng-click="getMoviesFromTheater(42506)">Regal Royal Park Stadium 16</button>
-        <button class="btn" type="button" ng-click="getMoviesFromTheater(42506)">Regal Celebration Pointe 10 & RPX Movie Theatre</button>
       </div>
 
         <div class="col-md-12">
@@ -63,9 +62,6 @@
                   Showtimes
                   <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span> <br>
                   Crowdy Public: {{x.crowdy}} <br>
-                  Rate crowdy: <button ng-click="addCrowdyMovieReport(0, x.id, x.theater)">0</button> <button ng-click="addCrowdyMovieReport(1, x.id, x.theater)">1</button>
-                  <button ng-click="addCrowdyMovieReport(2, x.id, x.theater)">2</button>
-                  <button ng-click="addCrowdyMovieReport(3, x.id, x.theater)">3</button>
                 </td>
               </tr>
           </table>
@@ -97,6 +93,7 @@
                         $("#history").text('History: ' + data.history);
                     }
                 };
+                }
             });
         });
     </script>
