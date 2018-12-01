@@ -6,6 +6,8 @@ var userSchema = new Schema({
     password: String,
     genre: [],
     employee_company: String
+}, {
+  usePushEach: true
 });
 
 var User = mongoose.model("User", userSchema);
