@@ -10,11 +10,11 @@ app.run(function ($rootScope) {
 });
 
 app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
-
     $scope.movies = undefined;
     $scope.codec = undefined;
     $scope.verify = "hello"
     $scope.theaterId = 42490;
+
     //$scope.loading = undefined;
 
     // const movieFormat = {
@@ -52,7 +52,7 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
       $http.post('/api/crowdy/', data);
     }
 
-    
+
 
     $scope.getMoviesFromTheater = async function (theater_id){
         if (theater_id == null || !theater_id) {
@@ -107,17 +107,38 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
 }]);
 
 
-app.controller('UserController', ['$scope', '$http','$cookies', function($scope, $http, $cookies){
+app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', function($scope, $http, $cookie, UserMethods){
+  $scope.userMethods = UserMethods;
+
   $scope.getUser = function(){
     console.log("starting user request");
     $http.get('/api/user/').then(response => {
       $scope.user = response.data;
     });
   }
+
+  $scope.genres = ["Animation", "Fantasy", "Adventure", "Family", "Drama", "Music"];
+  $scope.selectedValue = undefined;
+
+  $scope.showSelectValue = function (mySelect) {
+    $scope.selectedValue = mySelect;
+  }
+
+  $scope.addSelectedGenre = function () {
+    console.log($scope.selectedValue);
+    const payload = {
+      genre: $scope.selectedValue
+    };
+    //TODO :: Not sure if correct
+    $http.post('/api/user/genre/set',  payload).then(function(response){
+      console.log(response);
+    });
+  }
+
   // Either pass in user to the function to check or alter this function
   // expected format for user to check {username: '', password: ''};
   $scope.checkPassword = function(userToCheck){
-    
+
     $http.post('/login', userToCheck).then(response => {
       window.location.replace(response.data);
     });
@@ -135,3 +156,44 @@ app.controller('UserController', ['$scope', '$http','$cookies', function($scope,
     $http.post('/api/user/save', userToSave); // saves updates to user.
   }
 }]);
+
+app.factory('UserMethods', function($http) {
+    var methods = {
+        getGenres: function(user){
+            return $http.post('../api/user/genre/get', user);
+        },
+        setGenres: function(user, genres){
+            const body = {
+                username: user.username,
+                genres: genres
+            };
+            return $http.post('../api/user/genre/set', body);
+        },
+
+        setHistory: function(user, history){
+            const body = {
+                username: user.username,
+                history: history
+            };
+            return $http.post('../api/user/history/set', body);
+        },
+        // getHistory: function(user, history){
+        //     return $http.post('../api/user/history/get', user);
+        // },
+
+        checkPassword: function(user){
+            return $http.post('http://localhost:8080/api/user/password/check', user);
+        },
+        setPassword: function(user){
+            return $http.post('http://localhost:8080/api/user/password/set', user);
+        },
+        getCompany: function(user){
+            return $http.post('../api/user/company/get')
+        },
+        createUser: function(user){
+            return $http.post('http://localhost:8080/api/user/create', user);
+        }
+    };
+
+    return methods;
+  });
