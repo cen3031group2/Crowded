@@ -33,13 +33,21 @@
         <!-- user profile section -->
         <div class="up"><!--User Profile-->  </div>
         <div ng-controller="UserController">
-            <span id="username"></span>
-            <span id="genres"></span>
-            <span id="history"></span>
+            <span id="username"></span><br>
+            <span id="genres"></span><br>
+            <span id="history"></span><br>
+        </div>
+
+        <div ng-controller="UserController" id="genreAdd" style="display:none">
+          <p>Select a Genre to Add to Your Preferences</p>
+          <select ng-model="mySelect" ng-change="showSelectValue(mySelect)"  >
+            <option ng-repeat="x in genres">{{x}}</option>
+          </select>
+          <button ng-click="addSelectedGenre()">Add to Genres</button>
         </div>
 
         <!-- dropdown -->
-        <div class="dropdown" align="center">
+        <div class="dropdown" align="center" id="accountInfo" style="display:none">
             <button class="dropbtn">Change Account Info</button>
             <div class="dropdown-content">
                 <a href="change_email.html">Change Email</a>
@@ -49,12 +57,26 @@
             </div>
         </div>
 
-      <div ng-controller="UserController">
-        <p>Select a Genre to Add to Your Preferences</p>
-        <select ng-model="mySelect" ng-change="showSelectValue(mySelect)"  >
-          <option ng-repeat="x in genres">{{x}}</option>
-        </select>
-        <button ng-click="addSelectedGenre()">Add to Genres</button>
+        <div id="loginToView"  align="center">
+          <h1>Please Login To View</h1>
+        </div>
+
+        <div class="col-md-6" ng-controller="UserController" id="recMovies" style="display:none">
+          <h2 align="center">Recommended Movies</h2>
+          <div class="tableWrapper">
+            <table class="table table-striped table-hover">
+              <tr ng-repeat="x in recommendedMovies | filter:codec">
+                  <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
+                  <td><b>{{x.title}}</b><br>
+                  <em ng-repeat="genre in x.genres">{{genre}}, </em><br>
+                  <b>imbd rating {{x.ratings.imdb.value}}</b><br>
+                  Showtimes
+                  <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span> <br>
+                  Crowdy Public: {{x.crowdy}}
+                </td>
+              </tr>
+          </table>
+        </div>
       </div>
 
     </scroll-container>
@@ -70,6 +92,7 @@
                 // data is what will be sent back once the request is done
                 // look up await and promises if you want the data to be accessed outside of this function.
                 if(data){
+                  console.log(data);
                     $("#loginButton").text('Logout');
                     $("#loginButton").attr("href", "/logout");
                     if(data.username){
@@ -81,6 +104,10 @@
                     if(data.history){
                         $("#history").text('History: ' + data.history);
                     }
+                    document.getElementById("genreAdd").style.display = "block";
+                    document.getElementById("accountInfo").style.display = "block";
+                    document.getElementById("recMovies").style.display = "block";
+                    document.getElementById("loginToView").style.display = "none";
                 };
             });
         });

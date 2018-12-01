@@ -109,11 +109,19 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
 
 app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', function($scope, $http, $cookie, UserMethods){
   $scope.userMethods = UserMethods;
+  $scope.recommendedMovies = undefined;
+  $scope.user = undefined;
+
+  //Get user on document load
+  angular.element(document).ready(function () {
+    $scope.getUser();
+  });
 
   $scope.getUser = function(){
     console.log("starting user request");
     $http.get('/api/user/').then(response => {
       $scope.user = response.data;
+      $scope.showRecommendedMoviesBasedOnGenre();
     });
   }
 
@@ -125,15 +133,24 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
   }
 
   $scope.addSelectedGenre = function () {
-    console.log($scope.selectedValue);
-    //TODO :: Not sure if correct
-    var user = $.get('/api/user', function(data){
-        return data;
+    console.log($scope.user);
+    const payload = {
+      genre: $scope.selectedValue
+    };
+    $http.post('/api/user/genre/set',  payload).then(function(response){
+      console.log(response);
     });
-    console.log(user);
-    // POST 404 NOT FOUnD
-    $scope.userMethods.setGenres(user, $scope.selectedValue);
   }
+
+  $scope.showRecommendedMoviesBasedOnGenre = function () {
+    if ($scope.user) {
+      $http.get('/api/movie/getAllMoviesFromTheater/' + 42490).then(function(response){
+        $scope.recommendedMovies = response.data;
+      });
+    }
+  }
+
+
   // Either pass in user to the function to check or alter this function
   // expected format for user to check {username: '', password: ''};
   $scope.checkPassword = function(userToCheck){
@@ -159,14 +176,14 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
 app.factory('UserMethods', function($http) {
     var methods = {
         getGenres: function(user){
-            return $http.post('../api/genre/get', user);
+            return $http.post('../api/user/genre/get', user);
         },
         setGenres: function(user, genres){
             const body = {
                 username: user.username,
                 genres: genres
             };
-            return $http.post('../api/genre/set', body);
+            return $http.post('../api/user/genre/set', body);
         },
 
         setHistory: function(user, history){
@@ -176,9 +193,9 @@ app.factory('UserMethods', function($http) {
             };
             return $http.post('../api/user/history/set', body);
         },
-        getHistory: function(user, history){
-            return $http.post('../api/user/history/get', user);
-        },
+        // getHistory: function(user, history){
+        //     return $http.post('../api/user/history/get', user);
+        // },
 
         checkPassword: function(user){
             return $http.post('http://localhost:8080/api/user/password/check', user);

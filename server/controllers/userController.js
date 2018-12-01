@@ -14,13 +14,38 @@ exports.getUser = async function(req, res){
 
 exports.getUserByName = async function(req, res){
     const query = {username: req.username};
-    
+
     console.log(req.username);
     var user = await User.findOne(query).exec();
     if(user){
         user.password = '';
     }
     res.json(user);
+};
+
+exports.setGenre = async function(req, res){
+  var user = req.user;
+  const genre = req.body.genre;
+  console.log(req.body);
+  console.log("Adding genre: " + genre + " to user: " + user.username);
+    const query = {username: user.username};
+
+    var newUser = await User.findById(user._id).exec();
+    console.log(newUser);
+    if(newUser){
+      if(!newUser.genre){
+        newUser.genre = [];
+      }
+      console.log(genre);
+        newUser.genre.push(genre);
+        newUser.save(function(err){
+          console.log("Mongoose save err:" + err);
+        });
+        req.login(newUser, function(err){
+          console.log("Passport login err:" + err);
+        })
+    }
+    res.json(newUser);
 };
 
 exports.createUser = async function(req, res){
@@ -37,6 +62,7 @@ exports.createUser = async function(req, res){
         user.password = req.body.password;
         const website = user.username.split("@")[1];
         const website_name = website.split(".")[0];
+        console.log(website_name);
         if (website_name in config.companies) {
             user.employee_company = website_name;
         } else {

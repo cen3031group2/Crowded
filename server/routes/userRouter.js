@@ -12,6 +12,7 @@ router.route('/save').post(user.saveUser);
 router.route('/:username').get(user.getUserByName);
 router.route('/').get(user.getUser);
 
+router.route('/genre/set').post(user.setGenre);
 
 router.param('username', user.toUsername);
 module.exports = router;
