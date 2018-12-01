@@ -48,6 +48,31 @@ exports.setGenre = async function(req, res){
     res.json(newUser);
 };
 
+
+//TODO -- save when user clicks
+exports.setHistory = async function(req, res){
+  var user = req.user;
+  const history = req.body.genre;
+  const query = {username: user.username};
+  var newUser = await User.findById(user._id).exec();
+  console.log(newUser);
+
+  if(newUser){
+    if(!newUser.history){
+      newUser.history = [];
+    }
+    console.log(history);
+    newUser.genre.push(history);
+    newUser.save(function(err){
+      console.log("Mongoose save err:" + err);
+    });
+    req.login(newUser, function(err){
+      console.log("Passport login err:" + err);
+    })
+  }
+  res.json(newUser);
+};
+
 exports.createUser = async function(req, res){
     const query = {username: req.body.username};
     const result = await User.findOne(query);
@@ -83,9 +108,9 @@ exports.saveUser = function(req, res){
     res.end();
 }
 
-exports.addHistory = function(user, movie, theater){
-    console.log("adding history");
-}
+// exports.addHistory = function(user, movie, theater){
+//     console.log("adding history");
+// }
 
 exports.toUsername = function(req, res, next, username){
     req.username = username;

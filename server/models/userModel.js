@@ -5,7 +5,8 @@ var userSchema = new Schema({
     username: String,
     password: String,
     genre: [],
-    employee_company: String
+    employee_company: String,
+    history: []
 }, {
   usePushEach: true
 });
