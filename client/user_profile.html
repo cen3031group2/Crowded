@@ -61,6 +61,24 @@
           <h1>Please Login To View</h1>
         </div>
 
+        <div class="col-md-6" ng-controller="UserController" id="recMovies" style="display:none">
+          <h2 align="center">Recommended Movies</h2>
+          <div class="tableWrapper">
+            <table class="table table-striped table-hover">
+              <tr ng-repeat="x in recommendedMovies | filter:codec">
+                  <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
+                  <td><b>{{x.title}}</b><br>
+                  <em ng-repeat="genre in x.genres">{{genre}}, </em><br>
+                  <b>imbd rating {{x.ratings.imdb.value}}</b><br>
+                  Showtimes
+                  <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span> <br>
+                  Crowdy Public: {{x.crowdy}}
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+
     </scroll-container>
 
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
@@ -88,6 +106,7 @@
                     }
                     document.getElementById("genreAdd").style.display = "block";
                     document.getElementById("accountInfo").style.display = "block";
+                    document.getElementById("recMovies").style.display = "block";
                     document.getElementById("loginToView").style.display = "none";
                 };
             });
