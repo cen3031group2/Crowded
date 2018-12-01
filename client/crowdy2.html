@@ -63,9 +63,13 @@
                   Showtimes
                   <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span> <br>
                   Crowdy Public: {{x.crowdy}} <br>
-                  Rate crowdy: <button ng-click="addCrowdyMovieReport(0, x.id, x.theater)">0</button> <button ng-click="addCrowdyMovieReport(1, x.id, x.theater)">1</button>
-                  <button ng-click="addCrowdyMovieReport(2, x.id, x.theater)">2</button>
-                  <button ng-click="addCrowdyMovieReport(3, x.id, x.theater)">3</button>
+                  <div id="crowdyRateButtons" style="display: none">
+                    Rate crowdy:
+                    <button ng-click="addCrowdyMovieReport(0, x.id, x.theater)">0</button>
+                    <button ng-click="addCrowdyMovieReport(1, x.id, x.theater)">1</button>
+                    <button ng-click="addCrowdyMovieReport(2, x.id, x.theater)">2</button>
+                    <button ng-click="addCrowdyMovieReport(3, x.id, x.theater)">3</button>
+                  </div>
                 </td>
               </tr>
           </table>
@@ -85,6 +89,8 @@
                 // data is what will be sent back once the request is done
                 // look up await and promises if you want the data to be accessed outside of this function.
                 if(data){
+                    // $(".crowdyRateButtons").show();
+                    // document.getElementById("crowdyRateButtons").style.display = "block";
                     $("#loginButton").text('Logout');
                     $("#loginButton").attr("href", "/logout");
                     if(data.username){
@@ -96,9 +102,11 @@
                     if(data.history){
                         $("#history").text('History: ' + data.history);
                     }
-                };
+                }
             });
         });
+
+        document.getElementById("crowdyRateButtons").style.display = "block";
     </script>
   </body>
 </html>
