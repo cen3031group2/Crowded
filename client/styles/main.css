@@ -6,7 +6,7 @@
   float: right;
   margin-right: 30px;
   color: white;
-  text-decoration: none; 
+  text-decoration: none;
   /* width: 270px; */
 }
 
@@ -67,7 +67,7 @@ body {
 }
 
 /* Crowdy image */
-img {
+#crowdyLogoCorner {
   display: flex;
   width: 130px;
   height: 120px;
@@ -102,12 +102,12 @@ img {
   background-color: black;
 }
 .leftNavigation li input{
-  margin-top: 7px; 
+  margin-top: 7px;
   margin-left: 5px;
   color: white;
   /* width: 260px; */
   width: 260px;
-  height: 47px; 
+  height: 47px;
 }
 .details {
   margin-top: 88%;
