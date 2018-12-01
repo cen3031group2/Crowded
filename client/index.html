@@ -35,7 +35,7 @@
 
       <div class="details">
         <div class="detailInfo" ng-bind-html="theaters" ng-repeat="x in theaters">
-          <p>------------------------------------------------------</p>
+          <hr>
           <p>{{x.name}}</p>
           <p>Public Crowdy Level: {{x.crowdy.public}}</p>
           <p>Employee Crowdy Level: {{x.crowdy.employee}}</p>
@@ -50,7 +50,6 @@
               <button ng-click="setTheaterCrowdy(x.crowdy.id, 3)">3</button>
             </p>
           </div>
-          <!-- <p>------------------------------------------------------</p> -->
           <br>
         </div>
       </div>
