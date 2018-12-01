@@ -15,7 +15,6 @@
 
 .text-center {
   text-align: center;
-
 }
 
 /* tabs */
@@ -66,7 +65,7 @@ body {
 }
 
 /* Crowdy image */
-img {
+#logo {
   display: flex;
   width: 130px;
   height: 120px;
