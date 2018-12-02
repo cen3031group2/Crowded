@@ -23,7 +23,7 @@
   </div>
 
 <!-- map element -->
-  <div id="map"></div>
+  
   <div ng-controller="TheaterController" ng-init="getAllTheaters()">
     <div class="leftNavigation" align="center">
 
@@ -34,7 +34,7 @@
           <button onclick="resetMap();">Reset Map</button>
       </div>
  
-
+<!-- 
       <div class="details">
         <div class="detailInfo" ng-bind-html="theaters" ng-repeat="x in theaters">
           <hr>
@@ -53,11 +53,12 @@
           </div>
           <br>
         </div>
-      </div>
+      </div> -->
 
       <!-- Add a scroll for theaters -->
     </div>
   </div>
+  <div id="map"></div>
 <script>
 
       var map;

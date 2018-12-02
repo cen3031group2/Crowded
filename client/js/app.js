@@ -168,8 +168,24 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
 
   $scope.showRecommendedMoviesBasedOnGenre = function () {
     if ($scope.user) {
+      var abort = false;
       $http.get('/api/movie/getAllMoviesFromTheater/' + 42490).then(function(response){
-        $scope.recommendedMovies = response.data;
+        //For each movie
+        response.data.forEach (function (movie) {
+          abort = false;
+            //For each genre in the movie
+            movie.genres.forEach (function (genre) {
+              //Select the ones that match the user
+              if (abort == false) {
+                if ($scope.userGenres.includes(genre)) {
+                  console.log("inside loop");
+                  $scope.recommendedMovies.push(movie);
+                  abort = true;
+                }
+              }
+            });
+        });
+        // $scope.recommendedMovies = response.data;
       });
     }
   }
