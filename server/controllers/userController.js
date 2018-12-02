@@ -1,5 +1,8 @@
 var User = require('../models/userModel'),
     config = require('../config/config');
+const Movie = require('./movieController'),
+    Theater = require('./theaterController');
+var Promise = require('bluebird');
 
 
 exports.getUser = async function(req, res){
@@ -108,9 +111,32 @@ exports.saveUser = function(req, res){
     res.end();
 }
 
-// exports.addHistory = function(user, movie, theater){
-//     console.log("adding history");
-// }
+exports.addHistory = async function(user, movie_id, theater_id){
+    var newUser = User.findById(user._id);
+    var theater = Theater.getTheaterById(theater_id);
+    var movies = Movie.getMovieFromId(movie_id);
+    var result = await Promise.all([theater, movies, newUser]);
+    console.log(result);
+    var newUser = result[2];
+    var movie = result[1].movies[0];;
+    var theater = result[0];
+    const payload = {
+        title: movie.title,
+        theater: theater.name,
+        poster_image_thumbnail: movie.poster_image_thumbnail,
+        rating: movie.rating,
+        genre: movie.genre,
+    };
+    if(newUser.history){
+        newUser.history.push(payload);
+    } else{
+        newUser.history = []
+        newUser.history.push(payload);
+    }
+    console.log(newUser);
+    newUser.save();
+
+}
 
 exports.toUsername = function(req, res, next, username){
     req.username = username;

@@ -14,7 +14,7 @@ exports.addReport = async function(req, res){
         if(user.employee_company){
             //this.setEmployeeReport(req, res);
         } else {
-            this.addPublicReport(req, res);
+            exports.addPublicReport(req, res);
         }
         
     } else{

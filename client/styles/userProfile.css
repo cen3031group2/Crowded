@@ -59,13 +59,21 @@ scroll-container {
   font-size: 16px;
   width: 350px;
   align-content: right;
-} .dropdown {
+}
+
+.container-parent {
+  position: relative;
   align-content: right;
-  margin-top: 50px;
-  margin-bottom: 200px;
+}
+.dropdown {
+  align-content: right;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  position:absolute;
 }
   .dropdown-content {
     display: none;
+
     background-color: #f1f1f1;
     width: 350px;
     box-shadow: 0px 8px 16px 0px rgb(212, 5, 57);

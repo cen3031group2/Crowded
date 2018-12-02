@@ -34,6 +34,19 @@ var movieOptions ={
     }
 };
 
+var movieOptionsSingle ={
+    uri: 'https://api.internationalshowtimes.com/v4/movies/',
+    method: 'GET',
+    json: true,
+    headers: {
+        "X-API-Key": config.internationalshowtimes.key
+    },
+    qs: {
+        movie_id:0,
+        fields: "id,title,poster_image_thumbnail,genres,ratings",
+        limit: 1
+    }
+};
 var showtimeOptions = {
     uri: 'https://api.internationalshowtimes.com/v4/showtimes/',
     method: 'GET',
@@ -48,6 +61,13 @@ var showtimeOptions = {
         limit:5
     }
 };
+
+exports.getMovieFromId = async function(id){
+    movieOptionsSingle.qs.movie_id = id;
+    return rp(movieOptionsSingle).catch(function(err){
+        console.log(err);
+    });
+}
 
 exports.getAllMoviesFromTheater = async function(req,res){
     var theater_id = req.id;
