@@ -63,7 +63,7 @@
                   Showtimes
                   <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span> <br>
                   Crowdy Public: {{x.crowdy}} <br>
-                  <div id="crowdyRateButtons" style="display: none">
+                  <div id="crowdyRateButtons" style="display: none", ng-init="setVisibleIfUser()">
                     Rate crowdy:
                     <button ng-click="addCrowdyMovieReport(0, x.id, x.theater)">0</button>
                     <button ng-click="addCrowdyMovieReport(1, x.id, x.theater)">1</button>
@@ -93,16 +93,7 @@
                     // document.getElementById("crowdyRateButtons").style.display = "block";
                     $("#loginButton").text('Logout');
                     $("#loginButton").attr("href", "/logout");
-                    if(data.username){
-                        $("#username").text('Username: ' + data.username);
-                    }
-                    if(data.genre){
-                        $("#genres").text('Genres: ' + data.genre);
-                    }
-                    if(data.history){
-                        $("#history").text('History: ' + data.history);
-                    }
-                }
+                };
             });
         });
 
