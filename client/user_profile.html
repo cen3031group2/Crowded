@@ -32,13 +32,13 @@
 
         <!-- user profile section -->
         <div class="up"><!--User Profile-->  </div>
-        <div ng-controller="UserController">
+        <div ng-controller="UserController" align="right">
             <span id="username"></span><br>
             <span id="genres"></span><br>
             <span id="history"></span><br>
         </div>
 
-        <div ng-controller="UserController" id="genreAdd" style="display:none">
+        <div ng-controller="UserController" id="genreAdd" style="display:none" align="right">
           <p>Select a Genre to Add to Your Preferences</p>
           <select ng-model="mySelect" ng-change="showSelectValue(mySelect)"  >
             <option ng-repeat="x in genres">{{x}}</option>
@@ -47,19 +47,38 @@
         </div>
 
         <!-- dropdown -->
-        <div class="dropdown" align="center" id="accountInfo" style="display:none">
-            <button class="dropbtn">Change Account Info</button>
-            <div class="dropdown-content">
-                <a href="change_email.html">Change Email</a>
-                <a href="change_username.html">Change Username</a>
-                <a href="change_password.html">Change Password</a>
-                <a href="change_profile_photo.html">Change Profile Photo</a>
+        <div class="container-parent">
+          <div class="dropdown" id="accountInfo" style="display:none; margin-top:-150px;">
+              <div class="detect">
+              <button class="dropbtn">Change Account Info</button>
+              <div align="center" class="dropdown-content">
+                  <a href="change_email.html">Change Email</a>
+                  <a href="change_username.html">Change Username</a>
+                  <a href="change_password.html">Change Password</a>
+                  <a href="change_profile_photo.html">Change Profile Photo</a>
+              </div>
             </div>
+          </div>
         </div>
 
         <div id="loginToView"  align="center">
           <h1>Please Login To View</h1>
         </div>
+
+        <div class="col-md-6" ng-controller="UserController" id="recMovies" style="display:none; margin-top:100px;">
+          <h2 align="center">Recommended Movies</h2>
+          <div class="tableWrapper">
+            <table class="table table-striped table-hover">
+              <tr ng-repeat="x in recommendedMovies | filter:codec">
+                  <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
+                  <td><b>{{x.title}}</b><br>
+                  <em ng-repeat="genre in x.genres">{{genre}}, </em><br>
+                  <b>imbd rating {{x.ratings.imdb.value}}</b><br>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
 
     </scroll-container>
 
@@ -88,6 +107,7 @@
                     }
                     document.getElementById("genreAdd").style.display = "block";
                     document.getElementById("accountInfo").style.display = "block";
+                    document.getElementById("recMovies").style.display = "block";
                     document.getElementById("loginToView").style.display = "none";
                 };
             });
