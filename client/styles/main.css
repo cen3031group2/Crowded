@@ -6,7 +6,7 @@
   float: right;
   margin-right: 30px;
   color: white;
-  text-decoration: none;
+  text-decoration: none; 
   /* width: 270px; */
 }
 
@@ -67,7 +67,7 @@ body {
 }
 
 /* Crowdy image */
-#crowdyLogoCorner {
+img {
   display: flex;
   width: 130px;
   height: 120px;
@@ -94,29 +94,25 @@ body {
 
 .leftNavigation {
   list-style-type: none;
-  /* height: 100%; */
   width: 20%;
   float: right;
-  /* margin-top: -657px; */
   margin-top: -48.8%;
   background-color: black;
 }
-.leftNavigation li input{
-  margin-top: 7px;
-  margin-left: 5px;
+.navbar button {
+  background-color: rgb(0, 154, 201);
   color: white;
-  /* width: 260px; */
-  width: 260px;
-  height: 47px;
+  border: none;
+  border-radius: 5px;
+  width: 90%;
+  height: 50px;
+  margin: 5px;
 }
-.details {
-  margin-top: 88%;
-  height: 100%;
-}
+
 .detailInfo{
   text-align: center;
   color:white;
-  margin-top: -5%;
+  margin-top: -8%;
 }
 
 
@@ -154,6 +150,7 @@ body {
   background-color: #FBA20C;
   width: 270px;
   margin-right: -20px;
+  
 }
 
 /* end top navigation bar */
