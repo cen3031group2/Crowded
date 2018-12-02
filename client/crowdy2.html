@@ -60,7 +60,7 @@
                   <!-- Movie details -->
                   <td><h3>{{x.title}}</h3>
                   <em ng-repeat="genre in x.genres">{{genre}}, </em><br>
-                  <b>imbd rating {{x.ratings.imdb.value}}</b><br>
+                  <b>imdb rating {{x.ratings.imdb.value}}</b><br>
                   Showtimes
                   <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span> <br>
                   Crowdy Public: {{x.crowdy}} <br>
