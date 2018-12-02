@@ -6,7 +6,7 @@
   float: right;
   margin-right: 30px;
   color: white;
-  text-decoration: none; 
+  text-decoration: none;
   /* width: 270px; */
 }
 
@@ -67,7 +67,7 @@ body {
 }
 
 /* Crowdy image */
-img {
+#crowdyLogo {
   display: flex;
   width: 130px;
   height: 120px;
@@ -111,12 +111,13 @@ img {
   width: 90%;
   height: 50px;
   margin: 5px;
+  /* padding: 5px; */
 }
 
 .detailInfo{
   text-align: center;
   color:white;
-  margin-top: -8%;
+  /* margin-top: -8%; */
 }
 
 
@@ -154,7 +155,7 @@ img {
   background-color: #FBA20C;
   width: 270px;
   margin-right: -20px;
-  
+
 }
 
 /* end top navigation bar */

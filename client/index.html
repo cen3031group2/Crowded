@@ -14,7 +14,7 @@
   <!-- top navigation bar -->
   <div class="topNavigation">
       <ul class>
-          <li><img src="images\WHITE.png" alt="Crowdy">....................</li>
+          <li><img src="images\WHITE.png" id = "crowdyLogo" alt="Crowdy">....................</li>
           <li><a href="crowdy2.html">Movies</a></li>
           <li><a href="#index.html">Theaters</a></li>
           <li><a href="user_profile.html">User Profile</a></li>
@@ -23,7 +23,7 @@
   </div>
 
 <!-- map element -->
-  
+
   <div ng-controller="TheaterController" ng-init="getAllTheaters()">
     <div class="leftNavigation" align="center">
 
@@ -33,19 +33,19 @@
           <button onclick="crowdyCinema();">Show Most Crowdiest Cinema</button>
           <button onclick="resetMap();">Reset Map</button>
       </div>
- 
-<!-- 
+
+
       <div class="details">
         <div class="detailInfo" ng-bind-html="theaters" ng-repeat="x in theaters">
           <hr>
           <p>{{x.name}}</p>
           <p>Public Crowdy Level: {{x.crowdy.public}}</p>
           <p>Employee Crowdy Level: {{x.crowdy.employee}}</p>
-          
+
           <div class="employeeCrowdy" style="display: none">
             <p>
-              Rate crowdy: 
-              <button ng-click="setTheaterCrowdy(x.crowdy.id, 0)">0</button> 
+              Rate crowdy:
+              <button ng-click="setTheaterCrowdy(x.crowdy.id, 0)">0</button>
               <button ng-click="setTheaterCrowdy(x.crowdy.id, 1)">1</button>
               <button ng-click="setTheaterCrowdyx.crowdy.id, 2)">2</button>
               <button ng-click="setTheaterCrowdy(x.crowdy.id, 3)">3</button>
@@ -53,7 +53,7 @@
           </div>
           <br>
         </div>
-      </div> -->
+      </div>
 
       <!-- Add a scroll for theaters -->
     </div>
