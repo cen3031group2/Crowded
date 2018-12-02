@@ -21,6 +21,10 @@ exports.getAllTheaters = async function(req, res){
     res.json(newTheaters);
 }
 
+exports.getTheaterById = async function(id){
+    return Theater.findOne({id: id}).exec();
+}
+
 exports.getTheater = async function(req, res){
     var id = req.id;
     var query = {

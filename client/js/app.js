@@ -12,7 +12,8 @@ app.run(function ($rootScope) {
 app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
     $scope.movies = undefined;
     $scope.codec = undefined;
-    $scope.verify = "hello"
+    $scope.verify = "hello";
+    $scope.isValidUser = false;
     $scope.theaterId = 42490;
 
     //$scope.loading = undefined;
@@ -52,7 +53,18 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
       $http.post('/api/crowdy/', data);
     }
 
-
+    $scope.setVisibleIfUser = function(){
+      if($scope.isValidUser){
+        $(".crowdy").show();
+      } else{
+        $http.get('/api/user').then(function(response){
+          if(response.data){
+            $(".crowdy").show();
+            $scope.isValidUser = true;
+          }
+        });
+      }
+    }
 
     $scope.getMoviesFromTheater = async function (theater_id){
         if (theater_id == null || !theater_id) {
@@ -73,7 +85,7 @@ app.controller('MovieController', ['$scope', '$http', function ($scope, $http) {
 
 app.controller('TheaterController', ['$scope', '$http', function ($scope, $http) {
   $scope.theaters = undefined;
-  $scope.userIsValid = undefined;
+  $scope.isValidUser = undefined;
   // const theaterFormat = {
   //   id: 0,
   //   crowdy: {
@@ -103,6 +115,18 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
       theater: theater_id
     }
     $http.post('/api/crowdy/theater');
+  }
+
+  $scope.setVisibleIfUser = function(){
+    if($scope.isValidUser){
+      $(".employeeCrowdy").show();
+    } else{
+      $http.get('/api/user').then(function(response){
+        if(response.data){
+          $(".employeeCrowdy").show();
+        }
+      });
+    }
   }
 }]);
 

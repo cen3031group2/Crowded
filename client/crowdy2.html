@@ -63,9 +63,10 @@
                   Showtimes
                   <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span> <br>
                   Crowdy Public: {{x.crowdy}} <br>
-                  Rate crowdy: <button ng-click="addCrowdyMovieReport(0, x.id, x.theater)">0</button> <button ng-click="addCrowdyMovieReport(1, x.id, x.theater)">1</button>
-                  <button ng-click="addCrowdyMovieReport(2, x.id, x.theater)">2</button>
-                  <button ng-click="addCrowdyMovieReport(3, x.id, x.theater)">3</button>
+                  Rate crowdy: <button class="crowdy" style="display: none;" ng-click="addCrowdyMovieReport(0, x.id, x.theater)">0</button> 
+                  <button style="display: none;" class="crowdy" ng-click="addCrowdyMovieReport(1, x.id, x.theater)">1</button>
+                  <button style="display: none;" class="crowdy" ng-click="addCrowdyMovieReport(2, x.id, x.theater)">2</button>
+                  <button style="display: none;" class="crowdy" ng-click="addCrowdyMovieReport(3, x.id, x.theater)" ng-init="setVisibleIfUser()">3</button>
                 </td>
               </tr>
           </table>
@@ -87,15 +88,6 @@
                 if(data){
                     $("#loginButton").text('Logout');
                     $("#loginButton").attr("href", "/logout");
-                    if(data.username){
-                        $("#username").text('Username: ' + data.username);
-                    }
-                    if(data.genre){
-                        $("#genres").text('Genres: ' + data.genre);
-                    }
-                    if(data.history){
-                        $("#history").text('History: ' + data.history);
-                    }
                 };
             });
         });
