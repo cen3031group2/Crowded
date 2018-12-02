@@ -133,8 +133,10 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
 
 app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', function($scope, $http, $cookie, UserMethods){
   $scope.userMethods = UserMethods;
-  $scope.recommendedMovies = undefined;
+  $scope.recommendedMovies = [];
+  $scope.userHistory = undefined;
   $scope.user = undefined;
+  $scope.userGenres = undefined;
 
   //Get user on document load
   angular.element(document).ready(function () {
@@ -145,6 +147,10 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
     console.log("starting user request");
     $http.get('/api/user/').then(response => {
       $scope.user = response.data;
+      $scope.userGenres = $scope.user.genre;
+      console.log($scope.userGenres == null);
+      $scope.userHistory = $scope.user.history;
+      // $scope.userHistory =
       $scope.showRecommendedMoviesBasedOnGenre();
     });
   }
@@ -157,12 +163,11 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
   }
 
   $scope.addSelectedGenre = function () {
-    console.log($scope.user);
     const payload = {
       genre: $scope.selectedValue
     };
     $http.post('/api/user/genre/set',  payload).then(function(response){
-      console.log(response);
+      console.log("User Genres" + response);
     });
   }
 
