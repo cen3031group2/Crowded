@@ -35,7 +35,7 @@
         <div ng-controller="UserController" align="right">
             <span id="username"></span><br>
             <span id="genres"></span><br>
-            <span id="history"></span><br>
+            <!-- <span id="history"></span><br> -->
         </div>
 
         <div ng-controller="UserController" id="genreAdd" style="display:none" align="right">
@@ -48,7 +48,7 @@
 
         <!-- dropdown -->
         <div class="container-parent">
-          <div class="dropdown" id="accountInfo" style="display:none; margin-top:-150px;">
+          <div class="dropdown" id="accountInfo" style="display:none; margin-top:-130px;">
               <div class="detect">
               <button class="dropbtn">Change Account Info</button>
               <div align="center" class="dropdown-content">
@@ -84,11 +84,10 @@
         <div class="tableWrapper">
           <table class="table table-striped table-hover">
             <tr ng-repeat="x in userHistory">
-                <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
-                <td><b>{{x.title}}</b><br>
+              <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
+              <td><b>{{x.title}}</b><br>
                 <td><b>{{x.theater}}</b><br>
-                <em ng-repeat="genre in x.genres">{{genre}}, </em><br>
-                <b>imbd rating {{x.rating.imbd.value}}</b><br>
+                <!-- <em ng-repeat="genre in x.genre">{{genre}}, </em><br> -->
               </td>
             </tr>
         </table>
@@ -117,9 +116,9 @@
                     if(data.genre){
                         $("#genres").text('Genres: ' + data.genre);
                     }
-                    if(data.history){
-                        $("#history").text('History: ' + data.history);
-                    }
+                    // if(data.history){
+                    //     $("#history").text('History: ' + data.history);
+                    // }
                     document.getElementById("genreAdd").style.display = "block";
                     document.getElementById("accountInfo").style.display = "block";
                     document.getElementById("recMovies").style.display = "block";

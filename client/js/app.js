@@ -148,8 +148,9 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
     $http.get('/api/user/').then(response => {
       $scope.user = response.data;
       $scope.userGenres = $scope.user.genre;
-      console.log($scope.userGenres == null);
       $scope.userHistory = $scope.user.history;
+
+      console.log($scope.userHistory);
       // $scope.userHistory =
       $scope.showRecommendedMoviesBasedOnGenre();
     });
@@ -167,7 +168,6 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
       genre: $scope.selectedValue
     };
     $http.post('/api/user/genre/set',  payload).then(function(response){
-      console.log("User Genres" + response);
     });
   }
 
@@ -183,7 +183,6 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
               //Select the ones that match the user
               if (abort == false) {
                 if ($scope.userGenres.includes(genre)) {
-                  console.log("inside loop");
                   $scope.recommendedMovies.push(movie);
                   abort = true;
                 }
