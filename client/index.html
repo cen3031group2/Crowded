@@ -14,16 +14,16 @@
   <!-- top navigation bar -->
   <div class="topNavigation">
       <ul class>
-          <li><img src="images\WHITE.png" alt="Crowdy">....................</li>
-          <li><a href="crowdy2.html">Movies</a></li>
+          <li><img src="images\WHITE.png" id = "crowdyLogo" alt="Crowdy">....................</li>
           <li><a href="#index.html">Theaters</a></li>
+          <li><a href="crowdy2.html">Movies</a></li>
           <li><a href="user_profile.html">User Profile</a></li>
           <li style="float:right"><a class="active" href="loginForm.html">Login</a></li>
         </ul>
   </div>
 
 <!-- map element -->
-  
+
   <div ng-controller="TheaterController" ng-init="getAllTheaters()">
     <div class="leftNavigation" align="center">
 
@@ -33,7 +33,7 @@
           <button onclick="crowdyCinema();">Show Most Crowdiest Cinema</button>
           <button onclick="resetMap();">Reset Map</button>
       </div>
- 
+
 
       <div class="details">
         <div class="detailInfo" ng-bind-html="theaters" ng-repeat="x in theaters">
@@ -41,11 +41,11 @@
           <p>{{x.name}}</p>
           <p>Public Crowdy Level: {{x.crowdy.public}}</p>
           <p>Employee Crowdy Level: {{x.crowdy.employee}}</p>
-          
+
           <div class="employeeCrowdy" style="display: none">
             <p>
-              Rate crowdy: 
-              <button ng-click="setTheaterCrowdy(x.crowdy.id, 0)">0</button> 
+              Rate crowdy:
+              <button ng-click="setTheaterCrowdy(x.crowdy.id, 0)">0</button>
               <button ng-click="setTheaterCrowdy(x.crowdy.id, 1)">1</button>
               <button ng-click="setTheaterCrowdyx.crowdy.id, 2)">2</button>
               <button ng-click="setTheaterCrowdy(x.crowdy.id, 3)">3</button>
@@ -81,8 +81,8 @@
         };
 
         var contentString1 =
-			'<div id="crowdyLevel"><img src="images/CrowdedLogos_Empty.png">' +
-			'</div>' +
+			// '<div id="crowdyLevel"><img src="images/CrowdedLogos_Empty.png">' +
+			// '</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 14</b></p>' +
             '<p>(844) 462-7342 ext 185<br>' +
@@ -92,8 +92,8 @@
             '</p>'+
             '</div>';
         var contentString2 =
-			'<div id="crowdyLevel"><img src="images/CrowdedLogos_NotCrowded.png">' +
-			'</div>' +
+			// '<div id="crowdyLevel"><img src="images/CrowdedLogos_NotCrowded.png">' +
+			// '</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 16</b></p>' +
             '<p style="float:right">(844) 462-7342 ext 1308<br>' +
@@ -103,8 +103,8 @@
             '</p>'+
             '</div>';
         var contentString3 =
-			'<div id="crowdyLevel"><img src="images/CrowdedLogos_VeryCrowded.png">' +
-			'</div>' +
+			// '<div id="crowdyLevel"><img src="images/CrowdedLogos_VeryCrowded.png">' +
+			// '</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 10</b></p>' +
             '<p>(352) 373-2880<br>' +

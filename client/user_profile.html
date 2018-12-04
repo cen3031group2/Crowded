@@ -15,27 +15,38 @@
             <div class="page-header">Crowdy</div>
         </h2>
 
-        <div class="profile">
+        <!-- <div class="profile">
             <img src="http://profilepicturesdp.com/wp-content/uploads/2018/06/generic-female-profile-picture-8.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid"/>
-        </div>
+        </div> -->
 
 
         <!-- top navigation bar -->
-        <div class="topNavigation">
+        <!-- <div class="topNavigation">
             <ul class>
                 <li><a href="crowdy2.html">Movies</a></li>
                 <li><a href="index.html">Theaters</a></li>
                 <li><a href="user_profile.html">User Profile</a></li>
                 <li style="float:right"><a id="loginButton" class="active" href="loginForm.html">Login</a></li>
               </ul>
-        </div>
+        </div> -->
+        <div class="topNavigation">
+          <ul class>
+              <li><img src="images\WHITE.png" id = "crowdyLogo" alt="Crowdy">....................</li>
+              <li><a href="index.html">Theaters</a></li>
+              <li><a href="crowdy2.html">Movies</a></li>
+              <li><a href="user_profile.html">User Profile</a></li>
+              <li style="float:right"><a class="active" href="loginForm.html">Login</a></li>
+            </ul>
+      </div>
+
+
 
         <!-- user profile section -->
         <div class="up"><!--User Profile-->  </div>
         <div ng-controller="UserController" align="right">
             <span id="username"></span><br>
             <span id="genres"></span><br>
-            <span id="history"></span><br>
+            <!-- <span id="history"></span><br> -->
         </div>
 
         <div ng-controller="UserController" id="genreAdd" style="display:none" align="right">
@@ -48,7 +59,7 @@
 
         <!-- dropdown -->
         <div class="container-parent">
-          <div class="dropdown" id="accountInfo" style="display:none; margin-top:-150px;">
+          <div class="dropdown" id="accountInfo" style="display:none; margin-top:-130px;">
               <div class="detect">
               <button class="dropbtn">Change Account Info</button>
               <div align="center" class="dropdown-content">
@@ -69,16 +80,30 @@
           <h2 align="center">Recommended Movies</h2>
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
-              <tr ng-repeat="x in recommendedMovies | filter:codec">
+              <tr ng-repeat="x in recommendedMovies">
                   <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
                   <td><b>{{x.title}}</b><br>
                   <em ng-repeat="genre in x.genres">{{genre}}, </em><br>
-                  <b>imbd rating {{x.ratings.imdb.value}}</b><br>
                 </td>
               </tr>
           </table>
         </div>
       </div>
+
+      <div class="col-md-6" ng-controller="UserController" id="userHistory" align="right" style="display:none; margin-top:100px;">
+        <h2 align="center">Your History</h2>
+        <div class="tableWrapper">
+          <table class="table table-striped table-hover">
+            <tr ng-repeat="x in userHistory">
+              <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
+              <td><b>{{x.title}}</b><br>
+                <td><b>{{x.theater}}</b><br>
+                <!-- <em ng-repeat="genre in x.genre">{{genre}}, </em><br> -->
+              </td>
+            </tr>
+        </table>
+      </div>
+    </div>
 
     </scroll-container>
 
@@ -102,12 +127,13 @@
                     if(data.genre){
                         $("#genres").text('Genres: ' + data.genre);
                     }
-                    if(data.history){
-                        $("#history").text('History: ' + data.history);
-                    }
+                    // if(data.history){
+                    //     $("#history").text('History: ' + data.history);
+                    // }
                     document.getElementById("genreAdd").style.display = "block";
                     document.getElementById("accountInfo").style.display = "block";
                     document.getElementById("recMovies").style.display = "block";
+                    document.getElementById("userHistory").style.display = "block";
                     document.getElementById("loginToView").style.display = "none";
                 };
             });
