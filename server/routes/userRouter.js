@@ -13,6 +13,7 @@ router.route('/:username').get(user.getUserByName);
 router.route('/').get(user.getUser);
 
 router.route('/genre/set').post(user.setGenre);
+router.route('/history/set').post(user.setHistory);
 
 router.param('username', user.toUsername);
 module.exports = router;

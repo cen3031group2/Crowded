@@ -6,7 +6,7 @@
   float: right;
   margin-right: 30px;
   color: white;
-  text-decoration: none; 
+  text-decoration: none;
   /* width: 270px; */
 }
 
@@ -67,7 +67,7 @@ body {
 }
 
 /* Crowdy image */
-img {
+#crowdyLogo {
   display: flex;
   width: 130px;
   height: 120px;
@@ -93,31 +93,33 @@ img {
 /* left navigation bar*/
 
 .leftNavigation {
-  list-style-type: none;
-  /* height: 100%; */
+  /* list-style-type: none; */
   width: 20%;
   float: right;
-  margin-top: -657px;
-  background-color: black;
-}
-.leftNavigation li input{
-  margin-top: 7px; 
-  margin-left: 5px;
-  color: white;
-  width: 260px;
-  height: 50px; 
-}
-.details {
-  margin-top: 230px;
   height: 100%;
+  z-index: 1;
+  margin-left: 80%;
+  margin-right: 0%;
+  background-color: black;
+  position: absolute;
 }
+.navbar button {
+  background-color: rgb(0, 154, 201);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 90%;
+  height: 50px;
+  margin: 5px;
+  /* padding: 5px; */
+}
+
 .detailInfo{
   text-align: center;
   color:white;
+  /* margin-top: -8%; */
 }
-.details p {
-  font-size: 15px;
-}
+
 
 
 /* top navigation bar */
@@ -128,7 +130,6 @@ img {
   padding: 0;
   overflow: hidden;
   background-color: rgb(0, 0, 0);
-  /* margin-top: 5px; */
 }
 
 .topNavigation li {
@@ -154,60 +155,9 @@ img {
   background-color: #FBA20C;
   width: 270px;
   margin-right: -20px;
-}
-/* top navigation bar */
 
-/* ------------------ */
-
-.dropdown1 .dropbtn {
-  font-size: 20px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 30px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
 }
 
-.topNavigation a:hover, .dropdown1:hover .dropbtn {
-  background-color: rgb(0, 154, 201);
-}
-
-.dropdown1-content {
-  display: none;
-  position: absolute;
-  background-color: #000000;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown1-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown1-content a:hover {
-  background-color: #ddd;
-}
-
-.dropdown1:hover .dropdown1-content {
-  display: block;
-}
-
-.dropbtn {
-  float: right;
-  margin-right: 30px;
-  font-size: 36px;
-}
-.white, .white a {
-  color: #fff;
-}
 /* end top navigation bar */
 
 
