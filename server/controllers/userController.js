@@ -208,21 +208,21 @@ exports.addHistory = async function(user, movie_id, theater_id){
     var movie = result[1].movie;
     console.log(movie);
     var theater = result[0];
-    // const payload = {
-    //     title: movie.title,
-    //     theater: theater.name,
-    //     poster_image_thumbnail: movie.poster_image_thumbnail,
-    //     rating: movie.rating,
-    //     genre: movie.genre,
-    // };
-    // if(newUser.history){
-    //     newUser.history.push(payload);
-    // } else{
-    //     newUser.history = []
-    //     newUser.history.push(payload);
-    // }
-    // console.log(newUser);
-    // newUser.save();
+    const payload = {
+      title: movie.title,
+         theater: theater.name,
+         poster_image_thumbnail: movie.poster_image_thumbnail,
+         rating: movie.rating,
+         genre: movie.genre,
+     };
+     if(newUser.history){
+         newUser.history.push(payload);
+     } else{
+         newUser.history = []
+         newUser.history.push(payload);
+     }
+     console.log(newUser);
+     newUser.save();
 }
 
 exports.toUsername = function(req, res, next, username){
