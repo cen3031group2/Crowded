@@ -27,7 +27,7 @@ exports.getUserByName = async function(req, res){
     res.json(user);
 };
 
-exports.setGenre = async function(req, res){
+exports.addGenre = async function(req, res){
   var user = req.user;
   const genre = req.body.genre;
   console.log(req.body);
@@ -51,6 +51,41 @@ exports.setGenre = async function(req, res){
     }
     res.json(newUser);
 };
+
+exports.removeGenre = async function(req, res){
+    var user = req.user;
+    const genre = req.body.genre;
+    console.log(req.body);
+    console.log("Removing genre: " + genre + " from user: " + user.username);
+      const query = {username: user.username};
+  
+      var newUser = await User.findById(user._id).exec();
+      console.log(newUser);
+      if(newUser){
+        if(!newUser.genre){
+          newUser.genre = [];
+        }
+        console.log(genre);
+        const index = newUser.genre.indexOf(genre);
+        if (index > -1) {
+            newUser.genre.splice(index, 1);
+            newUser.save(function(err){
+                if(err){
+                    console.log("Mongoose save err:" + err);
+                }
+            
+            }); 
+            req.login(newUser, function(err){
+                if(err){
+                    console.log("Passport login err:" + err);
+                }
+                
+            })
+          }
+        
+      }
+      res.json(newUser);
+  };
 
 
 //TODO -- save when user clicks

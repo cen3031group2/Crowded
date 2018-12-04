@@ -32,12 +32,14 @@
         <div class="topNavigation">
           <ul class>
               <div class="container-parent">
-                <li><img src="https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/WHITE.png" id = "crowdyLogo" alt="Crowdy"></li>
+                <a href = 'index.html'>
+                  <li><img src="https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/WHITE.PNG" id = "crowdyLogo" alt="Crowdy"></li>
+                </a>
               </div>
               <li><a href="index.html" style="margin-left:120px;">Theaters</a></li>
               <li><a href="crowdy2.html">Movies</a></li>
               <li><a href="user_profile.html">User Profile</a></li>
-              <li style="float:right"><a class="active" href="loginForm.html">Login</a></li>
+              <li style="float:right"><a class="active" id="loginButton" href="loginForm.html">Login</a></li>
             </ul>
       </div>
 
@@ -53,17 +55,18 @@
           <h1>User Profile</h1>
         </div>
 
-        <div ng-controller="UserController" align="right">
+        <div ng-controller="UserController" align="center">
             <span id="username"></span><br>
             <span id="genres"></span><br>
             <!-- <span id="history"></span><br> -->
         </div>
-        <div ng-controller="UserController" id="genreAdd" style="display:none" align="right">
-          <p>Select a Genre to Add to Your Preferences</p>
+        <div ng-controller="UserController" id="genreAdd" style="display:none" align="center">
+          <p>Select a Genre to Add to Your Preferences or Remove</p>
           <select ng-model="mySelect" ng-change="showSelectValue(mySelect)"  >
             <option ng-repeat="x in genres">{{x}}</option>
           </select>
           <button ng-click="addSelectedGenre()">Add to Genres</button>
+          <button ng-click="removeSelectedGenre()">Remove</button>
         </div>
 
         <!-- dropdown -->

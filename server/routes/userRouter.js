@@ -12,7 +12,8 @@ router.route('/save').post(user.saveUser);
 router.route('/:username').get(user.getUserByName);
 router.route('/').get(user.getUser);
 
-router.route('/genre/set').post(user.setGenre);
+router.route('/genre/add').post(user.addGenre);
+router.route('/genre/remove').post(user.removeGenre);
 router.route('/history/set').post(user.setHistory);
 router.route('/updateUsername').post(user.updatePassword);
 

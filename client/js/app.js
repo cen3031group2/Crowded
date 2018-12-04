@@ -193,7 +193,15 @@ app.controller('UserController', ['$scope', '$http', 'UserMethods', '$window', f
     const payload = {
       genre: $scope.selectedValue
     };
-    $http.post('/api/user/genre/set',  payload).then(function(response){
+    $http.post('/api/user/genre/add',  payload).then(function(response){
+    });
+  }
+
+  $scope.removeSelectedGenre = function () {
+    const payload = {
+      genre: $scope.selectedValue
+    };
+    $http.post('/api/user/genre/remove',  payload).then(function(response){
     });
   }
 
