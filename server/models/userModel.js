@@ -13,7 +13,7 @@ var userSchema = new Schema({
             imbd: Number
           },
           genre: [String],
-        } 
+        }
       ],
     employee_company: String
 }, {

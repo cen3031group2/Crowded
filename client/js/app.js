@@ -133,8 +133,10 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
 
 app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', function($scope, $http, $cookie, UserMethods){
   $scope.userMethods = UserMethods;
-  $scope.recommendedMovies = undefined;
+  $scope.recommendedMovies = [];
+  $scope.userHistory = undefined;
   $scope.user = undefined;
+  $scope.userGenres = undefined;
 
   //Get user on document load
   angular.element(document).ready(function () {
@@ -145,6 +147,11 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
     console.log("starting user request");
     $http.get('/api/user/').then(response => {
       $scope.user = response.data;
+      $scope.userGenres = $scope.user.genre;
+      $scope.userHistory = $scope.user.history;
+
+      console.log($scope.userHistory);
+      // $scope.userHistory =
       $scope.showRecommendedMoviesBasedOnGenre();
     });
   }
@@ -157,19 +164,32 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
   }
 
   $scope.addSelectedGenre = function () {
-    console.log($scope.user);
     const payload = {
       genre: $scope.selectedValue
     };
     $http.post('/api/user/genre/set',  payload).then(function(response){
-      console.log(response);
     });
   }
 
   $scope.showRecommendedMoviesBasedOnGenre = function () {
     if ($scope.user) {
+      var abort = false;
       $http.get('/api/movie/getAllMoviesFromTheater/' + 42490).then(function(response){
-        $scope.recommendedMovies = response.data;
+        //For each movie
+        response.data.forEach (function (movie) {
+          abort = false;
+            //For each genre in the movie
+            movie.genres.forEach (function (genre) {
+              //Select the ones that match the user
+              if (abort == false) {
+                if ($scope.userGenres.includes(genre)) {
+                  $scope.recommendedMovies.push(movie);
+                  abort = true;
+                }
+              }
+            });
+        });
+        // $scope.recommendedMovies = response.data;
       });
     }
   }
