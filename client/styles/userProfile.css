@@ -1,5 +1,5 @@
 /* --------------------user profile page-------------------- */
-.form-heading2 {
+/* .form-heading2 {
   color: white;
   font-size: 150px;
   text-align: center;
@@ -14,8 +14,81 @@
   font-family: "Times New Roman";
   text-align: center;
   margin: 0;
+} */
+
+
+.form-heading2 {
+  color: white;
+  text-shadow:
+		-2px -2px 0 #000,
+		2px -2px 0 #000,
+		-2px 2px 0 #000,
+		2px 2px 0 #000;
+  font-size: 150px;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: -30px;
 }
 
+.page-header {
+   background-image: url("https://github.com/cen3031group2/Crowdy/blob/master/client/images/cinemasHeader1.png?raw=true");
+  background-repeat: no-repeat;
+  background-position: 50% 76%;
+  height: 250px;
+  background-size: cover;
+  font-family: "Times New Roman";
+  text-align: center;
+  margin: 0;
+}
+/* top navigation bar */
+ 
+/* Crowdy image */
+#crowdyLogo {
+  display: flex;
+  width: 130px;
+  height: 120px;
+  position: absolute;
+  margin-left: -15px;
+  margin-right: auto;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  z-index: 1;
+}
+
+.topNavigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(0, 0, 0);
+}
+
+.topNavigation li {
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.topNavigation li a {
+  display: block;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  padding: 30px 16px;
+  text-decoration: none;
+}
+
+.topNavigation li a:hover:not(.active) {
+  background-color: rgb(0, 154, 201);
+}
+
+.active {
+  background-color: #FBA20C;
+  width: 270px;
+  margin-right: -20px;
+
+}
+/* ---------------------------------- */
 .profile {
   text-align: center;
   font-size: 50px;
@@ -117,7 +190,7 @@ input[type='submit'] {
 
 
 /* top navigation bar */
-
+/* 
 .topNavigation ul {
   list-style-type: none;
   margin: 0;
@@ -149,6 +222,6 @@ input[type='submit'] {
   background-color: #191D60;
   width: 120px;
   margin-right: -20px;
-}
+} */
 
 /* end top navigation bar */
