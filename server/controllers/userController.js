@@ -83,6 +83,7 @@ exports.addAvatarImage = function(req, res, next){
         contentType: req.file.mimetype
     }
     User.findByIdAndUpdate(req.user._id, {img: img}).then(function(data){
+        fs.unlinkSync(req.file.path);
         res.send(true);
     }).catch(function(err){
         console.log(err);
