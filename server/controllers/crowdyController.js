@@ -57,7 +57,7 @@ exports.addPublicReport = async function(req,res){
 exports.setEmployeeReport = function(req,res){
     const theater_id = req.body.theater;
     const value = req.body.value;
-    var query = {id: id};
+    var query = {id: theater_id};
 
     Employee.findOne(query).exec()
         .then(function(crowdy){

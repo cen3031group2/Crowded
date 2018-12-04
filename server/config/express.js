@@ -13,6 +13,8 @@ var path = require('path'),
     User = require('../models/userModel'),
     LocalStrategy = require('passport-local').Strategy,
     session = require("express-session");
+var multer  = require('multer')
+var upload = multer({ dest: './uploads/' })
 
 module.exports.init = function() {
 //connect to database
@@ -26,8 +28,11 @@ var app = express();
 app.use(morgan('dev'));
 app.use(cors());
 
+
+
 //body parsing middleware
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 app.use(session({ secret: "cats" }));
 app.use(passport.initialize());
@@ -35,7 +40,15 @@ app.use(passport.session());
 
 app.use("/", express.static('client'));
 
-//TODO
+app.post('/avatar_image', upload.single('file'), function(req, res, next){
+  const user = req.user;
+  if(user){
+    userRouter.addAvatarImage(req, res, next);
+  } else{
+    res.send("Not logged in");
+  }
+});
+
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     console.log(user);
@@ -72,7 +85,7 @@ passport.use(new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!user.password === password) {
+      if (!(user.password === password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);

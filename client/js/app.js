@@ -1,7 +1,7 @@
 // this is Crowdy's app.js file
 // 10/11/18
 const website = 'http://localhost:8080';
-var app = angular.module('directoryApp', ['ngCookies']);
+var app = angular.module('directoryApp', []);
 
 app.run(function ($rootScope) {
     $rootScope.$on('scope.stored', function (event, data) {
@@ -114,7 +114,7 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
       value: value,
       theater: theater_id
     }
-    $http.post('/api/crowdy/theater');
+    $http.post('/api/crowdy/theater', data);
   }
 
   $scope.setVisibleIfUser = function(){
@@ -122,7 +122,7 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
       $(".employeeCrowdy").show();
     } else{
       $http.get('/api/user').then(function(response){
-        if(response.data){
+        if(response.data.employee_company){
           $(".employeeCrowdy").show();
         }
       });
@@ -130,8 +130,34 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
   }
 }]);
 
+app.controller('UpdateController', ['$scope', '$http', '$window', function($scope, $http, $window){
+  $scope.updatePassword = async function(passwords){
+    var result = await $http.post('/api/user/updateUsername', passwords);
+    const msg = result.data;
+    if(msg.updated === true){
+      $window.alert(msg.msg)
+    } else if (msg){
+      $window.alert(msg.msg);
+    } else {
+      $window.alert("ERROR");
+    }
+  }
 
-app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', function($scope, $http, $cookie, UserMethods){
+  $scope.updateAvatarImage = async function(img){
+    console.log(img);
+    // var result = await $http.post('/avatar_image', img);
+    // console.log(result);
+    // if(result ===  true){
+    //   $window.location.href = '/index.html'
+    // } else if (result){
+    //   $window.alert(result);
+    // } else{
+    //   $window.alert("Upload Failed!");
+    // }
+  }
+}]);
+
+app.controller('UserController', ['$scope', '$http', 'UserMethods', '$window', function($scope, $http, UserMethods, $window){
   $scope.userMethods = UserMethods;
   $scope.recommendedMovies = [];
   $scope.userHistory = undefined;
@@ -206,7 +232,12 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
 
   $scope.createUser = function(userToCreate){
     $http.post('/api/user/create', userToCreate).then(response => {
-      $scope.msg = response.data;
+      const msg = response.data;
+      if(msg.created){
+        window.location.replace('index.html');
+      } else{
+        $window.alert(msg.msg);
+      }
     }); // returns msg object, which will have a msg if failed
     // msg = {created: boolean, msg: ''}
   }

@@ -16,5 +16,5 @@ module.exports = {
       "country":"US"
     },
     port: 8080,
-    companies : ["regmovies"]
+    companies : ["regmovies.com"]
   };

@@ -14,6 +14,9 @@ router.route('/').get(user.getUser);
 
 router.route('/genre/set').post(user.setGenre);
 router.route('/history/set').post(user.setHistory);
+router.route('/updateUsername').post(user.updatePassword);
 
 router.param('username', user.toUsername);
+
+router.addAvatarImage = user.addAvatarImage;
 module.exports = router;
