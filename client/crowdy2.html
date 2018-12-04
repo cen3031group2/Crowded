@@ -69,14 +69,14 @@
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
               <tr ng-repeat="x in movies | filter:codec">
-                  <td><img src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
+                  <td><img id="moviePoster" src={{x.poster_image_thumbnail}}> </td> <!-- Picture goes here -->
                   <!-- Movie details -->
                   <td><h3>{{x.title}}</h3>
                   <em ng-repeat="genre in x.genres">{{genre}}, </em><br>
                   <b>imdb rating {{x.ratings.imdb.value}}</b><br>
-                  Showtimes
+                  <br>Showtimes:
                   <span class="shows" ng-repeat="y in x.showtimes">{{y.month}}/{{y.day}} {{y.hour}}:{{y.minute}} </span> <br>
-                  Crowdy Public: {{x.crowdy}} <br>
+                  <br>Crowdy Public: {{x.crowdy}} <br>
                   <div id="crowdyRateButtons" style="display: none", ng-init="setVisibleIfUser()">
                     Rate crowdy:
                     <button ng-click="addCrowdyMovieReport(0, x.id, x.theater)">0</button>
