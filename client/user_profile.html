@@ -31,8 +31,10 @@
         </div> -->
         <div class="topNavigation">
           <ul class>
-              <li><img src="images\WHITE.png" id = "crowdyLogo" alt="Crowdy">....................</li>
-              <li><a href="index.html">Theaters</a></li>
+              <div class="container-parent">
+                <li><img src="images\WHITE.png" id = "crowdyLogo" alt="Crowdy"></li>
+              </div>
+              <li><a href="index.html" style="margin-left:120px;">Theaters</a></li>
               <li><a href="crowdy2.html">Movies</a></li>
               <li><a href="user_profile.html">User Profile</a></li>
               <li style="float:right"><a class="active" href="loginForm.html">Login</a></li>
@@ -64,9 +66,9 @@
               <button class="dropbtn">Change Account Info</button>
               <div align="center" class="dropdown-content">
                   <a href="change_email.html">Change Email</a>
-                  <a href="change_username.html">Change Username</a>
+                  <!-- <a href="change_username.html">Change Username</a> -->
                   <a href="change_password.html">Change Password</a>
-                  <a href="change_profile_photo.html">Change Profile Photo</a>
+                  <!-- <a href="change_profile_photo.html">Change Profile Photo</a> -->
               </div>
             </div>
           </div>
@@ -76,7 +78,7 @@
           <h1>Please Login To View</h1>
         </div>
 
-        <div class="col-md-6" ng-controller="UserController" id="recMovies" style="display:none; margin-top:100px;">
+        <div class="col-md-6" ng-controller="UserController" id="recMovies" style="display:none; margin-top:50px;">
           <h2 align="center">Recommended Movies</h2>
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
@@ -90,7 +92,7 @@
         </div>
       </div>
 
-      <div class="col-md-6" ng-controller="UserController" id="userHistory" align="right" style="display:none; margin-top:100px;">
+      <div class="col-md-6" ng-controller="UserController" id="userHistory" align="right" style="display:none; margin-top:50px;">
         <h2 align="center">Your History</h2>
         <div class="tableWrapper">
           <table class="table table-striped table-hover">
