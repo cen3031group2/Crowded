@@ -45,12 +45,19 @@
 
         <!-- user profile section -->
         <div class="up"><!--User Profile-->  </div>
+
+        <div id="loginToView"  align="center">
+          <h1>Please Login To View</h1>
+        </div>
+        <div id="userProfile"  align="center" >
+          <h1>User Profile</h1>
+        </div>
+
         <div ng-controller="UserController" align="right">
             <span id="username"></span><br>
             <span id="genres"></span><br>
             <!-- <span id="history"></span><br> -->
         </div>
-
         <div ng-controller="UserController" id="genreAdd" style="display:none" align="right">
           <p>Select a Genre to Add to Your Preferences</p>
           <select ng-model="mySelect" ng-change="showSelectValue(mySelect)"  >
@@ -61,7 +68,7 @@
 
         <!-- dropdown -->
         <div class="container-parent">
-          <div class="dropdown" id="accountInfo" style="display:none; margin-top:-130px;">
+          <div class="dropdown" id="accountInfo" style="display:none; margin-top:-100px;">
               <div class="detect">
               <button class="dropbtn">Change Account Info</button>
               <div align="center" class="dropdown-content">
@@ -72,10 +79,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div id="loginToView"  align="center">
-          <h1>Please Login To View</h1>
         </div>
 
         <div class="col-md-6" ng-controller="UserController" id="recMovies" style="display:none; margin-top:50px;">
@@ -91,7 +94,7 @@
           </table>
         </div>
       </div>
-      
+
       <div class="col-md-6" ng-controller="UserController" id="userHistory" align="right" style="display:none; margin-top:50px;">
         <h2 align="center">Your History</h2>
         <div class="tableWrapper">
@@ -120,7 +123,7 @@
                 // data is what will be sent back once the request is done
                 // look up await and promises if you want the data to be accessed outside of this function.
                 if(data){
-                  console.log(data);
+                  
                     $("#loginButton").text('Logout');
                     $("#loginButton").attr("href", "/logout");
                     if(data.username){
@@ -136,6 +139,7 @@
                     document.getElementById("accountInfo").style.display = "block";
                     document.getElementById("recMovies").style.display = "block";
                     document.getElementById("userHistory").style.display = "block";
+                    // document.getElementById("userProfile").style.display = "block";
                     document.getElementById("loginToView").style.display = "none";
                 };
             });

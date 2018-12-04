@@ -150,7 +150,7 @@ app.controller('UserController', ['$scope', '$http','$cookies', 'UserMethods', f
       $scope.userGenres = $scope.user.genre;
       $scope.userHistory = $scope.user.history;
 
-      console.log($scope.userHistory);
+      // console.log($scope.userHistory);
       // $scope.userHistory =
       $scope.showRecommendedMoviesBasedOnGenre();
     });
