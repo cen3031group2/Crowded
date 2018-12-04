@@ -60,6 +60,22 @@ li a {
   padding: 0;
 }
 
+.popup img{
+  height: 150px;
+  width: 150px;
+  /* position: inline; */
+  /* position:center; */
+  margin-left: 10px;
+  margin-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+/* .popupWindows p {
+  font-size: 20px;
+  margin-left: 180px;
+} */
+
+
 html,
 body {
   height: 100%;
@@ -80,12 +96,13 @@ body {
 }
 
 #crowdyLevel {
-	margin-top: 200px;
-	margin-right: 80px;
-	display: inline;
-	padding: 20px;
+  margin-right: 150px;
+  margin-left: 20px;
+	/* display: inline; */
+	/* padding: 20px; */
 	width: 50px;
-	height: auto;
+  height: auto;
+  float: left;
 }
 
 
