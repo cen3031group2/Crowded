@@ -8,6 +8,9 @@
 <title>Crowdy</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body ng-app="directoryApp">
@@ -81,39 +84,55 @@
         };
 
         var contentString1 =
-			// '<div id="crowdyLevel"><img src="images/CrowdedLogos_Empty.png">' +
-			// '</div>' +
-			'<div id="bodyContent" style="float:right">'+
+			'<div id="crowdyLevel" class="popup"><img src="https://github.com/cen3031group2/Crowdy/blob/master/client/images/CrowdedLogosLarge_NotCrowded.png?raw=true">' +
+			'</div>' +
+			'<div id="bodyContent" style="float:right" class="popupWindows">'+ '<br>'+
 			'<p><b>Regal Royal Park Stadium 14</b></p>' +
             '<p>(844) 462-7342 ext 185<br>' +
             '3101 SW 35th Blvd, Gainesville, FL 32608, United States<br>'+
             '<a href="http://www.regmovies.com/theaters/regal-butler-town-center-14/1833">'+
-            'http://www.regmovies.com/theaters/regal-butler-town-center-14/1833</a>'+
+            'http://www.regmovies.com/theaters/regal-butler-town-center-14/1833</a><br>'
+            +'<hr>'
+            +'<span class="glyphicon glyphicon-cutlery" style="font-size:24px"></span>'+'&emsp;'
+            +'<i class="material-icons">&#xe544;</i>'+'&emsp;'
+            +'<i class="fa fa-wheelchair" style="font-size:24px"></i>'+'&emsp;'
+            +'<i class="fa fa-wifi" style="font-size:24px"></i>'+'&emsp;'
+            +'<b style="font-size:24px">3D</b>'
             '</p>'+
             '</div>';
-        var contentString2 =
-			// '<div id="crowdyLevel"><img src="images/CrowdedLogos_NotCrowded.png">' +
-			// '</div>' +
-			'<div id="bodyContent" style="float:right">'+
-			'<p><b>Regal Royal Park Stadium 16</b></p>' +
-            '<p style="float:right">(844) 462-7342 ext 1308<br>' +
+		
+          var contentString2 =
+            '<div id="crowdyLevel" class="popup"><img src="https://github.com/cen3031group2/Crowdy/blob/master/client/images/CrowdedLogosLarge_Crowded.png?raw=true">' +
+            '</div>' +
+            '<div id="bodyContent" style="float:right" class="popupWindows">'+ '<br>' +
+            '<p><b>Regal Royal Park Stadium 16</b></p>' +
+            '<p>(844) 462-7342 <br>' +
             '3702 W Newberry Rd, Gainesville, FL 32607, United States<br>'+
             '<a href="http://www.regmovies.com/theaters/regal-royal-park-stadium-16/6955">'+
-            'http://www.regmovies.com/theaters/regal-royal-park-stadium-16/6955</a>'+
+            'http://www.regmovies.com/theaters/regal-royal-park-stadium-16/6955</a><br>'
+           
+            +'<hr>'
+            +'<span class="glyphicon glyphicon-cutlery" style="font-size:24px"></span>'+'&emsp;'
+            +'<i class="material-icons">&#xe544;</i>'+'&emsp;'
+            +'<b style="font-size:24px">3D</b>'+
             '</p>'+
-            '</div>';
-        var contentString3 =
-			// '<div id="crowdyLevel"><img src="images/CrowdedLogos_VeryCrowded.png">' +
-			// '</div>' +
-			'<div id="bodyContent" style="float:right">'+
-			'<p><b>Regal Royal Park Stadium 10</b></p>' +
+            '</div>';    
+          var contentString3 =
+            '<div id="crowdyLevel" class="popup"><img src="https://github.com/cen3031group2/Crowdy/blob/master/client/images/CrowdedLogosLarge_VeryCrowded.png?raw=true">' +
+            '</div>' +
+            '<div id="bodyContent" style="float:right" class="popupWindows">'+ '<br>'+
+            '<p><b>Regal Royal Park Stadium 10</b></p>' +
             '<p>(352) 373-2880<br>' +
             '4901 Southwest 31st Place Gainesville, FL 32608, United States<br>'+
             '<a href="http://www.regmovies.com/theaters/regal-celebration-pointe-10-rpx/47521">'+
-            'http://www.regmovies.com/theaters/regal-celebration-pointe-10-rpx/47521</a>'+
+            'http://www.regmovies.com/theaters/regal-celebration-pointe-10-rpx/47521</a>'
+            +'<hr>'
+            +'<span class="glyphicon glyphicon-cutlery" style="font-size:24px"></span>'+'&emsp;'
+            +'<i class="material-icons">&#xe544;</i>'+'&emsp;'
+            +'<b style="font-size:24px">3D</b>'+'&emsp;'
+            +'<i class="fa fa-wheelchair" style="font-size:24px"></i>'+'&emsp;'
             '</p>'+
             '</div>';
-
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: gainesville,
