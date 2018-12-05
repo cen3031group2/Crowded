@@ -49,6 +49,7 @@
               <button class='btn btn-primary' ng-click="setTheaterCrowdy(x.crowdy.id, 1)">1</button>
               <button class='btn btn-primary' ng-click="setTheaterCrowdy(x.crowdy.id, 2)">2</button>
               <button class='btn btn-primary' ng-click="setTheaterCrowdy(x.crowdy.id, 3)">3</button>
+              <button class='btn btn-primary' ng-click="setTheaterCrowdy(x.crowdy.id, 4)">4</button>
             </p>
           </div>
           <br>
@@ -81,8 +82,8 @@
         };
 
         var contentString1 =
-			// '<div id="crowdyLevel"><img src="images/CrowdedLogos_Empty.png">' +
-			// '</div>' +
+			'<div ><img id="crowdyLevel14"  width="100" src="images/CrowdedLogos_Empty.png">' +
+			'</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 14</b></p>' +
             '<p>(844) 462-7342 ext 185<br>' +
@@ -92,8 +93,8 @@
             '</p>'+
             '</div>';
         var contentString2 =
-			// '<div id="crowdyLevel"><img src="images/CrowdedLogos_NotCrowded.png">' +
-			// '</div>' +
+			'<div ><img id="crowdyLevel16"  width="100" src="images/CrowdedLogos_NotCrowded.png">' +
+			'</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 16</b></p>' +
             '<p style="float:right">(844) 462-7342 ext 1308<br>' +
@@ -103,8 +104,8 @@
             '</p>'+
             '</div>';
         var contentString3 =
-			// '<div id="crowdyLevel"><img src="images/CrowdedLogos_VeryCrowded.png">' +
-			// '</div>' +
+			'<div><img id="crowdyLevel10" width="100" src="images/CrowdedLogos_VeryCrowded.png">' +
+			'</div>' +
 			'<div id="bodyContent" style="float:right">'+
 			'<p><b>Regal Royal Park Stadium 10</b></p>' +
             '<p>(352) 373-2880<br>' +
@@ -172,6 +173,7 @@
            map.setZoom(16);
            map.setCenter(marker1.getPosition());
            infowindow1.open(map, marker1);
+           doTheaterImages();
         });
         marker2.addListener('click', function() {
            map.setZoom(16);
@@ -307,11 +309,10 @@
 
     async function getCrowdinessLevel () {
       var crowdyIndex = [];
-      $.getJSON("/api/theater/getAllTheaters", function(data) {
-        for (var i = 0; i < data.length; ++i)
-        crowdyIndex.push((data[i].crowdy.public + data[i].crowdy.employee) / 2);
-      });
-      console.log(crowdyIndex);
+      // $.getJSON("/api/theater/getAllTheaters", function(data) {
+      //   console.log(data);
+      // });
+      // console.log(crowdyIndex);
           // for (var i = 0; i < data.length; ++i) {
           //   var crowdyCalc = (data[i].crowdy.public + data[i].crowdy.employee) / 2;
           //   if (crowdyCalc < 20)
@@ -362,6 +363,57 @@
             };
         });
     });
+
+    function doTheaterImages(){
+      $.getJSON("/api/theater/getAllTheaters", function(data) {
+          data.forEach(theater => {
+            if(theater.id == 42490){
+              const value = (theater.crowdy.employee + theater.crowdy.public) / 2;
+              if(value >= 0 && value < 0.8){
+                $("#crowdyLevel14").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_Empty.png");
+              } else if(value >= 0.8 && value < 1.6){
+                $("#crowdyLevel14").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_NotCrowded.png");
+              } else if(value >= 1.6 && value < 2.4){
+                $("#crowdyLevel14").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_Moderate.png");
+              }else if(value >= 2.4 && value < 3.2){
+                
+                $("#crowdyLevel14").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_Crowded.png");
+              }
+              else {
+                $("#crowdyLevel14").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_VeryCrowded.png");
+              }
+            } else  if(theater.id == 42506){
+              const value = (theater.crowdy.employee + theater.crowdy.public) / 2;
+              if(value >= 0 && value < 0.8){
+                $("#crowdyLevel16").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_Empty.png");
+              } else if(value >= 0.8 && value < 1.6){
+                $("#crowdyLevel16").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_NotCrowded.png");
+              } else if(value >= 1.6 && value < 2.4){
+                $("#crowdyLevel16").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_Moderate.png");
+              }else if(value >= 2.4 && value < 3.2){
+                $("#crowdyLevel16").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_Crowded.png");
+              }
+              else {
+                $("#crowdyLevel16").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_VeryCrowded.png");
+              }
+            } else  if(theater.id == 64196){
+              const value = (theater.crowdy.employee + theater.crowdy.public) / 2;
+              if(value >= 0 && value < 0.8){
+                $("#crowdyLevel10").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_Empty.png");
+              } else if(value >= 0.8 && value < 1.6){
+                $("#crowdyLevel10").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_NotCrowded.png");
+              } else if(value >= 1.6 && value < 2.4){
+                $("#crowdyLevel10").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_Moderate.png");
+              }else if(value >= 2.4 && value < 3.2){
+                $("#crowdyLevel10").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_Crowded.png");
+              }
+              else {
+                $("#crowdyLevel10").attr("src", "https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/CrowdedLogos_VeryCrowded.png");
+              }
+            }
+          });
+      });
+    }
 </script>
 </body>
 </html>

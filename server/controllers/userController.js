@@ -16,6 +16,11 @@ exports.getUser = async function(req, res){
     // res.json(user);
 };
 
+exports.clearHistory = function(req, res){
+    User.findByIdAndUpdate(req.user._id, {history: []}).exec();
+    res.end();
+}
+
 exports.getUserByName = async function(req, res){
     const query = {username: req.username};
 
@@ -126,7 +131,7 @@ exports.addAvatarImage = function(req, res, next){
     });
 }
 exports.updateUsername = async function(req, res){
-    const newUsername = req.body;
+    const newUsername = req.body.username;
     if(!req.user){
         const msg = {
             msg: "User not logged in",
@@ -153,14 +158,20 @@ exports.updateUsername = async function(req, res){
                 res.json(msg);
             });
             user.username = newUsername;
+            const website = newUsername.split("@")[1];
+            if (config.companies.includes(website)) {
+                user.employee_company = website;
+            }
             user.save();
             req.logIn(user, function(err){
                 console.log("Error log in for user after username change. User: " + req.user.username);
-                const msg = {
-                    msg: "Error logging in.",
-                    updated: true
-                };
-                res.json(msg);
+                if(err){
+                    const msg = {
+                        msg: "Error logging in.",
+                        updated: true
+                    };
+                    res.json(msg);
+                }
             });
             const msg = {
                 msg: "Username updated.",

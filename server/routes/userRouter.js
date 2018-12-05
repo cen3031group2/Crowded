@@ -15,7 +15,9 @@ router.route('/').get(user.getUser);
 router.route('/genre/add').post(user.addGenre);
 router.route('/genre/remove').post(user.removeGenre);
 router.route('/history/set').post(user.setHistory);
-router.route('/updateUsername').post(user.updatePassword);
+router.route('/history/clear').get(user.clearHistory);
+router.route('/updatePassword').post(user.updatePassword);
+router.route('/updateUsername').post(user.updateUsername);
 
 router.param('username', user.toUsername);
 

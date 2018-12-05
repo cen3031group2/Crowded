@@ -131,6 +131,21 @@ app.controller('TheaterController', ['$scope', '$http', function ($scope, $http)
 }]);
 
 app.controller('UpdateController', ['$scope', '$http', '$window', function($scope, $http, $window){
+  $scope.updateUsername = async function(username){
+    const payload = {
+      username: username
+    }
+    var result = await $http.post('/api/user/updateUsername', payload);
+    const msg = result.data;
+    if(msg.updated === true){
+      $window.alert(msg.msg)
+    } else if (msg){
+      $window.alert(msg.msg);
+    } else {
+      $window.alert("ERROR");
+    }
+  }
+
   $scope.updatePassword = async function(passwords){
     var result = await $http.post('/api/user/updateUsername', passwords);
     const msg = result.data;
@@ -145,15 +160,15 @@ app.controller('UpdateController', ['$scope', '$http', '$window', function($scop
 
   $scope.updateAvatarImage = async function(img){
     console.log(img);
-    // var result = await $http.post('/avatar_image', img);
-    // console.log(result);
-    // if(result ===  true){
-    //   $window.location.href = '/index.html'
-    // } else if (result){
-    //   $window.alert(result);
-    // } else{
-    //   $window.alert("Upload Failed!");
-    // }
+    var result = await $http.post('/avatar_image', img);
+    console.log(result);
+    if(result ===  true){
+      $window.location.href = '/index.html'
+    } else if (result){
+      $window.alert(result);
+    } else{
+      $window.alert("Upload Failed!");
+    }
   }
 }]);
 
@@ -169,6 +184,11 @@ app.controller('UserController', ['$scope', '$http', 'UserMethods', '$window', f
     $scope.getUser();
   });
 
+  $scope.clearHistory = function(){
+    $http.get('/api/user/history/clear').then(response =>{
+      $window.location.href = '/user_profile.html'
+    });
+  }
   $scope.getUser = function(){
     console.log("starting user request");
     $http.get('/api/user/').then(response => {

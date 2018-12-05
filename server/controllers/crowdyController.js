@@ -11,12 +11,7 @@ const expectedPackage = {
 exports.addReport = async function(req, res){
     user = req.user;
     if(user){
-        if(user.employee_company){
-            //this.setEmployeeReport(req, res);
-        } else {
-            exports.addPublicReport(req, res);
-        }
-        
+        exports.addPublicReport(req, res);
     } else{
         //res.send("User is not logged in.");
         res.end();

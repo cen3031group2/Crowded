@@ -75,7 +75,7 @@
               <div class="detect">
               <button class="dropbtn">Change Account Info</button>
               <div align="center" class="dropdown-content">
-                  <a href="change_email.html">Change Email</a>
+                  <a href="change_email.html">Change Username</a>
                   <!-- <a href="change_username.html">Change Username</a> -->
                   <a href="change_password.html">Change Password</a>
                   <a href="user_avatar.html">Change Profile Photo</a>
@@ -99,6 +99,7 @@
       </div>
 
       <div class="col-md-6" ng-controller="UserController" id="userHistory" align="right" style="display:none; margin-top:50px;">
+        <button class="btn" ng-click="clearHistory()">Clear History</button>
         <h2 align="center">Your History</h2>
         <div class="tableWrapper">
           <table class="table table-striped table-hover">
