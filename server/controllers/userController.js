@@ -3,6 +3,7 @@ var User = require('../models/userModel'),
 const Movie = require('./movieController'),
     Theater = require('./theaterController');
 var Promise = require('bluebird');
+const fs = require('fs');
 
 
 exports.getUser = async function(req, res){
@@ -15,6 +16,11 @@ exports.getUser = async function(req, res){
     // res.json(user);
 };
 
+exports.clearHistory = function(req, res){
+    User.findByIdAndUpdate(req.user._id, {history: []}).exec();
+    res.end();
+}
+
 exports.getUserByName = async function(req, res){
     const query = {username: req.username};
 
@@ -26,7 +32,7 @@ exports.getUserByName = async function(req, res){
     res.json(user);
 };
 
-exports.setGenre = async function(req, res){
+exports.addGenre = async function(req, res){
   var user = req.user;
   const genre = req.body.genre;
   console.log(req.body);
@@ -50,6 +56,41 @@ exports.setGenre = async function(req, res){
     }
     res.json(newUser);
 };
+
+exports.removeGenre = async function(req, res){
+    var user = req.user;
+    const genre = req.body.genre;
+    console.log(req.body);
+    console.log("Removing genre: " + genre + " from user: " + user.username);
+      const query = {username: user.username};
+  
+      var newUser = await User.findById(user._id).exec();
+      console.log(newUser);
+      if(newUser){
+        if(!newUser.genre){
+          newUser.genre = [];
+        }
+        console.log(genre);
+        const index = newUser.genre.indexOf(genre);
+        if (index > -1) {
+            newUser.genre.splice(index, 1);
+            newUser.save(function(err){
+                if(err){
+                    console.log("Mongoose save err:" + err);
+                }
+            
+            }); 
+            req.login(newUser, function(err){
+                if(err){
+                    console.log("Passport login err:" + err);
+                }
+                
+            })
+          }
+        
+      }
+      res.json(newUser);
+  };
 
 
 //TODO -- save when user clicks
@@ -76,6 +117,108 @@ exports.setHistory = async function(req, res){
   res.json(newUser);
 };
 
+exports.addAvatarImage = function(req, res, next){
+    const img = {
+        data: fs.readFileSync(req.file.path),
+        contentType: req.file.mimetype
+    }
+    User.findByIdAndUpdate(req.user._id, {img: img}).then(function(data){
+        fs.unlinkSync(req.file.path);
+        res.send(true);
+    }).catch(function(err){
+        console.log(err);
+        res.send(err);
+    });
+}
+exports.updateUsername = async function(req, res){
+    const newUsername = req.body.username;
+    if(!req.user){
+        const msg = {
+            msg: "User not logged in",
+            updated: false
+        };
+        res.json(msg);
+        return;
+    } else{
+        const user_taken = await User.findOne({username: newUsername});
+        if(user_taken){
+            const msg = {
+                msg: "Username already taken",
+                updated: false
+            };
+            res.json(msg);
+        } else {
+            var user = await User.findById(req.user._id).exec().catch(function(err){
+                console.log("Updating username err. User: " + req.user.username);
+                console.log(err);
+                const msg = {
+                    msg: "Error communicating with mongo",
+                    updated: false
+                }
+                res.json(msg);
+            });
+            user.username = newUsername;
+            const website = newUsername.split("@")[1];
+            if (config.companies.includes(website)) {
+                user.employee_company = website;
+            }
+            user.save();
+            req.logIn(user, function(err){
+                console.log("Error log in for user after username change. User: " + req.user.username);
+                if(err){
+                    const msg = {
+                        msg: "Error logging in.",
+                        updated: true
+                    };
+                    res.json(msg);
+                }
+            });
+            const msg = {
+                msg: "Username updated.",
+                updated: true
+            }
+            res.json(msg);
+        }
+    }
+}
+exports.updatePassword = async function(req, res){
+    if(!req.user){
+        const msg = {
+            msg: "User not logged in",
+            updated: false
+        };
+        res.json(msg);
+        return;
+    }
+    const newPassword = req.body.newPassword;
+    const oldPassword = req.body.oldPassword;
+    var user = await User.findById(req.user._id).exec();
+    if(user){
+        if(user.password === oldPassword){
+            user.password = newPassword;
+            user.save();
+            const msg = {
+                msg: "New username saved.",
+                updated: true
+            }
+            res.json(msg);
+        } else{
+            const msg = {
+                msg: "Password invalid.",
+                updated: false
+            };
+            res.json(msg);
+        }
+    } else{
+        const msg = {
+            msg: "User not found?",
+            updated: false
+        };
+        res.json(msg);
+    }
+
+}
+
 exports.createUser = async function(req, res){
     const query = {username: req.body.username};
     const result = await User.findOne(query);
@@ -89,10 +232,9 @@ exports.createUser = async function(req, res){
         user.username = req.body.username;
         user.password = req.body.password;
         const website = user.username.split("@")[1];
-        const website_name = website.split(".")[0];
-        console.log(website_name);
-        if (website_name in config.companies) {
-            user.employee_company = website_name;
+        console.log(website);
+        if (config.companies.includes(website)) {
+            user.employee_company = website;
         } else {
             user.employee_company = undefined;
         }
@@ -118,24 +260,24 @@ exports.addHistory = async function(user, movie_id, theater_id){
     var result = await Promise.all([theater, movies, newUser]);
     console.log(result);
     var newUser = result[2];
-    var movie = result[1].movies[0];;
+    var movie = result[1].movie;
+    console.log(movie);
     var theater = result[0];
     const payload = {
-        title: movie.title,
-        theater: theater.name,
-        poster_image_thumbnail: movie.poster_image_thumbnail,
-        rating: movie.rating,
-        genre: movie.genre,
-    };
-    if(newUser.history){
-        newUser.history.push(payload);
-    } else{
-        newUser.history = []
-        newUser.history.push(payload);
-    }
-    console.log(newUser);
-    newUser.save();
-
+      title: movie.title,
+         theater: theater.name,
+         poster_image_thumbnail: movie.poster_image_thumbnail,
+         rating: movie.rating,
+         genre: movie.genre,
+     };
+     if(newUser.history){
+         newUser.history.push(payload);
+     } else{
+         newUser.history = []
+         newUser.history.push(payload);
+     }
+     console.log(newUser);
+     newUser.save();
 }
 
 exports.toUsername = function(req, res, next, username){

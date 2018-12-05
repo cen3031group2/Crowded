@@ -16,7 +16,9 @@ router.route('/').post(crowdy.addReport);
   The ':' specifies a URL parameter.
  */
 router.route('/employee/')
-    .put(crowdy.setEmployeeReport);
+    .post(crowdy.setEmployeeReport);
+
+router.route('/theater/').post(crowdy.setEmployeeReport)
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle

@@ -15,7 +15,8 @@ var userSchema = new Schema({
           genre: [String],
         }
       ],
-    employee_company: String
+    employee_company: String,
+    img:{data: Buffer, contentType: String}
 }, {
   usePushEach: true
 });

@@ -1,0 +1,56 @@
+<!--  change password  -->
+<html>
+  <head>
+    <title>Crowdy</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/change.css">
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script type="text/javascript" src="./js/avatar.js"></script>
+    <script src="./js/ng-file-upload.min.js"></script>
+  </head>
+
+  <body id="LoginForm" ng-app="avatar">
+      
+    <h1 class="form-heading">
+        <img src="https://raw.githubusercontent.com/cen3031group2/Crowdy/master/client/images/Crowdy_Concept.png" alt="Crowdy">
+    </h1>
+            
+    <div class="exit">
+        <a href="index.html">
+            <i class="glyphicon glyphicon-remove white"></i>
+        </a>
+    </div>
+
+    <button type="button" class="close btn-light" aria-label="Close" style="font-size: 50px;" >
+        <a href="index.html">
+            <span aria-hidden="true" >&times;</span>
+        </a>
+    </button>
+    
+    <div class="login-form text-center">
+        <div class="main-div" ng-controller="UpdateController">
+            <div class="panel">
+                <form enctype="multipart/form-data">
+                    <button class="btn-dark btn-block" ng-click="updateAvatarImage(file)">Save</button>
+                    <div ngf-drop ngf-select ng-model="file" class="card text-center" ngf-drag-over-class="'dragover'"
+                    ngf-multiple="false" ngf-allow-dir="false" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="2MB">
+                        Drop images here or click to upload
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <style>
+        .drop-box {
+        background: #F8F8F8;
+        border: 5px dashed #DDD;
+        width: 200px;
+        height: 65px;
+        text-align: center;
+        padding-top: 25px;
+        margin: 10px;
+        }
+    </style>
+</body>

@@ -11,12 +11,7 @@ const expectedPackage = {
 exports.addReport = async function(req, res){
     user = req.user;
     if(user){
-        if(user.employee_company){
-            //this.setEmployeeReport(req, res);
-        } else {
-            exports.addPublicReport(req, res);
-        }
-        
+        exports.addPublicReport(req, res);
     } else{
         //res.send("User is not logged in.");
         res.end();
@@ -57,7 +52,7 @@ exports.addPublicReport = async function(req,res){
 exports.setEmployeeReport = function(req,res){
     const theater_id = req.body.theater;
     const value = req.body.value;
-    var query = {id: id};
+    var query = {id: theater_id};
 
     Employee.findOne(query).exec()
         .then(function(crowdy){

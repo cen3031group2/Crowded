@@ -35,14 +35,14 @@ var movieOptions ={
 };
 
 var movieOptionsSingle ={
-    uri: 'https://api.internationalshowtimes.com/v4/movies/',
+    baseUrl: 'https://api.internationalshowtimes.com/v4/movies/',
+    uri: '',
     method: 'GET',
     json: true,
     headers: {
         "X-API-Key": config.internationalshowtimes.key
     },
     qs: {
-        movie_id:0,
         fields: "id,title,poster_image_thumbnail,genres,ratings",
         limit: 1
     }
@@ -63,7 +63,8 @@ var showtimeOptions = {
 };
 
 exports.getMovieFromId = async function(id){
-    movieOptionsSingle.qs.movie_id = id;
+    movieOptionsSingle.uri = id;
+    console.log(movieOptionsSingle);
     return rp(movieOptionsSingle).catch(function(err){
         console.log(err);
     });
