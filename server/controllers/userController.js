@@ -125,7 +125,51 @@ exports.addAvatarImage = function(req, res, next){
         res.send(err);
     });
 }
-
+exports.updateUsername = async function(req, res){
+    const newUsername = req.body;
+    if(!req.user){
+        const msg = {
+            msg: "User not logged in",
+            updated: false
+        };
+        res.json(msg);
+        return;
+    } else{
+        const user_taken = await User.findOne({username: newUsername});
+        if(user_taken){
+            const msg = {
+                msg: "Username already taken",
+                updated: false
+            };
+            res.json(msg);
+        } else {
+            var user = await User.findById(req.user._id).exec().catch(function(err){
+                console.log("Updating username err. User: " + req.user.username);
+                console.log(err);
+                const msg = {
+                    msg: "Error communicating with mongo",
+                    updated: false
+                }
+                res.json(msg);
+            });
+            user.username = newUsername;
+            user.save();
+            req.logIn(user, function(err){
+                console.log("Error log in for user after username change. User: " + req.user.username);
+                const msg = {
+                    msg: "Error logging in.",
+                    updated: true
+                };
+                res.json(msg);
+            });
+            const msg = {
+                msg: "Username updated.",
+                updated: true
+            }
+            res.json(msg);
+        }
+    }
+}
 exports.updatePassword = async function(req, res){
     if(!req.user){
         const msg = {
