@@ -179,11 +179,13 @@
            map.setZoom(16);
            map.setCenter(marker2.getPosition());
            infowindow2.open(map, marker2);
+           doTheaterImages();
         });
         marker3.addListener('click', function() {
            map.setZoom(16);
            map.setCenter(marker3.getPosition());
            infowindow3.open(map, marker3);
+           doTheaterImages();
         });
 
         infoWindow = new google.maps.InfoWindow;
